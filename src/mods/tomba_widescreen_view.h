@@ -1,6 +1,8 @@
 #ifndef TOMBA_WIDESCREEN_VIEW_H
 #define TOMBA_WIDESCREEN_VIEW_H
 #include <string.h>
+enum { TOMBA_WIDESCREEN_FIT_MAX_NUMERATOR = 34,
+       TOMBA_WIDESCREEN_FIT_MAX_DENOMINATOR = 9 };
 
 typedef struct {
     unsigned numerator, denominator;

@@ -205,23 +205,22 @@ static void check_hud(uint32_t ra, unsigned offset, uint32_t parent,
     assert(tomba_hud_edge(ra, 0x1000, read_stack) == 0);
 }
 int main(void) {
-    /* At the starting boundary the widened view must begin at the same
-     * world edge as 4:3. The culling guard never biases the visible camera. */
-    assert(tomba_widescreen_camera_point(0, 0, 160, 160 << 16, 0) == 160 << 16);
-    assert(tomba_widescreen_camera_point(0, 0, 160, 160 << 16, 32) == 160 << 16);
+    /* Screen-space anchoring must cover the full reveal, independent of the
+     * world camera's parallax and the larger world-culling envelope. */
+    assert(tomba_widescreen_camera_shift(0, 0, 160, 160 << 16, 0) == 0);
     const int reveals[] = {53, 120, 267, 693};
     for (unsigned i = 0; i < sizeof reveals / sizeof *reveals; ++i) {
         int reveal = reveals[i];
-        int32_t p = tomba_widescreen_camera_point(0, 0, 160,
-            160 << 16, reveal + 32);
-        assert((p >> 16) - 160 - reveal == 0);
-        assert(tomba_widescreen_camera_point(0, 0, 160, p, reveal + 32) == p);
-        assert(tomba_widescreen_camera_point(0, 0, 160,
-            1200 << 16, reveal + 32) == 1200 << 16);
-        assert(tomba_widescreen_camera_point(2, 0, 160,
-            160 << 16, reveal + 32) == 160 << 16);
-        assert(tomba_widescreen_camera_point(0, 3, 160,
-            160 << 16, reveal + 32) == 160 << 16);
+        assert(tomba_widescreen_camera_shift(0, 0, 160,
+            160 << 16, reveal) == -reveal);
+        assert(tomba_widescreen_camera_shift(0, 0, 160,
+            180 << 16, reveal) == 20 - reveal);
+        assert(tomba_widescreen_camera_shift(0, 0, 160,
+            1200 << 16, reveal) == 0);
+        assert(tomba_widescreen_camera_shift(2, 0, 160,
+            160 << 16, reveal) == 0);
+        assert(tomba_widescreen_camera_shift(0, 3, 160,
+            160 << 16, reveal) == 0);
     }
 
     const char* values[] = {"16:9", "21:9", "32:9", "Fit", "", NULL};

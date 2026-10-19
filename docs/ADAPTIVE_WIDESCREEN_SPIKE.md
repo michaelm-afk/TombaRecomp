@@ -251,19 +251,29 @@ canonical height, so it never forms a finite backdrop.
 ## Starting-area camera anchor (2026-10-19)
 
 The SCUS-94236 starting grassland (area 0, sector 0) now anchors the expanded
-view to its native left boundary. The derived presentation point is at least
-native-left + visible-reveal. The 32-pixel culling guard is excluded. Other
+view to its native left boundary. A screen-space origin transfers the reveal
+to the right while the native camera is at the left edge. The configured
+visible reveal is independent of the larger culling envelope. Other
 areas/sectors, including centered interiors, are excluded.
 
 The function-entry hook at `0x800636A4` requires camera-builder return PC
 `0x8002A1E4`, its exact scratch-vector arguments, and the original area-0 overlay
-instructions. It adjusts the temporary translation vector and published camera
-X together. Native follow position, velocity and limits are untouched; no
-persistent host bookkeeping or extra guest allocation is needed. Narrowing
-back to 4:3 therefore uses the native view immediately.
+instructions. It supplies a frame-local origin to the renderer's existing wide
+view path. Foreground and slower parallax layers receive the same screen
+translation; native camera movement would shift them by different amounts.
+Native follow position, velocity, limits, scratch vectors and packet coordinates
+are untouched. HUD tags retain their physical-frame anchors. Other areas disable
+the origin, and narrowing back to 4:3 uses the native view immediately.
+
+Fit is capped at 34:9. TCP-only hidden-window captures subdivided 48:9,
+40:9, 36:9 and the interval around 35:9: a small grass gap remains at 35:9;
+34:9 is clean, with room below the observed threshold. Fixed 32:9 remains
+supported. Wider windows retain side bars rather than extending the projection.
 
 `tests/test_adaptive_widescreen.c` covers boundary placement, guard exclusion,
-identity away from the boundary, repeated evaluation and area/sector exclusions.
+identity away from the boundary and area/sector exclusions. Framework GPU tests
+cover the full asymmetric culling envelope, publishing the renderer origin
+before packet-free presents, stale-scene expiry and disabled identity.
 Live evidence and reproducible resize/camera scripts are retained locally at
 `F:/Projects/psxrecomp/_tomba-camera-anchor-20261019/`. Scope is the starting
 boundary and adaptive resize behavior; this is not full stage, collision,

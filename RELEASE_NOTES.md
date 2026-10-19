@@ -5,7 +5,10 @@ widescreen is enabled. The camera anchors the expanded view to the original
 left edge, revealing more of the area to the right as the window widens.
 
 - Fit to Window and the fixed widescreen choices use the same anchor.
-- Returning to 4:3 restores the native camera immediately.
+- Returning to 4:3 restores the native view immediately.
+- The rendered view shifts uniformly, including slower parallax backdrops.
+- Fit to Window now tops out at 34:9. Wider windows retain clean side bars;
+  fixed 32:9 remains available. This avoids projection gaps seen above that range.
 - Native camera following is unchanged. The rule applies only to the starting
   area; centered interiors such as the 100 Year Old Man's hut stay unchanged.
 - Retires the legacy host-paced Fast Loading package from release bundles.
