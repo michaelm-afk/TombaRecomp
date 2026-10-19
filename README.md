@@ -51,7 +51,7 @@ Important files:
 ## Status
 
 The game is playable from BIOS boot through gameplay. Latest release:
-**v0.20.0-alpha** (2026-10-08).
+**v0.20.1-alpha** (2026-10-19).
 
 | Area | State |
 |---|---|
@@ -63,7 +63,7 @@ The game is playable from BIOS boot through gameplay. Latest release:
 | Memory-card save & load | Works (standard `.mcd`, emulator-compatible) |
 | Gameplay | Playable; known crashes tracked in `ISSUES.md` |
 | Renderers | Software **and** OpenGL (GPU); OpenGL is the default |
-| Adaptive widescreen | Experimental, opt-in (fit to window, no upper aspect limit) |
+| Adaptive widescreen | Experimental, opt-in (fit to window through 34:9) |
 | Controller | Analog / D-Pad modes; optional Special Edition Hybrid mod |
 
 ## Features
@@ -83,7 +83,7 @@ The game is playable from BIOS boot through gameplay. Latest release:
   ending FMVs (Any%)** to keep the opening before the title, post-final-pig
   cutscene, and credits. The exception setting is off by default.
 - **Optional Custom Renderer.** Fit to Window follows the window's aspect
-  ratio, with fixed 16:9, 21:9 and 32:9 choices. Terrain, objects and HUD adapt
+  ratio through 34:9, with fixed 16:9, 21:9 and 32:9 choices. Terrain, objects and HUD adapt
   to the expanded view. Extreme widths and all-area coverage remain experimental.
 - **Controller modes.** Choose Analog (DualShock, variable stick movement) or
   D-Pad (digital movement) in the normal controller settings. The default-off

@@ -9,11 +9,18 @@
 #include "../src/mods/tomba_widescreen_residency.h"
 #include "../src/mods/tomba_widescreen_sprites.h"
 #include "../src/mods/tomba_widescreen_view.h"
+#include "../src/mods/tomba_widescreen_camera.h"
 #include "../src/mods/tomba_widescreen_scripts.h"
 #include "ws_primitive_roles.h"
 #include "ws_scene_latch.h"
 #include "ws_backdrop_margin.h"
 #include "ws_backdrop_detect.h"
+
+/* This fixture has native RAM and no allocated enhancement DMA arena.
+ * Use the runtime's real packet-key helper with that allocation state. */
+uint32_t psx_gpu_packet_key(uint32_t address) {
+    return psx_gpu_packet_key_for(address, 0u);
+}
 
 static TombaPoolObject pool_object(int pool, int type, int variant, int group,
                                    int x, int y, int z, int pending) {
@@ -198,6 +205,24 @@ static void check_hud(uint32_t ra, unsigned offset, uint32_t parent,
     assert(tomba_hud_edge(ra, 0x1000, read_stack) == 0);
 }
 int main(void) {
+    /* Screen-space anchoring must cover the full reveal, independent of the
+     * world camera's parallax and the larger world-culling envelope. */
+    assert(tomba_widescreen_camera_shift(0, 0, 160, 160 << 16, 0) == 0);
+    const int reveals[] = {53, 120, 267, 693};
+    for (unsigned i = 0; i < sizeof reveals / sizeof *reveals; ++i) {
+        int reveal = reveals[i];
+        assert(tomba_widescreen_camera_shift(0, 0, 160,
+            160 << 16, reveal) == -reveal);
+        assert(tomba_widescreen_camera_shift(0, 0, 160,
+            180 << 16, reveal) == 20 - reveal);
+        assert(tomba_widescreen_camera_shift(0, 0, 160,
+            1200 << 16, reveal) == 0);
+        assert(tomba_widescreen_camera_shift(2, 0, 160,
+            160 << 16, reveal) == 0);
+        assert(tomba_widescreen_camera_shift(0, 3, 160,
+            160 << 16, reveal) == 0);
+    }
+
     const char* values[] = {"16:9", "21:9", "32:9", "Fit", "", NULL};
     const unsigned numerators[] = {16, 21, 32, 16, 16, 16};
     for (unsigned i = 0; i < sizeof values / sizeof values[0]; ++i) {

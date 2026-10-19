@@ -30,7 +30,7 @@ known_sha1 = [
 seeds = "seeds/ghidra_funcs.txt"
 out_dir = "generated"
 strict = true
-mod_function_entry_funcs = ["0x8005E08C", "0x8005A184"]
+mod_function_entry_funcs = ["0x8005E08C", "0x8005A184", "0x800636A4"]
 
 [runtime]
 window_title = "TombaRecomp Recompiled"
@@ -60,8 +60,8 @@ multitap_analog = true
 
 # The default presentation remains faithful 4:3.  The bundled Tomba
 # enhancement activates this native-wide renderer after its mod plan commits.
-# Its Fit choice starts at 16:9 and follows the live window aspect without an
-# upper ratio limit. Wider content coverage remains experimental.
+# Its Fit choice starts at 16:9 and follows the live window aspect up to 34:9.
+# Wider windows retain clean side bars. Wider content remains experimental.
 [widescreen]
 offer = false
 adaptive_view = true
