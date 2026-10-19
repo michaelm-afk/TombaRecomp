@@ -140,6 +140,11 @@ if(BUILD_TESTING)
         "${PSXRECOMP_ROOT}/runtime/src/psx_ram_geometry.c")
     target_include_directories(tomba-adaptive-tests PRIVATE "${PSXRECOMP_ROOT}/runtime/include")
     add_test(NAME tomba_adaptive_widescreen COMMAND tomba-adaptive-tests)
+    add_executable(tomba-camera-anchor-tests tests/test_camera_anchor.c
+        src/mods/tomba_widescreen_plugin.c)
+    target_include_directories(tomba-camera-anchor-tests PRIVATE
+        "${PSXRECOMP_ROOT}/runtime/include")
+    add_test(NAME tomba_camera_anchor COMMAND tomba-camera-anchor-tests)
     find_package(Python3 QUIET COMPONENTS Interpreter)
     if(Python3_FOUND)
         add_test(NAME tomba_runtime_metadata

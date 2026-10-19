@@ -7,6 +7,7 @@ left edge, revealing more of the area to the right as the window widens.
 - Fit to Window and the fixed widescreen choices use the same anchor.
 - Returning to 4:3 restores the native view immediately.
 - The rendered view shifts uniformly, including slower parallax backdrops.
+- The anchor remains in place while paused and refreshes after loading a state.
 - Fit to Window now tops out at 34:9. Wider windows retain clean side bars;
   fixed 32:9 remains available. This avoids projection gaps seen above that range.
 - Native camera following is unchanged. The rule applies only to the starting

@@ -19,13 +19,12 @@
 static int tomba_widescreen_enabled;
 extern void tomba_widescreen_residency_activate(void);
 
-/* Sample the native camera builder, then shift the rendered world as a whole.
- * Moving the guest camera itself under-shifts slower parallax backdrops. */
-static void tomba_widescreen_anchor_camera(CPUState* cpu, uint32_t address) {
-    (void)address;
+/* Moving the guest camera itself under-shifts slower parallax backdrops.
+ * Refresh the frame-local screen origin even when pause/dialogue bypasses
+ * the native camera builder. Revalidate the scene on every refresh. */
+static void tomba_widescreen_refresh_anchor(void) {
     if (!tomba_widescreen_enabled) return;
-    if (cpu->gpr[31] != 0x8002A1E4u || cpu->gpr[4] != 0x1F8000C0u ||
-        cpu->gpr[5] != 0x1F800060u || cpu->gpr[6] != 0x1F800068u) return;
+    if (!psx_mod_game_started()) goto disable;
     unsigned area = psx_mod_read_half(0x8009BCC8u);
     unsigned sector = psx_mod_read_half(0x8009BCCAu);
     if (area != 0 || sector != 0) goto disable;
@@ -44,6 +43,18 @@ static void tomba_widescreen_anchor_camera(CPUState* cpu, uint32_t address) {
     return;
 disable:
     psx_mod_set_widescreen_view_anchor(0, 0);
+}
+
+static void tomba_widescreen_anchor_camera(CPUState* cpu, uint32_t address) {
+    (void)address;
+    if (cpu->gpr[31] != 0x8002A1E4u || cpu->gpr[4] != 0x1F8000C0u ||
+        cpu->gpr[5] != 0x1F800060u || cpu->gpr[6] != 0x1F800068u) return;
+    tomba_widescreen_refresh_anchor();
+}
+
+static void tomba_widescreen_tick(void) {
+    tomba_widescreen_scripts_tick();
+    tomba_widescreen_refresh_anchor();
 }
 
 static void tomba_widescreen_tag_hud(CPUState* cpu, uint32_t address) {
@@ -80,7 +91,7 @@ PSX_MOD_CONSTRUCTOR(tomba_register_widescreen_plugin) {
     (void)psx_mod_register_activation_plugin(
         "tomba.widescreen", tomba_widescreen_activate);
     (void)psx_mod_register_vblank_plugin(
-        "tomba.widescreen", tomba_widescreen_scripts_tick);
+        "tomba.widescreen", tomba_widescreen_tick);
     (void)psx_mod_register_savestate_plugin(
-        "tomba.widescreen", tomba_widescreen_scripts_tick);
+        "tomba.widescreen", tomba_widescreen_tick);
 }
