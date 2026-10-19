@@ -246,3 +246,25 @@ presented at native 4:3. Owner state slot 5: 4:3 at Fit, 16:9 and 21:9
 (`present_ring` 240/240 `native43`, `bd_veto`=1). Watch Tower field: still
 240/240 wide; its sky/flower grid is sprite-tagged and covers only 81% of the
 canonical height, so it never forms a finite backdrop.
+
+
+## Starting-area camera anchor (2026-10-19)
+
+The SCUS-94236 starting grassland (area 0, sector 0) now anchors the expanded
+view to its native left boundary. The derived presentation point is at least
+native-left + visible-reveal. The 32-pixel culling guard is excluded. Other
+areas/sectors, including centered interiors, are excluded.
+
+The function-entry hook at `0x800636A4` requires camera-builder return PC
+`0x8002A1E4`, its exact scratch-vector arguments, and the original area-0 overlay
+instructions. It adjusts the temporary translation vector and published camera
+X together. Native follow position, velocity and limits are untouched; no
+persistent host bookkeeping or extra guest allocation is needed. Narrowing
+back to 4:3 therefore uses the native view immediately.
+
+`tests/test_adaptive_widescreen.c` covers boundary placement, guard exclusion,
+identity away from the boundary, repeated evaluation and area/sector exclusions.
+Live evidence and reproducible resize/camera scripts are retained locally at
+`F:/Projects/psxrecomp/_tomba-camera-anchor-20261019/`. Scope is the starting
+boundary and adaptive resize behavior; this is not full stage, collision,
+spawn, checkpoint, boss or exit coverage.

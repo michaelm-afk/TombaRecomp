@@ -30,7 +30,7 @@ known_sha1 = [
 seeds = "seeds/ghidra_funcs.txt"
 out_dir = "generated"
 strict = true
-mod_function_entry_funcs = ["0x8005E08C", "0x8005A184"]
+mod_function_entry_funcs = ["0x8005E08C", "0x8005A184", "0x800636A4"]
 
 [runtime]
 window_title = "TombaRecomp Recompiled"

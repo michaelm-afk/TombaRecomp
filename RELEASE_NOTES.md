@@ -1,3 +1,17 @@
+## v0.20.1-alpha
+
+Fixes the exposed left boundary in the starting area when Custom Renderer
+widescreen is enabled. The camera anchors the expanded view to the original
+left edge, revealing more of the area to the right as the window widens.
+
+- Fit to Window and the fixed widescreen choices use the same anchor.
+- Returning to 4:3 restores the native camera immediately.
+- Native camera following is unchanged. The rule applies only to the starting
+  area; centered interiors such as the 100 Year Old Man's hut stay unchanged.
+
+Custom Renderer retains its existing default. Memory cards and settings carry
+over. This is a focused starting-area correction, not an all-area camera audit.
+
 ## v0.20.0-alpha
 
 Improves rainy Stormy Mountain performance, especially in wider Custom Renderer
