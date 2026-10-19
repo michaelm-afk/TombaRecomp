@@ -8,6 +8,7 @@ left edge, revealing more of the area to the right as the window widens.
 - Returning to 4:3 restores the native camera immediately.
 - Native camera following is unchanged. The rule applies only to the starting
   area; centered interiors such as the 100 Year Old Man's hut stay unchanged.
+- Retires the legacy host-paced Fast Loading package from release bundles.
 
 Custom Renderer retains its existing default. Memory cards and settings carry
 over. This is a focused starting-area correction, not an all-area camera audit.
