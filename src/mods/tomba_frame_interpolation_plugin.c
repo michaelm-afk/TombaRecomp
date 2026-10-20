@@ -1,14 +1,15 @@
 #include "mod_plugins.h"
+#include <stdio.h>
 
 /*
- * Keep Tomba's guest cadence completely stock. These callbacks only select how
- * frequently PSXrecomp's OpenGL presentation thread blends between the two
- * most recent completed game frames.
+ * Compatibility tombstones: old installed manifests/state.toml can still name
+ * these IDs. Never let them restore temporal blending or force VSync off.
+ * Keep registration so upgrades do not invalidate the other selected mods.
+ * Tomba has no qualified geometry-interpolation implementation yet.
  */
 static void tomba_frame_rate_set(unsigned frames_per_second) {
-    (void)psx_mod_set_frame_interpolation_blend(
-        PSX_MOD_FRAME_INTERPOLATION_MOTION_ADAPTIVE);
-    (void)psx_mod_set_frame_interpolation(frames_per_second);
+    (void)frames_per_second;
+    fprintf(stderr, "Tomba: temporal frame blending is disabled; using stock frames\n");
 }
 
 static void tomba_frame_rate_60_activate(void) {

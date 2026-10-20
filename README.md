@@ -118,7 +118,7 @@ The game is playable from BIOS boot through gameplay. Latest release:
 4. Set the game **disc**: select your legally obtained Tomba! (USA, SCUS-94236)
    disc image. The launcher verifies the ISO9660 header, region, and serial.
 5. Optionally adjust renderer, supersampling, screen look, and controller
-   settings. Widescreen, frame interpolation, FMV skipping, the Hybrid
+   settings. Widescreen, FMV skipping, the Hybrid
    Controller, and the Warp Debug Menu are on the **Mods** page. Then press
    **Launch**; your choices are remembered. **Seamless Loading** is already on
    and prepares its data cache on first launch. The executable is prebuilt;

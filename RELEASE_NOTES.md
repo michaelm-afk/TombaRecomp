@@ -1,3 +1,28 @@
+## v0.20.2-alpha
+
+Tentative fix for horizontal tearing in focused fullscreen/borderless windows.
+Please retest the same display and fullscreen settings used with v0.20.1.
+
+- Preserve synchronized OpenGL swaps on faster displays while the wall-clock
+  pacer keeps the original game speed. Previously a display refresh different
+  from the game cadence disabled VSync even with frame blending turned off.
+- Retire Tomba's Temporal Frame Blending package. It is removed from release
+  catalogs, and its old activation IDs are inert so saved selections and older
+  installed manifests cannot enable it again. This was image blending rather
+  than true geometry interpolation.
+- Preserve explicit VSync-off, existing interpolation scheduling in other
+  titles, netplay pacing, and driver-recovery fallbacks.
+- Keep the v0.20.1 adaptive widescreen camera fix and other visual mods.
+
+Muted hidden-window Windows A/B checks reproduce swap interval 0 before and 1
+after at a simulated 144 Hz refresh, with stock gameplay remaining near 59.94
+frames/s. An old enabled blending manifest also stays on stock frames. These
+checks establish runtime behavior; physical focused-fullscreen scanout tearing
+still needs confirmation on the reporter's display.
+
+Memory cards and settings carry over. CD Speed and host-paced Fast Loading
+remain absent from both release packages.
+
 ## v0.20.1-alpha
 
 Fixes the exposed left boundary in the starting area when Custom Renderer
