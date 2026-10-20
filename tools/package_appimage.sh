@@ -78,6 +78,8 @@ cp -a "$build_dir/assets" "$payload/assets"
 cp -a "$build_dir/bios" "$payload/bios"
 psx_add_mod_catalog --build-path "$build_dir" --stage "$payload" \
                     --runtime-target psx-runtime
+"${PSX_RELEASE_STAGE_PYTHON:-python3}" "$fw/tools/mod_channel_filter.py" \
+    "$payload/mods/bundled"
 
 game_id=SCUS-94236
 recompiler_bin=$fw/$bios_build/psxrecomp-game

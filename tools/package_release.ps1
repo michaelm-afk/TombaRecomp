@@ -175,6 +175,9 @@ Write-Host "Bundled recomp-ui launcher assets: $fontCount font(s) + $imgCount im
 
 Add-ModCatalog -BuildPath $BuildPath -Stage $Stage `
                -RuntimeTarget $RuntimeTarget | Out-Null
+Invoke-Native {
+    & $AotPython (Join-Path $RecompTools 'mod_channel_filter.py') (Join-Path $Stage 'mods/bundled')
+} "filter developer-only release mods"
 
 # Player-facing game.toml is shared with the AppImage package so release
 # defaults cannot drift between Windows and Linux.

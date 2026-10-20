@@ -72,6 +72,7 @@ test -f "$tmp/state/mods/bundled/tomba.experimental.seamless/0.1.0/manifest.toml
 test ! -e "$tmp/state/mods/bundled/psx.enhancement.cd-speed"
 test ! -e "$tmp/state/mods/bundled/psx.enhancement.fast-loading"
 test ! -e "$tmp/state/mods/bundled/tomba.enhancement.fast-loading"
+test ! -e "$tmp/state/mods/bundled/tomba.enhancement.frame-interpolation"
 test ! -e "$appdir/settings.toml"
 
 printf 'user-owned\n' > "$tmp/state/input.ini"

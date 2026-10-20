@@ -3,7 +3,8 @@ id = "tomba.enhancement.frame-interpolation"
 version = "1.0.0"
 name = "Tomba Frame Rate"
 author = "mstan"
-description = "Presentation-only temporal frame blending. Game logic, timers, and audio remain at their stock cadence."
+description = "Retired temporal blending. Activation is disabled pending a validated Tomba interpolation implementation."
+channel = "developer"
 resolver = "declarative"
 save_compatibility = "shared"
 
@@ -17,6 +18,7 @@ name = "Temporal Frame Blending"
 description = "Blend completed game frames at the selected presentation rate without accelerating gameplay, timers, or audio. This is not motion-vector frame generation."
 group = "Frame Rate"
 default_enabled = false
+hidden = true
 
 [[option]]
 feature = "frame-interpolation"
