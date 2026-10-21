@@ -1,0 +1,215 @@
+{
+  "schema": "Tombi EU integration assessment v1",
+  "recorded_utc": "2026-10-21T23:55:43.260830+00:00",
+  "branch": "integrate/tombi-eu-rc4-20261021",
+  "source_base": "1b7bafa5afc3dfd08a4889f2361f9a177e6b0f52",
+  "framework_commit": "3f3cfb757146d333ddf42dc579107096b633a955",
+  "ui_commit": "e08082d10c38d0c4293455c3d15b3ab35ef1afe3",
+  "handoff": {
+    "downloaded_zip_sha256": "acea0375f76dc2c2bfd3ef2fba78aea1fd9dde4244af905b8f0148cfb6b7e307",
+    "inner_sha256_checks_passed": 67,
+    "outer_archive_differs_from_original_archive_manifest": true
+  },
+  "supported_disc": {
+    "serial": "SCES-01330",
+    "revision": "Rev 1",
+    "bytes": 492370032,
+    "sha1": "2505d958b4439d04844cadd3f968fc7432a48e00",
+    "source_archive": "Tombi_EUR_SCES01330_H.zip",
+    "member": "TOMBI.img"
+  },
+  "build": {
+    "shared_emitters_built": true,
+    "baseline_executable_built": true,
+    "private_qa_executable_built": true,
+    "candidate_cache_staging_verified": true,
+    "portable_release_archive_built": false,
+    "full_us_runtime_rebuild": false,
+    "windows_only": true
+  },
+  "aot": {
+    "aot_scope": "opening",
+    "recipe_count": 54,
+    "published_pairs": 66,
+    "manifest_rows": 15440,
+    "all_pairs_valid": true,
+    "all_guards_match_known_input_bytes": true,
+    "full_static_coverage_proven": false
+  },
+  "focused_checks": {
+    "python_sources_parsed": 22,
+    "initial_checks": [
+      {
+        "test": "Python syntax",
+        "passed": true,
+        "files": 21
+      },
+      {
+        "test": "plan-us",
+        "passed": true,
+        "exit_code": 0
+      },
+      {
+        "test": "plan-eu",
+        "passed": true,
+        "exit_code": 0
+      },
+      {
+        "test": "plan-both",
+        "passed": true,
+        "exit_code": 0
+      },
+      {
+        "test": "reject-SCES01331",
+        "passed": true,
+        "exit_code": 1
+      },
+      {
+        "test": "handoff-rejects-SCES01331",
+        "passed": true,
+        "exit_code": 1
+      },
+      {
+        "test": "overlay-exports",
+        "passed": true,
+        "exit_code": 0
+      },
+      {
+        "test": "overlay-staging",
+        "passed": true,
+        "exit_code": 0
+      },
+      {
+        "test": "hybrid-controller-compile",
+        "passed": true,
+        "exit_code": 0
+      },
+      {
+        "test": "hybrid-controller",
+        "passed": true,
+        "exit_code": 0
+      },
+      {
+        "test": "fmv-skip-compile",
+        "passed": true,
+        "exit_code": 0
+      },
+      {
+        "test": "fmv-skip",
+        "passed": true,
+        "exit_code": 0
+      },
+      {
+        "test": "fast-forward-compile",
+        "passed": true,
+        "exit_code": 0
+      },
+      {
+        "test": "fast-forward",
+        "passed": true,
+        "exit_code": 0
+      },
+      {
+        "test": "launcher-vsync-compile",
+        "passed": true,
+        "exit_code": 0
+      },
+      {
+        "test": "launcher-vsync",
+        "passed": true,
+        "exit_code": 0
+      },
+      {
+        "test": "spu-CD-XA-compile",
+        "passed": true,
+        "exit_code": 0
+      },
+      {
+        "test": "spu-CD-XA",
+        "passed": true,
+        "exit_code": 0
+      },
+      {
+        "test": "sha-object",
+        "passed": true,
+        "exit_code": 0
+      },
+      {
+        "test": "sha-native-compile",
+        "passed": true,
+        "exit_code": 0
+      },
+      {
+        "test": "sha-native",
+        "passed": true,
+        "exit_code": 0
+      },
+      {
+        "test": "sha-portable-compile",
+        "passed": true,
+        "exit_code": 0
+      },
+      {
+        "test": "sha-portable",
+        "passed": true,
+        "exit_code": 0
+      }
+    ],
+    "us_eu_combined_disc_tool_preflight": true,
+    "us_geometry_portable_c_syntax": true,
+    "eu_loader_atomicity_memory_card_wait_fallback_fixture": true,
+    "python312_original_geometry_reference_generation": true
+  },
+  "runtime_samples": [
+    {
+      "language": "en",
+      "passed": true,
+      "original_main_fingerprint_verified": true,
+      "walk_x_delta": 10.94140625,
+      "observed_jump_y_range": 80.21875,
+      "native_dispatches": 19001339,
+      "native_module_loads": 3,
+      "geometry_reference_batches": 600,
+      "resident_files": 2257,
+      "resident_state": "verified",
+      "seamless_batches": 4,
+      "seamless_files": 19,
+      "runtime_native_compilation_disabled": true,
+      "host_audio_muted": true,
+      "evidence": "build-eu-qa/sampled-native-en-de-20261021/en/result.json",
+      "screenshot_sha256": "72a9c328782db8aec61841033520362556cf5a66534be277f4d633c1a2f87980"
+    },
+    {
+      "language": "de",
+      "passed": true,
+      "original_main_fingerprint_verified": true,
+      "walk_x_delta": 10.94140625,
+      "observed_jump_y_range": 75.5625,
+      "native_dispatches": 18130271,
+      "native_module_loads": 3,
+      "geometry_reference_batches": 600,
+      "resident_files": 2257,
+      "resident_state": "verified",
+      "seamless_batches": 4,
+      "seamless_files": 19,
+      "runtime_native_compilation_disabled": true,
+      "host_audio_muted": true,
+      "evidence": "build-eu-qa/sampled-native-en-de-20261021/de/result.json",
+      "screenshot_sha256": "0b1e690aad69c138d668a06d607fa4a628704c68a48d731cecd34703502163bd"
+    }
+  ],
+  "findings": [
+    "HLE geometry and Seamless Loading present and exercised.",
+    "Opening AOT rebuilt from original disc, audited, staged and executed.",
+    "New build entry point supports US/EU/both without changing the US target.",
+    "New entry point cache-staging gap found in QA and fixed; native dispatches are now mandatory.",
+    "Adaptive widescreen deliberately absent from supplied EU implementation."
+  ],
+  "unverified": [
+    "Full-scope AOT build and full campaign/native dispatch coverage",
+    "New integration Memory Card in-game save/restart/load roundtrip",
+    "FMV audio/video synchronization and physical controller acceptance",
+    "EU widescreen/entity/HUD behavior (feature not implemented)",
+    "Other host-platform builds and portable release packaging"
+  ]
+}

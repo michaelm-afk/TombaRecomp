@@ -1,0 +1,242 @@
+{
+  "prepared_utc": "2026-10-21T16:10:13.188471+00:00",
+  "official_repository": "https://github.com/RetroPortingToolKit/psxrecomp",
+  "official_commit": "958ae0e396f14d39c86e5c016d405fcdd96af4d5",
+  "official_commit_date": "2026-10-20T22:43:47Z",
+  "tomba_commit": "1b7bafa5afc3dfd08a4889f2361f9a177e6b0f52",
+  "tomba_framework_pin": "03e635e86dceb540b7b6421ada7ee32cc28ca62b",
+  "files_sha256": {
+    "official-LICENSE": "133629d3a7fa3543e96e27cc8c03c27dd6cd6c395e0a02fc1eda307d1d206cc6",
+    "official-runtime__include__audio_shadow.h": "a2f042a66f699ac05031de8d5fa1df5422bb1cd7ce545efa48be7969feccc392",
+    "official-runtime__include__mod_session_baseline.h": "94f194ecf16f7c83fb9821849b0dd0daf61dd45f029517ffb7beb5f9f8ecf7f8",
+    "official-runtime__include__present_sync.h": "2b0a0fad3beee5fc91c5d311ef23fa63fe6dd165eac082891e9982efcfc9e94c",
+    "official-runtime__include__spu.h": "690162bb62c33ded47068fea98bf924655b994abdde5ce79db76d90a8480f92e",
+    "official-runtime__include__spu_shadow.h": "685a761c085a7c2e7163a176a3072da9742f41366c14109ac01d94ebd4164c7a",
+    "official-runtime__runtime.cmake": "dd39e7cfef4ca1d7236af5ff0c7fe0b747df1bc514306bff04c3f150599db572",
+    "official-runtime__src__audio_shadow.c": "01b3e1c279d046142ef496319f383c73a713f9b7b910f9923ec5df10af863ecb",
+    "official-runtime__src__main.cpp": "e91592595f2668e31b253202010a0762bb581bfd6ec6b64158bb0a1da3cfaa6a",
+    "official-runtime__src__spu_shadow.c": "7095ca2bc73bb88bcfd9bc27a1dcd4ef1d95c21799617d48c08f0ddafe2ca638",
+    "official-tools__aot_overlay_pipeline.py": "f961f1361531bb0b3c1a895889f06bc83b8883d7c4c05c7bd8b24fcb9e205029",
+    "official-tools__compile_overlays.py": "88d22829f7901ba4a8e6c6ef81c5c505932d180741bcffab67b498f7b350d860"
+  },
+  "searches": {
+    "search-dllexport": {
+      "total_count": 1,
+      "incomplete_results": false,
+      "urls": [
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/344"
+      ]
+    },
+    "search-framework-clang": {
+      "total_count": 32,
+      "incomplete_results": false,
+      "urls": [
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/714",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/710",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/667",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/344",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/670",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/656",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/376",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/652",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/691",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/647",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/685",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/460",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/394",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/356",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/418",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/448",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/349",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/182",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/393",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/348",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/322",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/151",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/419",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/226",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/329",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/246",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/476",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/245",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/423",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/326",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/424",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/427"
+      ]
+    },
+    "search-framework-spu": {
+      "total_count": 61,
+      "incomplete_results": false,
+      "urls": [
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/703",
+        "https://github.com/RetroPortingToolKit/psxrecomp/issues/636",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/630",
+        "https://github.com/RetroPortingToolKit/psxrecomp/issues/443",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/635",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/614",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/629",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/606",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/632",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/292",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/559",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/239",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/564",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/102",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/565",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/104",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/562",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/560",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/170",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/240",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/558",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/548",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/286",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/356",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/610",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/508",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/431",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/166",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/355",
+        "https://github.com/RetroPortingToolKit/psxrecomp/issues/103",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/187",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/39",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/372",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/532",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/354",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/361",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/561",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/536",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/17",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/193",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/157",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/538",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/537",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/547",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/539",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/99",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/253",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/16",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/23",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/420",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/20",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/18",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/21",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/14",
+        "https://github.com/RetroPortingToolKit/psxrecomp/issues/475",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/540",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/13",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/63",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/424",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/435",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/429"
+      ]
+    },
+    "search-framework-vsync": {
+      "total_count": 20,
+      "incomplete_results": false,
+      "urls": [
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/723",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/713",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/699",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/605",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/591",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/590",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/260",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/562",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/288",
+        "https://github.com/RetroPortingToolKit/psxrecomp/issues/278",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/273",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/149",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/421",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/404",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/436",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/537",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/131",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/259",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/437",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/424"
+      ]
+    },
+    "search-locked": {
+      "total_count": 1,
+      "incomplete_results": false,
+      "urls": [
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/456"
+      ]
+    },
+    "search-normalization": {
+      "total_count": 3,
+      "incomplete_results": false,
+      "urls": [
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/520",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/641",
+        "https://github.com/RetroPortingToolKit/psxrecomp/pull/11"
+      ]
+    },
+    "search-shadow-exact": {
+      "total_count": 0,
+      "incomplete_results": false,
+      "urls": []
+    },
+    "search-tomba": {
+      "total_count": 11,
+      "incomplete_results": false,
+      "urls": [
+        "https://github.com/mstan/TombaRecomp/pull/35",
+        "https://github.com/mstan/TombaRecomp/pull/45",
+        "https://github.com/mstan/TombaRecomp/issues/5",
+        "https://github.com/mstan/TombaRecomp/pull/44",
+        "https://github.com/mstan/TombaRecomp/pull/30",
+        "https://github.com/mstan/TombaRecomp/issues/34",
+        "https://github.com/mstan/TombaRecomp/pull/31",
+        "https://github.com/mstan/TombaRecomp/issues/12",
+        "https://github.com/mstan/TombaRecomp/pull/21",
+        "https://github.com/mstan/TombaRecomp/issues/1",
+        "https://github.com/mstan/TombaRecomp/pull/7"
+      ]
+    }
+  },
+  "source_tags": [
+    {
+      "name": "v0.3.3-alpha",
+      "zipball_url": "https://api.github.com/repos/RetroPortingToolKit/psxrecomp/zipball/refs/tags/v0.3.3-alpha",
+      "tarball_url": "https://api.github.com/repos/RetroPortingToolKit/psxrecomp/tarball/refs/tags/v0.3.3-alpha",
+      "commit": {
+        "sha": "2da25c18d9e395ccc81091a77c375c637d573b14",
+        "url": "https://api.github.com/repos/RetroPortingToolKit/psxrecomp/commits/2da25c18d9e395ccc81091a77c375c637d573b14"
+      },
+      "node_id": "REF_kwDORdw2TbZyZWZzL3RhZ3MvdjAuMy4zLWFscGhh"
+    },
+    {
+      "name": "v0.3.2-alpha",
+      "zipball_url": "https://api.github.com/repos/RetroPortingToolKit/psxrecomp/zipball/refs/tags/v0.3.2-alpha",
+      "tarball_url": "https://api.github.com/repos/RetroPortingToolKit/psxrecomp/tarball/refs/tags/v0.3.2-alpha",
+      "commit": {
+        "sha": "b2d5abc41b824dba85102a5299671a65f4dc0ca9",
+        "url": "https://api.github.com/repos/RetroPortingToolKit/psxrecomp/commits/b2d5abc41b824dba85102a5299671a65f4dc0ca9"
+      },
+      "node_id": "REF_kwDORdw2TbZyZWZzL3RhZ3MvdjAuMy4yLWFscGhh"
+    },
+    {
+      "name": "v0.3.1-alpha",
+      "zipball_url": "https://api.github.com/repos/RetroPortingToolKit/psxrecomp/zipball/refs/tags/v0.3.1-alpha",
+      "tarball_url": "https://api.github.com/repos/RetroPortingToolKit/psxrecomp/tarball/refs/tags/v0.3.1-alpha",
+      "commit": {
+        "sha": "d742a623913312533fce3c1d9658922c767035b2",
+        "url": "https://api.github.com/repos/RetroPortingToolKit/psxrecomp/commits/d742a623913312533fce3c1d9658922c767035b2"
+      },
+      "node_id": "REF_kwDORdw2TbZyZWZzL3RhZ3MvdjAuMy4xLWFscGhh"
+    },
+    {
+      "name": "v0.3.0-alpha",
+      "zipball_url": "https://api.github.com/repos/RetroPortingToolKit/psxrecomp/zipball/refs/tags/v0.3.0-alpha",
+      "tarball_url": "https://api.github.com/repos/RetroPortingToolKit/psxrecomp/tarball/refs/tags/v0.3.0-alpha",
+      "commit": {
+        "sha": "cd944e8c0c6505bc009d57a4f4de97b958d9745f",
+        "url": "https://api.github.com/repos/RetroPortingToolKit/psxrecomp/commits/cd944e8c0c6505bc009d57a4f4de97b958d9745f"
+      },
+      "node_id": "REF_kwDORdw2TbZyZWZzL3RhZ3MvdjAuMy4wLWFscGhh"
+    }
+  ]
+}

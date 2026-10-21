@@ -1,0 +1,22 @@
+format_version = 5
+id = "tombi.enhancement.hybrid-controller"
+version = "1.0.0"
+name = "Hybrid Controller"
+author = "mstan"
+description = "Switch between original digital D-pad and analog stick movement according to the active input."
+resolver = "declarative"
+save_compatibility = "shared"
+
+[[target]]
+game_id = "SCES-01330"
+
+[[feature]]
+id = "hybrid-controller"
+name = "Hybrid Controller"
+description = "Use the D-pad for digital movement or the left stick for original analog movement. The most recently active control selects the input path. No external files required."
+group = "Gameplay"
+default_enabled = false
+
+[[plugin]]
+feature = "hybrid-controller"
+id = "tomba.hybrid-controller"

@@ -24,7 +24,10 @@ struct CatalogEntry {
     uint32_t decoded_size;       /* nonzero: GAM-compressed */
     const char *decoded_sha256;
 };
-#include "tomba_seamless_catalog.inc"
+#ifndef TOMBA_SEAMLESS_CATALOG_HEADER
+#define TOMBA_SEAMLESS_CATALOG_HEADER "tomba_seamless_catalog.inc"
+#endif
+#include TOMBA_SEAMLESS_CATALOG_HEADER
 
 constexpr uint32_t kGamTag = 0x444D4147u; /* 'GAMD' */
 std::vector<TombaAsset> assets;
@@ -102,7 +105,10 @@ extern "C" const TombaAsset *tomba_seamless_prepare(uint32_t *count) {
     PSXResidentSpec spec{};
     spec.struct_size = sizeof spec;
     spec.title = "TombaRecomp";
-    spec.format = "scus94236-gam-v2";
+#ifndef TOMBA_SEAMLESS_PACK_FORMAT
+#define TOMBA_SEAMLESS_PACK_FORMAT "scus94236-gam-v2"
+#endif
+    spec.format = TOMBA_SEAMLESS_PACK_FORMAT;
     spec.files = files;
     spec.file_count = uint32_t(std::size(files));
     spec.policy = PSX_RESIDENT_ALLOW_MODIFIED;

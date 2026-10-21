@@ -1,0 +1,60 @@
+[game]
+name = "TombiRecomp EU"
+region = "Europe (PAL)"
+id = "SCES-01330"
+players = 1
+exe = "user-data/SCES_013.30"
+load_address = "0x80010000"
+entry_pc = "0x8001E1F4"
+text_size = "0x0009E800"
+stack_base = "0x801FFFF0"
+
+[prepare_disc]
+boot_exe = "SCES_013.30"
+known_sizes = [492370032]
+known_md5 = ["5029ec8fee56ec6bb6316bd16ee77d54"]
+known_sha1 = ["2505d958b4439d04844cadd3f968fc7432a48e00"]
+
+[recompiler]
+seeds = "seeds/boot.txt"
+out_dir = "cache/generated"
+strict = true
+mod_function_entry_funcs = ["0x800171B8", "0x80017238", "0x8001BE1C", "0x8005042C", "0x8002235C", "0x80022630", "0x80022838"]
+
+[runtime]
+window_title = "TombiRecomp EU"
+memcard_dir = "saves"
+overlay_cache = true
+disc_speed = "1x"
+idle_skip = false
+
+[video]
+renderer = "opengl"
+vsync = "off"
+aspect_ratio = "4:3"
+internal_resolution = "1080p"
+fullscreen = 0
+low_latency_input = true
+offer_vulkan = false
+offer_render_pipeline = false
+render_thread = false
+present_thread = false
+frame_generation = false
+frame_interpolation = false
+offer_frame_interpolation = false
+auto_skip_fmv = false
+offer_skip_fmv = false
+fmv_skip_total_table = 0x80077F10
+fmv_skip_movie_id = 0x1F8001CD
+fmv_skip_end_total = 3
+pgxp_mod_only = true
+
+[audio]
+spu_hq = true
+
+[controller]
+default_mode = "digital"
+multitap_analog = false
+
+[widescreen]
+offer = false

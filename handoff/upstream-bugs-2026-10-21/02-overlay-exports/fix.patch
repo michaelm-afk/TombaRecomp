@@ -1,0 +1,11 @@
+--- a/tools/compile_overlays.py
++++ b/tools/compile_overlays.py
+@@ -3561,7 +3561,7 @@
+             '__attribute__((visibility("default")))\n#endif\n'
+             + m.group(0)
+         )
+-    src = re.sub(r'^void func_([0-9A-Fa-f]{8})\(CPUState\* cpu\)$',
++    src = re.sub(r'^void func_([0-9A-Fa-f]{8})\(CPUState\* cpu\);?$',
+                  add_export, src, flags=re.MULTILINE)
+ 
+     return src

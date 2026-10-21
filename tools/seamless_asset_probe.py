@@ -65,10 +65,11 @@ def decode_gam(data: bytes) -> bytes:
 class DecoderOracle:
     """Execute original MIPS bytes, not a second translation of the codec."""
 
-    def __init__(self, exe: bytes):
+    def __init__(self, exe: bytes, entry: int = 0x8003EF50):
         from unicorn import Uc, UC_ARCH_MIPS, UC_MODE_MIPS32, UC_MODE_LITTLE_ENDIAN
         from unicorn import mips_const
         self.reg = mips_const
+        self.entry = entry
         self.uc = Uc(UC_ARCH_MIPS, UC_MODE_MIPS32 | UC_MODE_LITTLE_ENDIAN)
         # Unicorn's MIPS CPU maps KSEG0 accesses to physical RAM.
         self.uc.mem_map(0, 16 * 1024 * 1024)
@@ -89,7 +90,7 @@ class DecoderOracle:
             self.uc.reg_write(reg.UC_MIPS_REG_A1, 0x80800000)
             self.uc.reg_write(reg.UC_MIPS_REG_SP, 0x801FF000)
             self.uc.reg_write(reg.UC_MIPS_REG_RA, 0x80000000)
-            self.uc.emu_start(0x8003EF50, 0x80000000,
+            self.uc.emu_start(self.entry, 0x80000000,
                               timeout=5_000_000, count=50_000_000)
             if self.uc.reg_read(reg.UC_MIPS_REG_PC) != 0x80000000:
                 raise ValueError("original decoder did not return within budget")

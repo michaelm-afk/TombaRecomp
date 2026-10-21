@@ -12,6 +12,10 @@
 Tomba! (USA, SCUS-94236) statically recompiled to a native PC executable with
 [PSXRecomp](https://github.com/mstan/psxrecomp).
 
+The European SCES-01330 Rev 1 integration candidate lives in `eu/`.
+See [US/EU build integration](docs/EU_INTEGRATION.md) for supported disc inputs,
+the common build entry point, and the remaining feature-parity work.
+
 [![PSXRecomp demo](https://img.youtube.com/vi/CID9oVhgCyY/maxresdefault.jpg)](https://www.youtube.com/watch?v=CID9oVhgCyY)
 
 ## What This Is

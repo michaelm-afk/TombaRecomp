@@ -1,0 +1,22 @@
+format_version = 5
+id = "psx.enhancement.pgxp"
+version = "1.0.0"
+name = "PGXP (partial precision)"
+author = "psxrecomp"
+description = "Optional perspective texture and tracked vertex corrections. This base-flavour EU build has reduced coverage, not full PGXP or widescreen. No external files required."
+resolver = "declarative"
+save_compatibility = "shared"
+
+[[target]]
+game_id = "SCES-01330"
+
+[[feature]]
+id = "pgxp"
+name = "PGXP (partial precision)"
+description = "Reduces perspective texture distortion where vertex tracking is available. Other geometry retains its original precision; 2D sprites and UI are unchanged. Optional and off by default."
+group = "Visual"
+default_enabled = false
+
+[[plugin]]
+feature = "pgxp"
+id = "psx.pgxp"

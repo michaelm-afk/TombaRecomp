@@ -1,0 +1,20 @@
+{
+  "TombaRecomp": {
+    "base": "1b7bafa5afc3dfd08a4889f2361f9a177e6b0f52",
+    "revision": "707f387ab4755a270ab7d88b44658f7b7113c12a",
+    "apply_in": "project root",
+    "patch_bytes": 303878
+  },
+  "psxrecomp": {
+    "base": "03e635e86dceb540b7b6421ada7ee32cc28ca62b",
+    "revision": "cb32f937342b7dd8ca2bc3755f5c861865cae382",
+    "apply_in": "psxrecomp",
+    "patch_bytes": 56548
+  },
+  "recomp-ui": {
+    "base": "7e884a227accea91ddb378671bd49aaeeea13371",
+    "revision": "2409ce11ee41d5ac248d10a2a6e5ad20d95c603e",
+    "apply_in": "recomp-ui",
+    "patch_bytes": 9506
+  }
+}

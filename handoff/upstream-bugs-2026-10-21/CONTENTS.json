@@ -1,0 +1,82 @@
+{
+  "01-hq-spu/fix.patch": {
+    "bytes": 473,
+    "sha256": "9c51fb76a40aacc2ec13ed293494845bdd0805a1b3fc39d34ee6dbc5ddfd05f7"
+  },
+  "01-hq-spu/REPORT.md": {
+    "bytes": 3080,
+    "sha256": "f5662cd6838ffa14ae56c8e2020efa0ed0288aa5631bfda482dac7e0b7dd60e0"
+  },
+  "01-hq-spu/test_spu_shadow_normalization.c": {
+    "bytes": 2747,
+    "sha256": "753f3e6bbf7e75f8d4636f83e0226a2370284b979f5709b22bf13c259b484edd"
+  },
+  "02-overlay-exports/fix.patch": {
+    "bytes": 411,
+    "sha256": "695155076eff330e326a8857efc5525a3482bd9ca638f138bfdb7072f935c631"
+  },
+  "02-overlay-exports/REPORT.md": {
+    "bytes": 2345,
+    "sha256": "13ea2c16d4d72024b25a9f1a94e0b12285b860ef22194a5e67b55cafc3941534"
+  },
+  "02-overlay-exports/test_overlay_exports.py": {
+    "bytes": 2540,
+    "sha256": "1bd1a780233d175dd99617a7fc8a505bae9f22a266491460904528c0c650d5e5"
+  },
+  "03-overlay-staging/fix.patch": {
+    "bytes": 713,
+    "sha256": "f3ffe917e7be17c03bdaeec6079a3086552b8856c4908e34ba0a26457a44a31c"
+  },
+  "03-overlay-staging/REPORT.md": {
+    "bytes": 2082,
+    "sha256": "b4e8ef534ddd83022d9f64b8df07cf83db60e34ec820fdb3491171e38ac3f890"
+  },
+  "03-overlay-staging/test_overlay_staging.py": {
+    "bytes": 3226,
+    "sha256": "28efcaca4a581b73a645deac2215bfb70cb45034543ddb5c95e216170de7e48a"
+  },
+  "04-vsync/fix.patch": {
+    "bytes": 1841,
+    "sha256": "661bfc111fb7209a7a2d3175095c335eab3ff35b72aad57c907a4cecdf10a612"
+  },
+  "04-vsync/REPORT.md": {
+    "bytes": 2386,
+    "sha256": "876faa152bf088bcf0aa9ebc1a5809878e9d2b9869aad27e21e1303598b365d2"
+  },
+  "04-vsync/tests.md": {
+    "bytes": 1379,
+    "sha256": "a1cf225bc117ba590c5506fe4ab8a14dd315cb2be2b3ab032d7a44650831cc1f"
+  },
+  "05-hq-spu-cd-input/fix.patch": {
+    "bytes": 1962,
+    "sha256": "1e397d987caf5d8f57a8da4d29ad6397bb147b49fc8374effec151292e9caf01"
+  },
+  "05-hq-spu-cd-input/REPORT.md": {
+    "bytes": 3383,
+    "sha256": "faa9f5c0b47e675ec196936613df89d4204196ce4a288070c15a9b69204ae1b7"
+  },
+  "05-hq-spu-cd-input/test_spu_shadow_cd_input.c": {
+    "bytes": 3258,
+    "sha256": "3b8710ee49512759d4f3c8f5baca9a29e14cf1945ffab61042b4a37b82b42b31"
+  },
+  "CLASSIFICATION.md": {
+    "bytes": 4534,
+    "sha256": "b382e9e3b2c86dc8249f1b914df0f704e85555442ec3243b144c3059e3dc085d"
+  },
+  "evidence.json": {
+    "bytes": 13906,
+    "sha256": "24cec15b9b48e167102ac68e60fcf19eb69162c9c44774fd7446f7bb79a034ad"
+  },
+  "LICENSE.framework": {
+    "bytes": 3892,
+    "sha256": "133629d3a7fa3543e96e27cc8c03c27dd6cd6c395e0a02fc1eda307d1d206cc6"
+  },
+  "README.md": {
+    "bytes": 2973,
+    "sha256": "26cbf9b56bc943e73c6953b3c1635f231d739ff4f3abf8733a1adb8caadb9722"
+  },
+  "TEST_RESULTS.md": {
+    "bytes": 2447,
+    "sha256": "99a69c4852e5ce3cfc4c7a7ce6dc25c64f4537a684b5132fa91314345313f9ce"
+  }
+}

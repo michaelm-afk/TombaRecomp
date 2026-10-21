@@ -1,0 +1,220 @@
+{
+  "description": "Controller-only German Rev-1 campaign prefix; full fog/Bell route is not yet verified.",
+  "phases": [
+    {
+      "id": "first-house-roof",
+      "steps": [
+        {
+          "buttons": [
+            "left"
+          ],
+          "frames": 18
+        },
+        {
+          "buttons": [
+            "up"
+          ],
+          "frames": 20
+        },
+        {
+          "buttons": [
+            "up",
+            "cross"
+          ],
+          "frames": 30
+        },
+        {
+          "buttons": [
+            "up"
+          ],
+          "frames": 100
+        },
+        {
+          "buttons": [],
+          "frames": 30
+        }
+      ],
+      "expect": {
+        "field": "position",
+        "ranges": [
+          [
+            40,
+            50
+          ],
+          [
+            -205,
+            -195
+          ],
+          [
+            89,
+            91
+          ]
+        ]
+      }
+    },
+    {
+      "expect": {
+        "ranges": [[1, 255]],
+        "field": "tornado"
+      },
+      "steps": [
+        {
+          "buttons": [
+            "cross"
+          ],
+          "frames": 8
+        },
+        {
+          "buttons": [],
+          "frames": 110
+        },
+        {
+          "buttons": [
+            "right"
+          ],
+          "frames": 60
+        },
+        {
+          "buttons": [],
+          "frames": 80
+        },
+        {
+          "buttons": [
+            "circle"
+          ],
+          "frames": 4
+        },
+        {
+          "buttons": [],
+          "frames": 200
+        },
+        {
+          "buttons": [
+            "cross"
+          ],
+          "frames": 8
+        },
+        {
+          "buttons": [],
+          "frames": 20
+        },
+        {
+          "buttons": [
+            "cross"
+          ],
+          "frames": 8
+        },
+        {
+          "buttons": [],
+          "frames": 20
+        },
+        {
+          "buttons": [
+            "cross"
+          ],
+          "frames": 8
+        },
+        {
+          "buttons": [],
+          "frames": 20
+        },
+        {
+          "buttons": [
+            "cross"
+          ],
+          "frames": 8
+        },
+        {
+          "buttons": [],
+          "frames": 20
+        },
+        {
+          "buttons": [
+            "cross"
+          ],
+          "frames": 8
+        },
+        {
+          "buttons": [],
+          "frames": 20
+        },
+        {
+          "buttons": [
+            "cross"
+          ],
+          "frames": 8
+        },
+        {
+          "buttons": [],
+          "frames": 20
+        },
+        {
+          "buttons": [
+            "cross"
+          ],
+          "frames": 8
+        },
+        {
+          "buttons": [],
+          "frames": 20
+        },
+        {
+          "buttons": [
+            "cross"
+          ],
+          "frames": 8
+        },
+        {
+          "buttons": [],
+          "frames": 20
+        },
+        {
+          "buttons": [
+            "cross"
+          ],
+          "frames": 8
+        },
+        {
+          "buttons": [],
+          "frames": 20
+        },
+        {
+          "buttons": [
+            "cross"
+          ],
+          "frames": 8
+        },
+        {
+          "buttons": [],
+          "frames": 20
+        },
+        {
+          "buttons": [
+            "cross"
+          ],
+          "frames": 8
+        },
+        {
+          "buttons": [],
+          "frames": 20
+        },
+        {
+          "buttons": [
+            "cross"
+          ],
+          "frames": 8
+        },
+        {
+          "buttons": [],
+          "frames": 20
+        },
+        {
+          "buttons": [],
+          "frames": 100
+        }
+      ],
+      "id": "furious-tornado-collected"
+    }
+  ],
+  "next_unverified_action": "Reach the far-right fog roof and use Furious Tornado through the original inventory menu. Hut exit and memory-card roundtrip are still unverified."
+}
