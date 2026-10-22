@@ -191,8 +191,14 @@
     "release": false,
     "default_branches_unchanged": true,
     "integration_branch": "integrate/tombi-eu2-rc2-20261022",
-    "draft_review_pending": true,
-    "local_release_candidate": true
+    "draft_review_pending": false,
+    "local_release_candidate": true,
+    "ready_for_source_review": true,
+    "pull_requests": [
+      "https://github.com/mstan/TombaRecomp/pull/48",
+      "https://github.com/RetroPortingToolKit/psxrecomp/pull/738",
+      "https://github.com/RetroPortingToolKit/recomp-ui/pull/111"
+    ]
   },
   "personal_cards_and_original_discs_preserved": true,
   "storage": {
