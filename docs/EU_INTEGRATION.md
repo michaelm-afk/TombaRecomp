@@ -3,7 +3,8 @@
 The EU RC4 handoff has been imported on `integrate/tombi-eu-rc4-20261021`
 against its exact game/framework/UI bases. The existing US target remains
 at the project root; the separate EU target is in `eu/`. This is an integration
-candidate, not a validated feature-parity release.
+candidate. The v0.21.0-alpha release adds separate USA/Europe Windows packages
+with the sampled validation below; full feature/campaign parity is not claimed.
 
 ## Disc inputs
 
@@ -50,15 +51,20 @@ accepted under the same exact data-track hash checks.
 
 The entry point builds shared emitters and OpenBIOS, then selected native
 executables and original-disc AOT caches. EU baseline codegen completes before
-overlay compilation. EU AOT defaults to `full`, enumerating the configured area
-and support images; `--eu-aot-scope opening` reproduces the handoff's narrower
-scope. The native entry-hook audit uses the same selected inventory.
+overlay compilation. EU AOT defaults to `opening`, the audited release inventory.
+`--eu-aot-scope full` is experimental: its expanded configured inventory currently
+fails the generated-instruction safety audit in later-area recipes. Failed
+modules are never staged. The native entry-hook audit uses the selected inventory.
 Image enumeration and byte guards do not establish full native execution coverage.
 
 US outputs are in `build-regions/us/`. EU retains its documented
 `build-eu-prototype`, `build-eu-seamless` and `build-eu-release-final` layouts.
-For portable packaging, follow `eu/release/docs/DEVELOPER.md` and the existing
-US packager. This entry point builds candidates; it does not publish or launch.
+For both portable Windows packages, run `python -I -B tools/package_regions.py`
+after building. `--us-build`/`--us-aot` and their EU counterparts select audited
+build workspaces. The packager rejects private debug/geometry-validation builds,
+checks the cache tag against the packaged regional config, filters developer
+mods, stages the pinned fallback toolchain and produces regional ZIPs/checksums.
+Neither entry point publishes or launches.
 `--qa` builds a separate EU debug-tools executable under `build-eu-qa/native`;
 the EU packager rejects debug-tools builds. The bounded test entry point is
 `python -I -B eu/tests/test_sampled_gameplay.py`, which samples English and

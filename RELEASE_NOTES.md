@@ -1,11 +1,48 @@
-## Regional integration candidate
+## v0.21.0-alpha — Tomba! (USA) and Tombi! (Europe)
+
+Choose the Windows x64 ZIP for your disc:
+
+| Download | Required game |
+| --- | --- |
+| `TombaRecomp-v0.21.0-alpha-USA-windows-x64.zip` | Tomba! (USA), SCUS-94236 |
+| `TombiRecomp-v0.21.0-alpha-Europe-windows-x64.zip` | Tombi! (Europe) (En,Fr,De,It,Nl) (Rev 1), SCES-01330 |
+
+The European build supports English, French, German, Italian and Dutch at
+the original PAL speed. It requires the exact Rev 1 data track with SHA-1
+`2505d958b4439d04844cadd3f968fc7432a48e00`. SCES-01331
+(En,Es,Pt,Sv,Da) and other SCES-01330 revisions are unsupported.
+Both packages include OpenBIOS and an overlay fallback toolchain; supply
+your own disc. Keep USA and Europe installations and Memory Cards separate.
 
 - Add EU adaptive Widescreen with Fit to Window and fixed aspect choices,
   using checked PAL language/overlay bindings for the shared renderer policies.
 - Name the option **Widescreen** in both US and EU catalogs. Existing selections
   retain their stable IDs; the feature remains optional and disabled initially.
-- Rebuild all EU native overlays with PAL-aware culling signatures. Keep native
+- Rebuild the audited EU native overlays with PAL-aware culling signatures. Keep native
   PAL simulation speed and the existing US rendering implementation.
+- Use consistent mod names: Seamless Loading, Widescreen, Skip FMVs, Hybrid
+  Controller, HD Texture Packs and PGXP Precision. EU Geometry HLE is now
+  called Geometry Optimization. Existing package IDs and selections are retained.
+- Keep Seamless Loading enabled by default and Widescreen optional with Fit
+  to Window selected initially. CD Speed, host-paced Fast Loading, retired
+  frame blending and developer-only mods are excluded from the packages.
+- Keep the life counter and AP display at the viewport edges when the opening
+  area's widescreen camera shifts.
+
+Sampled EU English/German and US gameplay passed walk/jump, native overlay
+execution and adaptive window/aspect checks. EU fixed 21:9 and disabled
+Widescreen also passed; 2,400 EU geometry batches matched the original code.
+The owner additionally playtested the integrated EU build and reported it
+plays well. This remains an alpha with sampled validation: campaign-wide
+Widescreen content, every EU language/area combination and an integrated-build
+Memory Card roundtrip have not been exhaustively tested. Native in-game saves
+remain supported; execution snapshots are build-specific.
+
+The USA package includes native code for its 25 configured area/support images.
+The Europe package includes 66 audited native modules from the opening/support
+inventory; later code can use the runtime fallback. Expanding EU AOT to the
+full configured inventory encountered unsupported generated instructions and
+was rejected by the safety audit. No failed modules are included.
 
 ## v0.20.2-alpha
 

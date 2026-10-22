@@ -9,12 +9,17 @@
 > accelerate this game's polish. More on the why at:
 > [Recomp + AI: 5 Months Later »](https://1379.tech/recomp-ai-5-months-later/)_
 
-Tomba! (USA, SCUS-94236) statically recompiled to a native PC executable with
+Tomba! (USA, SCUS-94236) and Tombi! (Europe, SCES-01330 Rev 1) statically
+recompiled to separate native PC executables with
 [PSXRecomp](https://github.com/mstan/psxrecomp).
 
-The European SCES-01330 Rev 1 integration candidate lives in `eu/`.
+The European target lives in `eu/` and supports the En/Fr/De/It/Nl Rev 1 disc.
 See [US/EU build integration](docs/EU_INTEGRATION.md) for supported disc inputs,
-the common build entry point, and the remaining feature-parity work.
+the common build entry point, and scoped validation results.
+
+Download **TombaRecomp-USA** for the US disc or **TombiRecomp-Europe** for
+the European disc from [Releases](https://github.com/mstan/TombaRecomp/releases/latest).
+The European En/Es/Pt/Sv/Da release (SCES-01331) is not supported.
 
 [![PSXRecomp demo](https://img.youtube.com/vi/CID9oVhgCyY/maxresdefault.jpg)](https://www.youtube.com/watch?v=CID9oVhgCyY)
 
@@ -47,6 +52,8 @@ Important files:
 - `tools/regen.sh` (macOS/Linux) / `tools/regen.ps1` (Windows): regenerates the
   Tomba recompiled C output by invoking the framework recompiler.
 - `tools/package_release.ps1`: builds the redistributable release zip.
+- `tools/package_regions.py`: stages and audits both Windows regional ZIPs
+  from release builds and their original-disc AOT audit receipts.
 - `tools/package_appimage.sh`: builds the experimental Linux x86-64 AppImage.
 - `psxrecomp/`: the [PSXRecomp](https://github.com/mstan/psxrecomp) framework,
   pulled in as a **git submodule** pinned to a known-good commit.
@@ -55,7 +62,7 @@ Important files:
 ## Status
 
 The game is playable from BIOS boot through gameplay. Latest release:
-**v0.20.1-alpha** (2026-10-19).
+**v0.21.0-alpha**, with separate USA and Europe Windows builds.
 
 | Area | State |
 |---|---|
@@ -68,7 +75,7 @@ The game is playable from BIOS boot through gameplay. Latest release:
 | Gameplay | Playable; known crashes tracked in `ISSUES.md` |
 | Renderers | Software **and** OpenGL (GPU); OpenGL is the default |
 | Adaptive widescreen | Experimental, opt-in (fit to window through 34:9) |
-| Controller | Analog / D-Pad modes; optional Special Edition Hybrid mod |
+| Controller | Analog / D-Pad modes; optional Hybrid Controller mod |
 
 ## Features
 
@@ -91,7 +98,7 @@ The game is playable from BIOS boot through gameplay. Latest release:
   to the expanded view. Extreme widths and all-area coverage remain experimental.
 - **Controller modes.** Choose Analog (DualShock, variable stick movement) or
   D-Pad (digital movement) in the normal controller settings. The default-off
-  **Special Edition Hybrid Controller** mod switches to digital when the D-pad
+  **Hybrid Controller** mod switches to digital when the D-pad
   is touched and back to analog when the stick is moved. Adjustable deadzone.
 - **Persistent in-game settings.** Your OPTION choices — text speed, sound,
   vibration, screen adjust — are saved and restored on every launch.
@@ -115,12 +122,14 @@ The game is playable from BIOS boot through gameplay. Latest release:
 
 ### Windows Release Package
 
-1. Download `TombaRecomp-v*-windows-x64.zip` from Releases and extract it.
-2. Run `TombaRecomp.exe`. A **launcher window** opens.
+1. Download the **USA** or **Europe** Windows ZIP matching your disc and extract it.
+2. Run `TombaRecomp.exe` (USA) or `TombiRecompEU.exe` (Europe). A **launcher window** opens.
 3. OpenBIOS is selected automatically. Optionally select your legally obtained
    `SCPH1001.BIN` in the BIOS row.
-4. Set the game **disc**: select your legally obtained Tomba! (USA, SCUS-94236)
-   disc image. The launcher verifies the ISO9660 header, region, and serial.
+4. Set the game **disc**: select your own matching regional disc image.
+   Europe requires Tombi! (Europe) (En,Fr,De,It,Nl) (Rev 1), SCES-01330,
+   BIN SHA-1 `2505d958b4439d04844cadd3f968fc7432a48e00`.
+   The launcher verifies the ISO9660 header, region, and serial.
 5. Optionally adjust renderer, supersampling, screen look, and controller
    settings. Widescreen, FMV skipping, the Hybrid
    Controller, and the Warp Debug Menu are on the **Mods** page. Then press

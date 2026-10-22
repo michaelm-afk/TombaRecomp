@@ -1,7 +1,7 @@
 format_version = 5
 id = "tomba.enhancement.skip-fmv"
 version = "1.0.0"
-name = "Tomba Skip FMVs"
+name = "Skip FMVs"
 author = "mstan"
 description = "Automatically skips Tomba's full-motion videos, with an optional Any% setting to preserve the title opening, post-final-pig ending, and credits."
 resolver = "declarative"

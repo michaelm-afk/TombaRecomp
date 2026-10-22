@@ -1,5 +1,5 @@
 [game]
-name = "Tomba!"
+name = "Tomba! (USA)"
 id = "SCUS-94236"
 exe = "tomba/SCUS_942.36"
 disc = "tomba/tomba.cue"
@@ -17,7 +17,7 @@ mod_function_entry_funcs = ["0x8005E08C", "0x8005A184"]
 
 # ---- Player-adjustable options ------------------------------------------
 [runtime]
-window_title = "Tomba! Recompiled"
+window_title = "Tomba! (USA)"
 memcard_dir = "saves"
 
 # Authentic CD timing is the baseline. Seamless Loading (Mods, default on)

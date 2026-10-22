@@ -51,7 +51,9 @@ def main():
     recompiler = ROOT/'build-eu-tools/psxrecomp-game.exe'
     tag = pipeline.compiler.cache_tag(str(ROOT/'psxrecomp/runtime/include'),str(recompiler),str(config),0)
     cache = work/'cache'
-    if not (cache/'SCES-01330/gcc/win-x64'/tag).is_dir():
+    previous = json.loads((work/'audit.json').read_text()) if (work/'audit.json').is_file() else {}
+    if (not (cache/'SCES-01330/gcc/win-x64'/tag).is_dir()
+            or previous.get('aot_scope') != args.scope):
         # pipeline.build requires a new directory; a failed attempt is retained
         # for diagnosis and the next attempt gets its own workspace.
         import tempfile

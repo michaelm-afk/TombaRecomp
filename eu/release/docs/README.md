@@ -1,13 +1,12 @@
-# TombiRecomp EU - 0.1.0-eu-rc4
+# Tombi! (Europe) - v0.21.0-alpha
 
 A native Windows x64 port of the original European Tombi!, using PSXRecomp
-and the shared TombaRecomp PC runtime. This is a local release candidate for
-acceptance testing, not an official Sony release.
+and the shared TombaRecomp PC runtime. This is the European alpha build.
 
 ## Requirements and first launch
 
 Use Windows 10/11 x64, a working OpenGL graphics driver and a writable folder.
-Extract the entire `windows-x64` folder, then double-click `TombiRecompEU.exe`.
+Extract the entire Europe ZIP, then double-click `TombiRecompEU.exe`.
 No administrator rights, system Python or compiler installation is required.
 Keep the companion folders beside the executable. Avoid Program Files and
 read-only media: settings, caches and saves are stored beside the program.
@@ -97,8 +96,9 @@ Regular gameplay, area changes and save/full-exit/restart/load were manually
 validated through Dwarf Village on the previous preserved EU build. Short
 five-language area/geometry regressions and feature tests also passed there.
 See `TEST_STATUS.md` for the release candidate's separate acceptance status.
-The entire campaign has not been validated. This candidate still needs a
-final hands-on launcher and controller acceptance test before redistribution.
+The entire campaign has not been validated. The owner playtested the integrated
+adaptive Widescreen build and reported that it plays well. The integrated build
+has sampled validation rather than a complete campaign replay.
 The added adaptive Widescreen integration has separate sampled English/German
 resize validation; the original RC4 acceptance does not qualify the new renderer
 across the whole campaign.

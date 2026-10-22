@@ -33,7 +33,7 @@ def privacy(directory):
         if not file.is_file():
             continue
         rel = file.relative_to(directory).as_posix()
-        if file.suffix.lower() in forbidden and rel != 'windows-x64/bios/openbios.bin':
+        if file.suffix.lower() in forbidden and rel not in ('windows-x64/bios/openbios.bin', 'bios/openbios.bin'):
             problems.append(rel + ': excluded file type')
         data = file.read_bytes()
         count += 1

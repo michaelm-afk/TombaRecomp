@@ -1,7 +1,7 @@
 format_version = 5
 id = "tombi.enhancement.geometry"
 version = "0.1.0"
-name = "Geometry HLE"
+name = "Geometry Optimization"
 author = "TombaRecomp contributors"
 description = "Shared Tomba geometry batches adapted to verified PAL MAIN overlays."
 resolver = "declarative"
@@ -13,7 +13,7 @@ disc_sha256 = "25aa80a9f7000fc68a4621e17c60fd1505df540dd6ed383baac305c37087bce2"
 
 [[feature]]
 id = "geometry"
-name = "Geometry HLE"
+name = "Geometry Optimization"
 description = "Uses optimized PC terrain geometry processing with original-code checks. Compared against the original in all five languages; full-game coverage is not yet verified. Optional and on by default."
 group = "Graphics"
 default_enabled = true

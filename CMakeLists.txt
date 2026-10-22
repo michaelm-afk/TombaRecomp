@@ -61,6 +61,11 @@ psxrecomp_add_game_runtime(psx-runtime
 )
 
 target_sources(psx-runtime PRIVATE ${TOMBA_MOD_PLUGIN_SOURCES})
+if(CMAKE_C_COMPILER_ID MATCHES "GNU|Clang")
+    target_compile_options(psx-runtime PRIVATE
+        "$<$<CONFIG:Release>:-ffile-prefix-map=${CMAKE_CURRENT_SOURCE_DIR}=.>"
+        "$<$<CONFIG:Release>:-fdebug-prefix-map=${CMAKE_CURRENT_SOURCE_DIR}=.>")
+endif()
 if(TARGET psx-runtime-pgxp)
     target_sources(psx-runtime-pgxp PRIVATE ${TOMBA_MOD_PLUGIN_SOURCES})
 endif()

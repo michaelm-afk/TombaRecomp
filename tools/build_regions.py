@@ -133,7 +133,8 @@ def main():
     parser.add_argument('--us-disc', type=Path)
     parser.add_argument('--eu-disc', type=Path)
     parser.add_argument('--jobs', type=int, default=3)
-    parser.add_argument('--eu-aot-scope', choices=('opening', 'full'), default='full')
+    parser.add_argument('--eu-aot-scope', choices=('opening', 'full'), default='opening',
+                        help='opening is release-qualified; full is experimental and may fail code-safety audit')
     parser.add_argument('--qa', action='store_true', help='Build an EU private debug-tools candidate for automation')
     parser.add_argument('--toolchain-bin', type=Path,
                         default=os.environ.get('TOMBI_TOOLCHAIN_BIN'))
@@ -192,7 +193,11 @@ def main():
     env = dict(os.environ, PATH=path, TEMP=str(scratch), TMP=str(scratch),
                TMPDIR=scratch.as_posix(), PYTHONDONTWRITEBYTECODE='1',
                XDG_CACHE_HOME=str(scratch / 'cache'), CCACHE_DIR=str(scratch / 'ccache'),
-               SCCACHE_DIR=str(scratch / 'sccache'))
+               SCCACHE_DIR=str(scratch / 'sccache'),
+               APPDATA=str(scratch / 'profile/Roaming'),
+               LOCALAPPDATA=str(scratch / 'profile/Local'))
+    for key in ('XDG_CACHE_HOME', 'CCACHE_DIR', 'SCCACHE_DIR', 'APPDATA', 'LOCALAPPDATA'):
+        Path(env[key]).mkdir(parents=True, exist_ok=True)
     env.pop('PYTHONHOME', None)
     env.pop('PYTHONPATH', None)
     if args.toolchain_bin:

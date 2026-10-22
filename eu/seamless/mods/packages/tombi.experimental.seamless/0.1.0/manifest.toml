@@ -13,7 +13,7 @@ disc_sha256 = "25aa80a9f7000fc68a4621e17c60fd1505df540dd6ed383baac305c37087bce2"
 
 [[feature]]
 id = "resident-assets"
-name = "EU Seamless Loading"
+name = "Seamless Loading"
 description = "Reduces area loading interruptions. Uses extra memory and prepares a local cache from your own disc on first use. Unsupported requests use the original loader; saves and game speed are unchanged."
 group = "Quality of Life"
 default_enabled = true

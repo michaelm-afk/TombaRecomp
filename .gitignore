@@ -64,3 +64,5 @@ tools/_toolchain_cache/
 /disc/
 /bios/
 /dist/
+/owner-playtest/
+/launch-temp/

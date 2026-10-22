@@ -1,5 +1,5 @@
 [game]
-name = "TombiRecomp EU"
+name = "Tombi! (Europe)"
 region = "Europe (PAL)"
 id = "SCES-01330"
 players = 1
@@ -22,7 +22,7 @@ strict = true
 mod_function_entry_funcs = ["0x800171B8", "0x80017238", "0x8001BE1C", "0x8005042C", "0x8002235C", "0x80022630", "0x80022838", "0x8005E634", "0x8004C1EC", "0x80063C4C"]
 
 [runtime]
-window_title = "TombiRecomp EU"
+window_title = "Tombi! (Europe)"
 memcard_dir = "saves"
 overlay_cache = true
 disc_speed = "1x"
