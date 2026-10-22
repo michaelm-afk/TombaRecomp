@@ -27,6 +27,11 @@ from toolchain import executable
 
 def package(region, build, aot, out, version):
     build, aot = build.resolve(), aot.resolve()
+    if not (aot / 'audit.json').is_file():
+        attempts = sorted(aot.glob('disc-aot-*/audit.json'))
+        if len(attempts) != 1:
+            raise ValueError('Select the exact audited AOT attempt directory with --us-aot/--eu-aot')
+        aot = attempts[0].parent
     cache = (build / 'CMakeCache.txt').read_text()
     for flag in ('PSX_DEBUG_TOOLS:BOOL=ON', 'TOMBA_GEOMETRY_VALIDATE:BOOL=ON',
                  'TOMBI_GEOMETRY_VALIDATE:BOOL=ON'):

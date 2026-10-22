@@ -1,0 +1,139 @@
+{
+  "version": "0.21.0-alpha",
+  "platform": "Windows x64",
+  "branch": "integrate/tombi-eu-rc4-20261021",
+  "framework": "84776299",
+  "ui": "e08082d10c38d0c4293455c3d15b3ab35ef1afe3",
+  "reports": [
+    {
+      "region": "us",
+      "archive": "TombaRecomp-v0.21.0-alpha-USA-windows-x64.zip",
+      "bytes": 64893052,
+      "sha256": "76a396bc6410db49390c4098523473634c5153c7a63fc53118ac5f43f7bfece8",
+      "package_audit": {
+        "files": 761,
+        "bytes": 204526446,
+        "personal_path_scan": "passed",
+        "excluded_extensions_scan": "passed",
+        "generated_game_source": "not staged",
+        "region": "us",
+        "game_id": "SCUS-94236",
+        "version": "0.21.0-alpha",
+        "mod_names": {
+          "psx.enhancement.pgxp": [
+            "PGXP Precision"
+          ],
+          "psx.presentation.bezel": [
+            "Bezel Artwork"
+          ],
+          "tomba.debug.warp": [
+            "Warp Menu"
+          ],
+          "tomba.enhancement.hd-textures": [
+            "HD Texture Packs"
+          ],
+          "tomba.enhancement.hybrid-controller": [
+            "Hybrid Controller"
+          ],
+          "tomba.enhancement.skip-fmv": [
+            "Skip FMVs"
+          ],
+          "tomba.enhancement.widescreen": [
+            "Widescreen"
+          ],
+          "tomba.experimental.seamless": [
+            "Seamless Loading"
+          ]
+        },
+        "native_pairs": 176,
+        "cache_tag": "cg18_0bea7895_gc272cdb19_f0",
+        "debug_tools": false
+      },
+      "exact_package_smoke": {
+        "region": "us",
+        "result": "passed",
+        "heartbeat_frames": 4701,
+        "fatal": null,
+        "boot_disc_serial": "SCUS-94236",
+        "native_modules_load_and_text_compare_passed": 176,
+        "portable_python_emitters_tcc_fixture_passed": true,
+        "no_host_tools_on_path": true,
+        "excluded_mods_absent": true,
+        "region_in_window_title": true,
+        "scope": "Exact ZIP extraction, dependency and module loading, portable toolchain, no-disc error and 35-second owned-disc boot; prior test harness expected heartbeat in exe directory, corrected to foreign working directory without rerunning gameplay."
+      }
+    },
+    {
+      "region": "eu",
+      "archive": "TombiRecomp-v0.21.0-alpha-Europe-windows-x64.zip",
+      "bytes": 80797778,
+      "sha256": "3c8b70123fa49aed3af6547147b30188c5b77551ca2c90a2277f6477d190e322",
+      "package_audit": {
+        "files": 535,
+        "bytes": 270296112,
+        "personal_path_scan": "passed",
+        "excluded_extensions_scan": "passed",
+        "generated_game_source": "not staged",
+        "region": "eu",
+        "game_id": "SCES-01330",
+        "version": "0.21.0-alpha",
+        "mod_names": {
+          "psx.enhancement.pgxp": [
+            "PGXP Precision"
+          ],
+          "psx.presentation.bezel": [
+            "Bezel Artwork"
+          ],
+          "tomba.enhancement.skip-fmv": [
+            "Skip FMVs"
+          ],
+          "tomba.enhancement.widescreen": [
+            "Widescreen"
+          ],
+          "tombi.enhancement.geometry": [
+            "Geometry Optimization"
+          ],
+          "tombi.enhancement.hd-textures": [
+            "HD Texture Packs"
+          ],
+          "tombi.enhancement.hybrid-controller": [
+            "Hybrid Controller"
+          ],
+          "tombi.enhancement.language-confirmation": [
+            "Wait for Language Confirmation"
+          ],
+          "tombi.experimental.seamless": [
+            "Seamless Loading"
+          ]
+        },
+        "native_pairs": 66,
+        "cache_tag": "cg18_0bea7895_gcaa01377e_f0",
+        "debug_tools": false
+      },
+      "exact_package_smoke": {
+        "region": "eu",
+        "result": "passed",
+        "heartbeat_frames": 2204,
+        "fatal": null,
+        "boot_disc_serial": "SCES-01330",
+        "native_modules_load_and_text_compare_passed": 66,
+        "portable_python_emitters_tcc_fixture_passed": true,
+        "no_host_tools_on_path": true,
+        "excluded_mods_absent": true,
+        "region_in_window_title": true,
+        "scope": "Exact ZIP extraction, dependency and module loading, portable toolchain, no-disc error and 35-second owned-disc boot; prior test harness expected heartbeat in exe directory, corrected to foreign working directory without rerunning gameplay."
+      }
+    }
+  ],
+  "shared_mod_names_match": true,
+  "source_metadata_guard": "passed",
+  "debug_build_packaging_rejected": true,
+  "owner_eu_playtest": "Owner reports integrated EU build plays well.",
+  "scope_limits": [
+    "Prior sampled English/German and US Widescreen gameplay QA remains scoped; no exhaustive five-language runtime matrix.",
+    "Exact release ZIPs tested for relocation, dependencies, native DLL load and preserved text, portable Python/emitters/TinyCC, no-disc error and 35-second owned-disc boot.",
+    "Full EU native inventory generated 129 recipes; later-area generated-C audit rejected unsupported instructions in jobs 015/016/017. Failed attempt never staged. Released 66-pair opening inventory retains fallback.",
+    "Full campaign Widescreen content and integrated-build native Memory Card roundtrip remain follow-ups."
+  ],
+  "evidence": "build-release-dual/ (ignored local workspace)"
+}
