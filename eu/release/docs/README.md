@@ -1,4 +1,4 @@
-# Tombi! (Europe) - v0.21.0-alpha
+# Tombi! (Europe, SCES-01330 Rev 1) - v0.22.0-alpha
 
 A native Windows x64 port of the original European Tombi!, using PSXRecomp
 and the shared TombaRecomp PC runtime. This is the European alpha build.
@@ -6,7 +6,7 @@ and the shared TombaRecomp PC runtime. This is the European alpha build.
 ## Requirements and first launch
 
 Use Windows 10/11 x64, a working OpenGL graphics driver and a writable folder.
-Extract the entire Europe ZIP, then double-click `TombiRecompEU.exe`.
+Extract the entire Europe-SCES01330-Rev1 ZIP, then double-click `TombiRecompEU.exe`.
 No administrator rights, system Python or compiler installation is required.
 Keep the companion folders beside the executable. Avoid Program Files and
 read-only media: settings, caches and saves are stored beside the program.
@@ -126,7 +126,7 @@ passed. The owner also completed an RC2 Razer test without a disconnect; this
 is positive evidence, not a guarantee that every intermittent failure is gone.
 Startup measurements distinguish launcher first paint from guest boot, not the
 first visible gameplay frame. No disc/cache integrity checks were removed.
-Keep this candidate in a separate folder and copy cards only while both games
+Keep this build in a separate folder and copy cards only while both games
 are closed. Never replace the only copy of a card.
 
 RC3 hashes the same complete disc/cache bytes using the Windows system SHA-256

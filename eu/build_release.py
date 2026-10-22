@@ -66,7 +66,8 @@ def main():
     for label,argv in [('configure',command),('build',[cmake,'--build',str(target),'--target','tombi-eu-seamless','-j',str(args.jobs)])]:
         log=target.parent/(label+'.log');print(f'{label}: {log}',flush=True)
         with log.open('w') as output:
-            subprocess.run(argv,cwd=ROOT,env=env,stdout=output,stderr=subprocess.STDOUT,check=True)
+            subprocess.run(argv,cwd=ROOT,env=env,stdout=output,stderr=subprocess.STDOUT,check=True,
+                           creationflags=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0)
     # Direct launches use the executable's cache root. Install the audited
     # native pairs there as well as in the separate hook-build workspace.
     sys.path.insert(0,str(ROOT/'psxrecomp/tools'))

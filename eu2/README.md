@@ -12,7 +12,8 @@ live language identity, including the different Spanish code layout.
 The original RC2 revision and Rev 1 have separate checked bindings and native
 cache configurations. The owner's SCES-01331 Rev 1 disc is now accepted for
 builds. Its fresh player and AOT rebuild passed bounded EN/ES runtime QA.
-Existing v0.21.0 downloads support USA/EU1. FMV Skip remains hidden for EU2.
+The v0.22.0 release includes USA, EU1 Rev 1 and EU2 Rev 1 Windows ZIPs.
+FMV Skip remains hidden for EU2.
 
 ## Required input
 
@@ -68,9 +69,9 @@ The fresh cache has 66 audited pairs and 15,440 original-byte guards.
 Eighteen combined-launcher checks passed, including real process handoffs and
 Play verification in both directions, corrupt-disc/missing-backend rejection,
 paths with spaces, and preservation of private settings/mod state/cards.
-The standalone release-mode candidate ZIP also passed stripped-cache hashes,
+The standalone release-mode ZIP also passed stripped-cache hashes,
 privacy/import checks, relocated Play verification and exact-disc rejection.
-It has not been published as a new GitHub release.
+The v0.22.0 download is named `Europe-SCES01331-Rev1`.
 The original RC2 revision retains static-only qualification.
 
 The adapter compiles and original-MAIN fixtures pass for all five static

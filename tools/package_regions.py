@@ -49,7 +49,7 @@ def package(region, build, aot, out, version):
         if revision not in PROFILES:raise ValueError('Unqualified EU2 build revision')
     if eu2 and revision=='rev1':title+=' (Rev 1)'
     folder = ('TombiRecomp-Europe-SCES01331-windows-x64' if eu2 else
-              'TombiRecomp-Europe-windows-x64' if eu else 'TombaRecomp-USA-windows-x64')
+              'TombiRecomp-Europe-SCES01330-Rev1-windows-x64' if eu else 'TombaRecomp-USA-windows-x64')
     if eu2 and revision=='rev1':folder=folder.replace('SCES01331-','SCES01331-Rev1-')
     player = out / folder
     player.mkdir(parents=True, exist_ok=False)
@@ -177,7 +177,7 @@ def package(region, build, aot, out, version):
     report.update(region=region, game_id=serial, version=version, mod_names=names,
                   native_pairs=receipt['published_pairs'], cache_tag=tag, debug_tools=False)
     (out / f'{region}-package-audit.json').write_text(json.dumps(report, indent=2) + '\n')
-    release_region = 'Europe-SCES01331' if eu2 else 'Europe' if eu else 'USA'
+    release_region = 'Europe-SCES01331' if eu2 else 'Europe-SCES01330-Rev1' if eu else 'USA'
     if eu2 and revision=='rev1':release_region+='-Rev1'
     archive = out / f'{"TombiRecomp" if eu else "TombaRecomp"}-v{version}-{release_region}-windows-x64.zip'
     create_release_zip(player, archive)

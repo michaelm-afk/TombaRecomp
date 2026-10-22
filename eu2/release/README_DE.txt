@@ -1,4 +1,4 @@
-Tombi! (Europa, SCES-01331) - Windows-x64-Kandidat
+Tombi! (Europa, SCES-01331 Rev 1) - v0.22.0-alpha - Windows x64
 
 ZIP in einen beschreibbaren Ordner entpacken, TombiRecompEU2.exe starten.
 Im Launcher unter Browse For Disc die eigene SCES-01331-CUE auswaehlen.
@@ -24,8 +24,7 @@ Beim naechsten Start werden dieselben Karten und Einstellungen wiederverwendet.
 
 Persoenliche Karten werden nicht mitgeliefert oder automatisch verschoben.
 Fuer einen Wechsel vom lokalen Testbuild nur eine Sicherungskopie der eigenen
-Karte verwenden und mit Browse auswaehlen. Die Testkarte liegt beim bisherigen
-Build im separaten Ordner build-eu2-launcher/manual-cards.
+Karte verwenden und mit Browse auswaehlen. Eigene Karten liegen unter saves/SCES-01331.
 
 Enthalten: frei lizenziertes OpenBIOS mit Lizenzhinweisen. Kein Sony-BIOS,
 kein Spiel-Image und keine persoenlichen Karten. Die gebuendelte kleine
@@ -35,4 +34,3 @@ Bekannte Grenzen: keine vollstaendige Kampagnenfreigabe.
 Widescreen-Inhalte und Objektverhalten sind nicht fuer alle Gebiete geprueft.
 Portugiesisches Game-over-Overlay verwendet den geprueften Interpreter-Fallback.
 Erste DLL-Kompatibilitaetspruefung kann dauern; den Cache nicht jedes Mal loeschen.
-Keine Veroeffentlichung oder Weitergabe dieses Kandidaten ist erfolgt.
