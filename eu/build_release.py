@@ -19,6 +19,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--build-dir', default='build-eu-release-final/native')
     parser.add_argument('--jobs', type=int, default=3)
+    parser.add_argument('--webp-source',type=Path,help='Pinned local dependency source cache')
     parser.add_argument('--debug-tools',action='store_true',help='Private QA only; never stage this binary')
     parser.add_argument('--geometry-validation',action='store_true',
         help='Private QA: compare HLE with verified original MAIN translations')
@@ -54,6 +55,8 @@ def main():
         '-DCMAKE_CXX_COMPILER='+executable('clang++.exe'),
         '-DCMAKE_MAKE_PROGRAM='+executable('ninja.exe')]
     # Optional local dependency reuse; nothing from this cache is distributed.
+    if args.webp_source:
+        command.append('-DFETCHCONTENT_SOURCE_DIR_PSX_LIBWEBP='+str(args.webp_source.resolve()))
     cache=ROOT/'build-eu-prototype/native/CMakeCache.txt'
     if cache.exists():
         for line in cache.read_text().splitlines():

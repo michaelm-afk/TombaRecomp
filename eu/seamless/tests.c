@@ -2,7 +2,13 @@
 #include "mod_plugins.h"
 #undef PSX_MOD_CONSTRUCTOR
 #define PSX_MOD_CONSTRUCTOR(name) static void name(void)
-#include "loader.c"
+#ifndef TOMBI_TEST_LOADER_SOURCE
+#define TOMBI_TEST_LOADER_SOURCE "loader.c"
+#endif
+#ifndef TOMBI_TEST_ADDRESS
+#define TOMBI_TEST_ADDRESS(value) (value)
+#endif
+#include TOMBI_TEST_LOADER_SOURCE
 #include <assert.h>
 
 static uint8_t memory[0x200000], scratchpad[1024], bank[8192];
@@ -27,7 +33,7 @@ int psx_mod_dma_write_ram(uint32_t a,const void *p,uint32_t n,int lba) {
 }
 uint32_t psx_mod_call_guest(CPUState *cpu,uint32_t f,uint32_t ra,uint32_t a,uint32_t b,uint32_t c,uint32_t d) {
     (void)cpu;(void)ra;(void)a;(void)b;(void)c;(void)d;
-    assert(f==0x8005f0fc);++leaves;return 0;
+    assert(f==TOMBI_TEST_ADDRESS(0x8005f0fc));++leaves;return 0;
 }
 int psx_mod_spu_upload(uint32_t a,uint32_t b,uint32_t c,int d) { (void)a;(void)b;(void)c;(void)d;assert(0);return 0; }
 int psx_mod_psyq_load_image(uint32_t a,uint32_t b,uint32_t c,uint32_t d,uint32_t e) { (void)a;(void)b;(void)c;(void)d;(void)e;assert(0);return 0; }
@@ -96,7 +102,7 @@ int main(void) {
             for(unsigned k=0;k<4;k++) bank[a+k]=(uint8_t)(v>>(8*k));
         }
         w8(0x8009b003,0x93);w32(s_profile->spu_mode,3);
-        for(unsigned j=0;j<75;j++) w32(0x80078530+j*8,0x48250);
+        for(unsigned j=0;j<75;j++) w32(TOMBI_TEST_ADDRESS(0x80078530)+j*8,0x48250);
         Request request;
         for(unsigned j=0;j<75;j++) {
             w16(0x8009b00e,(uint16_t)j);

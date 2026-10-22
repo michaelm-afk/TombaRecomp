@@ -1,0 +1,68 @@
+{
+  "reference": "psx_tomba src/main/video/movie.c movieDecodeNextFrame (US nominated layout; original EU2 bytes determine bindings)",
+  "eu1_total_table": "0x80077F10",
+  "eu1_movie_id": "0x1F8001CD",
+  "eu1_end_total": 3,
+  "shared_parts": [
+    "MDEC/XA stream detection",
+    "host pacing/audio mute",
+    "per-active-movie natural teardown policy",
+    "declarative OFF-by-default plugin",
+    "optional title/ending preservation policy"
+  ],
+  "eu2": [
+    {
+      "language": "en",
+      "main": 0,
+      "total_table": "0x800779fc",
+      "frame_totals_sha256": "7012c4ad2ddfa2da1a10826e19ee8f80107c3bfa2f79b2574c2a770b6750bd5b",
+      "movie_asset_map": "0x80077a30",
+      "map_sha256": "ea3958f9c1b8192caa1d7fc8ef4c87867df8d27ff54d796d3c9b2386be460ff5",
+      "movie_count": 22
+    },
+    {
+      "language": "es",
+      "main": 5,
+      "total_table": "0x800779e4",
+      "frame_totals_sha256": "7012c4ad2ddfa2da1a10826e19ee8f80107c3bfa2f79b2574c2a770b6750bd5b",
+      "movie_asset_map": "0x80077a18",
+      "map_sha256": "ea3958f9c1b8192caa1d7fc8ef4c87867df8d27ff54d796d3c9b2386be460ff5",
+      "movie_count": 22
+    },
+    {
+      "language": "pt",
+      "main": 6,
+      "total_table": "0x800779fc",
+      "frame_totals_sha256": "7012c4ad2ddfa2da1a10826e19ee8f80107c3bfa2f79b2574c2a770b6750bd5b",
+      "movie_asset_map": "0x80077a30",
+      "map_sha256": "ea3958f9c1b8192caa1d7fc8ef4c87867df8d27ff54d796d3c9b2386be460ff5",
+      "movie_count": 22
+    },
+    {
+      "language": "sv",
+      "main": 7,
+      "total_table": "0x800779fc",
+      "frame_totals_sha256": "7012c4ad2ddfa2da1a10826e19ee8f80107c3bfa2f79b2574c2a770b6750bd5b",
+      "movie_asset_map": "0x80077a30",
+      "map_sha256": "ea3958f9c1b8192caa1d7fc8ef4c87867df8d27ff54d796d3c9b2386be460ff5",
+      "movie_count": 22
+    },
+    {
+      "language": "da",
+      "main": 8,
+      "total_table": "0x800779fc",
+      "frame_totals_sha256": "7012c4ad2ddfa2da1a10826e19ee8f80107c3bfa2f79b2574c2a770b6750bd5b",
+      "movie_asset_map": "0x80077a30",
+      "map_sha256": "ea3958f9c1b8192caa1d7fc8ef4c87867df8d27ff54d796d3c9b2386be460ff5",
+      "movie_count": 22
+    }
+  ],
+  "blocked_by": [
+    "Shared runtime stores one fixed total-table pointer for an entire session, loaded once from game.toml",
+    "Existing mod API can toggle skip but has no trusted metadata rebinding API",
+    "Need reviewed live MAIN identity/teardown instruction contracts and bounds before any guest table write",
+    "Need language-change/savestate refresh tests and natural teardown/audio tests in all five languages",
+    "Any-percent classification must be checked against EU2 assets, not only a matching map"
+  ],
+  "decision": "Remain disabled: table candidates are reliable, but safe live metadata ownership/guards and regression coverage require a new regional skip adapter/runtime interface; no unverified address transfer"
+}

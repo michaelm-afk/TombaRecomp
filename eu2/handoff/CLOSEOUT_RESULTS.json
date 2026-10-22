@@ -1,0 +1,74 @@
+{
+  "date": "2026-10-22",
+  "status": "local integration candidate; manual acceptance pending",
+  "official_browse_source_parity": true,
+  "geometry": {
+    "languages": [
+      "en",
+      "es",
+      "pt",
+      "sv",
+      "da"
+    ],
+    "routines": 3,
+    "comparisons_per_routine_per_language": 200,
+    "total_comparisons": 3000,
+    "default_enabled": true
+  },
+  "pgxp": {
+    "languages": [
+      "en",
+      "es",
+      "pt",
+      "sv",
+      "da"
+    ],
+    "exact_dataflow_and_perspective_effect": true,
+    "base_flavor_reduced_coverage": true,
+    "default_enabled": false
+  },
+  "native_cache": {
+    "pairs": 65,
+    "recipes": 54,
+    "guard_rows": 15439
+  },
+  "shared_tests": {
+    "hybrid_controller": "passed",
+    "fast_forward": "41 fractional speed cases passed",
+    "spu_shadow": "passed",
+    "hd_installer": "10 synthetic SCES-01331 cases passed",
+    "hd_renderer": "real GL synthetic fixture passed",
+    "bezel": "shared ownership/resource guard passed"
+  },
+  "seamless": "five-language native batches passed; previous roundtrip retained",
+  "manual_pending": [
+    "Official Browse arbitrary-file selection",
+    "New through launcher",
+    "GUI settings and card-path persistence",
+    "Save sign on test card, exit/restart and load",
+    "Physical hybrid controller and listening/artwork acceptance"
+  ],
+  "isolated_rebuild": {
+    "status": "passed at backend checkpoint 2bad1db",
+    "native_pairs": 65,
+    "guard_rows": 15439,
+    "needs_final_common_launcher_integration": true
+  },
+  "package_audits": {
+    "status": "pending"
+  },
+  "limitations": [
+    "No full campaign certification",
+    "Widescreen unavailable: unreviewed EU2 camera/HUD/cull/overlay contracts",
+    "FMV Skip unavailable: Spanish table differs and language-aware metadata not bound",
+    "Portuguese game-over uses audited interpreter fallback",
+    "Additional current-card load automation inconclusive; prior owner and independent load evidence retained"
+  ],
+  "publication": false,
+  "target_architecture": "one European launcher package with SCES-01330 and SCES-01331 backends; scope review pending",
+  "fresh_defaults_corrections": [
+    "VSync OFF",
+    "HQ SPU ON",
+    "Geometry ON"
+  ]
+}

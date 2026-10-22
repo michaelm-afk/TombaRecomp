@@ -1,0 +1,23 @@
+format_version = 5
+id = "tombi.eu2.experimental.seamless"
+version = "0.1.0"
+name = "Seamless Loading"
+author = "TombaRecomp contributors"
+description = "Verified SCES-01331 bindings for the shared European resident loader."
+resolver = "declarative"
+save_compatibility = "shared"
+
+[[target]]
+game_id = "SCES-01331"
+disc_sha256 = "2eba3dfdd25f5d270d47f5fe408391971aa25ee09c6aac9874bba4e3bf6f32cc"
+
+[[feature]]
+id = "resident-assets"
+name = "Seamless Loading"
+description = "Uses a verified local asset cache; unsupported requests retain the original loader. Original card operations and PAL timing remain in place."
+group = "Quality of Life"
+default_enabled = true
+
+[[plugin]]
+feature = "resident-assets"
+id = "tombi.seamless"

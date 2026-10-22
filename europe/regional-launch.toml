@@ -1,0 +1,11 @@
+[[profile]]
+id = "SCES-01330"
+size = 492370032
+sha256 = "25aa80a9f7000fc68a4621e17c60fd1505df540dd6ed383baac305c37087bce2"
+backend = "TombiRecompEU.exe"
+
+[[profile]]
+id = "SCES-01331"
+size = 492306528
+sha256 = "2eba3dfdd25f5d270d47f5fe408391971aa25ee09c6aac9874bba4e3bf6f32cc"
+backend = "backends/SCES-01331/TombiRecompEU2.exe"

@@ -1,0 +1,147 @@
+{
+  "enabled": false,
+  "identity_address": "0x800305b0",
+  "languages": {
+    "en": {
+      "game": "0x8009c450",
+      "routines": [
+        {
+          "pc": "0x80022310",
+          "size": 724,
+          "sha256": "d02e846921608d487a65540a4698d1583a897f5a6a95635182afa1ebad40c04e",
+          "verified_internal_relocations": [
+            {
+              "offset": "0x21c",
+              "target_offset": "0x27c"
+            }
+          ]
+        },
+        {
+          "pc": "0x800225e4",
+          "size": 520,
+          "sha256": "1286a4d0c55df2bf2b6bf5d0313480560d00a35243a659599b7e197c51f400e4",
+          "verified_internal_relocations": []
+        },
+        {
+          "pc": "0x800227ec",
+          "size": 644,
+          "sha256": "2fb503d7fc2018bdca649ea9377422c28e7ef1e0aa08f8c7c86c9e455bb1a146",
+          "verified_internal_relocations": []
+        }
+      ]
+    },
+    "es": {
+      "game": "0x8009c478",
+      "routines": [
+        {
+          "pc": "0x80022310",
+          "size": 724,
+          "sha256": "d02e846921608d487a65540a4698d1583a897f5a6a95635182afa1ebad40c04e",
+          "verified_internal_relocations": [
+            {
+              "offset": "0x21c",
+              "target_offset": "0x27c"
+            }
+          ]
+        },
+        {
+          "pc": "0x800225e4",
+          "size": 520,
+          "sha256": "1286a4d0c55df2bf2b6bf5d0313480560d00a35243a659599b7e197c51f400e4",
+          "verified_internal_relocations": []
+        },
+        {
+          "pc": "0x800227ec",
+          "size": 644,
+          "sha256": "2fb503d7fc2018bdca649ea9377422c28e7ef1e0aa08f8c7c86c9e455bb1a146",
+          "verified_internal_relocations": []
+        }
+      ]
+    },
+    "pt": {
+      "game": "0x8009c478",
+      "routines": [
+        {
+          "pc": "0x80022310",
+          "size": 724,
+          "sha256": "d02e846921608d487a65540a4698d1583a897f5a6a95635182afa1ebad40c04e",
+          "verified_internal_relocations": [
+            {
+              "offset": "0x21c",
+              "target_offset": "0x27c"
+            }
+          ]
+        },
+        {
+          "pc": "0x800225e4",
+          "size": 520,
+          "sha256": "1286a4d0c55df2bf2b6bf5d0313480560d00a35243a659599b7e197c51f400e4",
+          "verified_internal_relocations": []
+        },
+        {
+          "pc": "0x800227ec",
+          "size": 644,
+          "sha256": "2fb503d7fc2018bdca649ea9377422c28e7ef1e0aa08f8c7c86c9e455bb1a146",
+          "verified_internal_relocations": []
+        }
+      ]
+    },
+    "sv": {
+      "game": "0x8009c458",
+      "routines": [
+        {
+          "pc": "0x80022310",
+          "size": 724,
+          "sha256": "d02e846921608d487a65540a4698d1583a897f5a6a95635182afa1ebad40c04e",
+          "verified_internal_relocations": [
+            {
+              "offset": "0x21c",
+              "target_offset": "0x27c"
+            }
+          ]
+        },
+        {
+          "pc": "0x800225e4",
+          "size": 520,
+          "sha256": "1286a4d0c55df2bf2b6bf5d0313480560d00a35243a659599b7e197c51f400e4",
+          "verified_internal_relocations": []
+        },
+        {
+          "pc": "0x800227ec",
+          "size": 644,
+          "sha256": "2fb503d7fc2018bdca649ea9377422c28e7ef1e0aa08f8c7c86c9e455bb1a146",
+          "verified_internal_relocations": []
+        }
+      ]
+    },
+    "da": {
+      "game": "0x8009c478",
+      "routines": [
+        {
+          "pc": "0x80022310",
+          "size": 724,
+          "sha256": "d02e846921608d487a65540a4698d1583a897f5a6a95635182afa1ebad40c04e",
+          "verified_internal_relocations": [
+            {
+              "offset": "0x21c",
+              "target_offset": "0x27c"
+            }
+          ]
+        },
+        {
+          "pc": "0x800225e4",
+          "size": 520,
+          "sha256": "1286a4d0c55df2bf2b6bf5d0313480560d00a35243a659599b7e197c51f400e4",
+          "verified_internal_relocations": []
+        },
+        {
+          "pc": "0x800227ec",
+          "size": 644,
+          "sha256": "2fb503d7fc2018bdca649ea9377422c28e7ef1e0aa08f8c7c86c9e455bb1a146",
+          "verified_internal_relocations": []
+        }
+      ]
+    }
+  },
+  "evidence": "Complete function comparison against hash-verified EU1 bodies; internal J relocation checked"
+}

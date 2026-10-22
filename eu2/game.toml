@@ -1,0 +1,43 @@
+# Experimental original-disc baseline; enhancements require separate verification.
+[game]
+name = "Tombi! Europe 2 Prototype"
+id = "SCES-01331"
+players = 1
+exe = "../disc/eu2/SCES_013.31"
+disc = "../disc/eu2/disc.cue"
+load_address = "0x80010000"
+entry_pc = "0x8001E1F8"
+text_size = "0x0009E800"
+stack_base = "0x801FFFF0"
+
+[prepare_disc]
+out_dir = "../disc/eu2"
+bin_name = "disc.bin"
+cue_name = "disc.cue"
+boot_exe = "SCES_013.31"
+known_sizes = [492306528]
+known_md5 = ["5cbbd8800409d992ce4b6d0df4bd7fab"]
+known_sha1 = ["684dbf0ad03f872511046d40d3cc85b17d839dbf"]
+
+[recompiler]
+bios_config = "../psxrecomp/bios/SCPH1001.toml"
+seeds = "seeds/boot.txt"
+out_dir = "../build-eu2/generated"
+strict = true
+
+[runtime]
+window_title = "Tombi! SCES-01331 Prototype"
+memcard_dir = "../build-eu2/saves"
+overlay_cache = true
+
+[video]
+renderer = "opengl"
+aspect_ratio = "4:3"
+auto_skip_fmv = false
+offer_skip_fmv = false
+
+[controller]
+default_mode = "digital"
+
+[widescreen]
+offer = false

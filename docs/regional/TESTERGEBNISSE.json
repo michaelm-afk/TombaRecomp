@@ -1,0 +1,921 @@
+{
+  "date": "2026-10-22",
+  "base_commit": "ec11a7e",
+  "branch": "feature/sces-01331",
+  "aot_audit": {
+    "game_id": "SCES-01331",
+    "cache_tag": "cg18_0bea7895_gcc15c8ed0_f0",
+    "flavor": 0,
+    "recipe_input_sha256": "612b08ed9eee1e93af1aea9e3f905fa4be3c42f012ac4a3d2aba41c507457eb3",
+    "recipe_count": 54,
+    "published_pairs": 65,
+    "manifest_rows": 15439,
+    "all_pairs_valid": true,
+    "all_guards_match_known_input_bytes": true,
+    "full_static_coverage_proven": false,
+    "image_coverage": [
+      {
+        "name": "000-EXE/MAIN0.EXE@80010000+88800",
+        "required_entries_verified": 1,
+        "native_entries": 1428,
+        "guarded_variants": 1428
+      },
+      {
+        "name": "001-SYSTEM/D0SPSUB.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 63,
+        "guarded_variants": 63
+      },
+      {
+        "name": "002-SYSTEM/D0SPSUB2.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 33,
+        "guarded_variants": 33
+      },
+      {
+        "name": "003-SYSTEM/D0SPSUB3.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 48,
+        "guarded_variants": 48
+      },
+      {
+        "name": "004-SYSTEM/I0NFO.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 54,
+        "guarded_variants": 54
+      },
+      {
+        "name": "005-SYSTEM/I0NFO2.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 200,
+        "guarded_variants": 200
+      },
+      {
+        "name": "006-SYSTEM/I0NFO3.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 55,
+        "guarded_variants": 55
+      },
+      {
+        "name": "007-SYSTEM/O0PTSUB0.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 27,
+        "guarded_variants": 27
+      },
+      {
+        "name": "008-SYSTEM/G0OVER.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 7,
+        "guarded_variants": 7
+      },
+      {
+        "name": "009-SYSTEM/X000.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 586,
+        "guarded_variants": 586
+      },
+      {
+        "name": "010-SYSTEM/X001.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 589,
+        "guarded_variants": 589
+      },
+      {
+        "name": "011-EXE/MAIN5.EXE@80010000+88800",
+        "required_entries_verified": 1,
+        "native_entries": 1428,
+        "guarded_variants": 1428
+      },
+      {
+        "name": "012-SYSTEM/D5SPSUB.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 63,
+        "guarded_variants": 63
+      },
+      {
+        "name": "013-SYSTEM/D5SPSUB2.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 33,
+        "guarded_variants": 33
+      },
+      {
+        "name": "014-SYSTEM/D5SPSUB3.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 48,
+        "guarded_variants": 48
+      },
+      {
+        "name": "015-SYSTEM/I5NFO.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 54,
+        "guarded_variants": 54
+      },
+      {
+        "name": "016-SYSTEM/I5NFO2.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 200,
+        "guarded_variants": 200
+      },
+      {
+        "name": "017-SYSTEM/I5NFO3.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 55,
+        "guarded_variants": 55
+      },
+      {
+        "name": "018-SYSTEM/O5PTSUB0.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 27,
+        "guarded_variants": 27
+      },
+      {
+        "name": "019-SYSTEM/G5OVER.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 7,
+        "guarded_variants": 7
+      },
+      {
+        "name": "020-SYSTEM/X500.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 586,
+        "guarded_variants": 586
+      },
+      {
+        "name": "021-SYSTEM/X501.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 589,
+        "guarded_variants": 589
+      },
+      {
+        "name": "022-EXE/MAIN6.EXE@80010000+88800",
+        "required_entries_verified": 1,
+        "native_entries": 1428,
+        "guarded_variants": 1428
+      },
+      {
+        "name": "023-SYSTEM/D6SPSUB.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 63,
+        "guarded_variants": 63
+      },
+      {
+        "name": "024-SYSTEM/D6SPSUB2.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 33,
+        "guarded_variants": 33
+      },
+      {
+        "name": "025-SYSTEM/D6SPSUB3.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 48,
+        "guarded_variants": 48
+      },
+      {
+        "name": "026-SYSTEM/I6NFO.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 54,
+        "guarded_variants": 54
+      },
+      {
+        "name": "027-SYSTEM/I6NFO2.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 200,
+        "guarded_variants": 200
+      },
+      {
+        "name": "028-SYSTEM/I6NFO3.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 55,
+        "guarded_variants": 55
+      },
+      {
+        "name": "029-SYSTEM/O6PTSUB0.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 27,
+        "guarded_variants": 27
+      },
+      {
+        "name": "030-SYSTEM/X600.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 586,
+        "guarded_variants": 586
+      },
+      {
+        "name": "031-SYSTEM/X601.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 589,
+        "guarded_variants": 589
+      },
+      {
+        "name": "032-EXE/MAIN7.EXE@80010000+88800",
+        "required_entries_verified": 1,
+        "native_entries": 1428,
+        "guarded_variants": 1428
+      },
+      {
+        "name": "033-SYSTEM/D7SPSUB.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 63,
+        "guarded_variants": 63
+      },
+      {
+        "name": "034-SYSTEM/D7SPSUB2.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 33,
+        "guarded_variants": 33
+      },
+      {
+        "name": "035-SYSTEM/D7SPSUB3.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 48,
+        "guarded_variants": 48
+      },
+      {
+        "name": "036-SYSTEM/I7NFO.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 54,
+        "guarded_variants": 54
+      },
+      {
+        "name": "037-SYSTEM/I7NFO2.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 205,
+        "guarded_variants": 205
+      },
+      {
+        "name": "038-SYSTEM/I7NFO3.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 55,
+        "guarded_variants": 55
+      },
+      {
+        "name": "039-SYSTEM/O7PTSUB0.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 28,
+        "guarded_variants": 28
+      },
+      {
+        "name": "040-SYSTEM/G7OVER.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 7,
+        "guarded_variants": 7
+      },
+      {
+        "name": "041-SYSTEM/X700.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 589,
+        "guarded_variants": 589
+      },
+      {
+        "name": "042-SYSTEM/X701.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 591,
+        "guarded_variants": 591
+      },
+      {
+        "name": "043-EXE/MAIN8.EXE@80010000+88800",
+        "required_entries_verified": 1,
+        "native_entries": 1428,
+        "guarded_variants": 1428
+      },
+      {
+        "name": "044-SYSTEM/D8SPSUB.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 63,
+        "guarded_variants": 63
+      },
+      {
+        "name": "045-SYSTEM/D8SPSUB2.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 33,
+        "guarded_variants": 33
+      },
+      {
+        "name": "046-SYSTEM/D8SPSUB3.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 48,
+        "guarded_variants": 48
+      },
+      {
+        "name": "047-SYSTEM/I8NFO.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 54,
+        "guarded_variants": 54
+      },
+      {
+        "name": "048-SYSTEM/I8NFO2.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 200,
+        "guarded_variants": 200
+      },
+      {
+        "name": "049-SYSTEM/I8NFO3.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 55,
+        "guarded_variants": 55
+      },
+      {
+        "name": "050-SYSTEM/O8PTSUB0.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 27,
+        "guarded_variants": 27
+      },
+      {
+        "name": "051-SYSTEM/G8OVER.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 7,
+        "guarded_variants": 7
+      },
+      {
+        "name": "052-SYSTEM/X800.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 586,
+        "guarded_variants": 586
+      },
+      {
+        "name": "053-SYSTEM/X801.BIN",
+        "required_entries_verified": 0,
+        "native_entries": 589,
+        "guarded_variants": 589
+      }
+    ],
+    "pairs": [
+      {
+        "dll": "00010000_385D4487.dll",
+        "functions": 1428,
+        "matched_recipe": "022-EXE/MAIN6.EXE@80010000+88800",
+        "dll_sha256": "fd2bcea2056c23b4afe6242282d82f4b8c0a25fb477d4f7d077e36e2e3926567",
+        "manifest_sha256": "43c6711c8e116cb6c1e1e7fba410de0adbbf945ae45b4c9b87ff025710244a40"
+      },
+      {
+        "dll": "00010000_49010926.dll",
+        "functions": 1428,
+        "matched_recipe": "032-EXE/MAIN7.EXE@80010000+88800",
+        "dll_sha256": "908f3b5f913b793f85e41407596347bfe1b720e38874de8ddb7d4d544cdbf89c",
+        "manifest_sha256": "79c10b0bde12bd915efadb7afe91ad1e63b5f9c3ff3865da65edbe6c0f6a8186"
+      },
+      {
+        "dll": "00010000_64187508.dll",
+        "functions": 1428,
+        "matched_recipe": "011-EXE/MAIN5.EXE@80010000+88800",
+        "dll_sha256": "1ad423d5480961f8db2fb8bc695fdf57ec8d5a7640881098ad659fbe34a77fea",
+        "manifest_sha256": "c7f1e1f18209f931f0cced19ca47377dcd88505ce73959a6fb5011e1633ac25a"
+      },
+      {
+        "dll": "00010000_654D0E4D.dll",
+        "functions": 1428,
+        "matched_recipe": "000-EXE/MAIN0.EXE@80010000+88800",
+        "dll_sha256": "8dac1f6e54e68c2e66af0aedbb95dbb3ebe88a0f5034b78758a91d487622a917",
+        "manifest_sha256": "eacac9300f6b62b0658b1eb575ec39fdba6dd5ef9246ec74085ae5f1817abcc1"
+      },
+      {
+        "dll": "00010000_CFE96CC9.dll",
+        "functions": 1428,
+        "matched_recipe": "043-EXE/MAIN8.EXE@80010000+88800",
+        "dll_sha256": "c834325d3d8676e08c768a5524343c305f41bd13bd0d61a77a67a3c0fd3ea6a6",
+        "manifest_sha256": "bd38d0cf6bdc57b7196aa31bd053b4e7e26fffd051d47921f8916aa619cb8400"
+      },
+      {
+        "dll": "000E7000_047A7372.dll",
+        "functions": 47,
+        "matched_recipe": "003-SYSTEM/D0SPSUB3.BIN",
+        "dll_sha256": "b8d3089f1c1831d6be2a6faccae27ff674282ac35d12beb0fc0b7db7a5c07743",
+        "manifest_sha256": "1e2d7001249f87ad1394d5d3047bb742693394758ba1e7b12bb5356b25db36fe"
+      },
+      {
+        "dll": "000E7000_0504486B.dll",
+        "functions": 586,
+        "matched_recipe": "009-SYSTEM/X000.BIN",
+        "dll_sha256": "8d2bf8d8746cfe98029f544957ae0ce57c69b7e9fa6d0b8371ca4774abf3f3b7",
+        "manifest_sha256": "f5d054d76c2068154c8dbeee65f85cbf0a0eeaa9c934378745df84db9fbf3cce"
+      },
+      {
+        "dll": "000E7000_0522550A.dll",
+        "functions": 47,
+        "matched_recipe": "035-SYSTEM/D7SPSUB3.BIN",
+        "dll_sha256": "c89c45d2fbeac04224a55dc60914f3c651f9f8b3b207ef8ac1e0b915cad40cec",
+        "manifest_sha256": "92ee5d6455fc40849c0a5f9728a895542ce43902b34174764d39eec82013f3ed"
+      },
+      {
+        "dll": "000E7000_05B85180.dll",
+        "functions": 1,
+        "matched_recipe": "012-SYSTEM/D5SPSUB.BIN",
+        "dll_sha256": "56486bcebabf0a1f23ee52cfa9de67eea106acbbb2127a0897608d196ce5c750",
+        "manifest_sha256": "151a7458ed28086149968fea29bea90e38844ece07fe1069e8ccb4146fbe9756"
+      },
+      {
+        "dll": "000E7000_0BC03C8F.dll",
+        "functions": 1,
+        "matched_recipe": "001-SYSTEM/D0SPSUB.BIN",
+        "dll_sha256": "d245ef36c7cc4084f0e2cbcc75cad7cc25a63956bf98ee8522d964b31abdbf64",
+        "manifest_sha256": "c448f6157681944c3ca972ecca9b6b8ab4d52b672fc37fae4ced100f77eb9a97"
+      },
+      {
+        "dll": "000E7000_0E7C86DE.dll",
+        "functions": 32,
+        "matched_recipe": "034-SYSTEM/D7SPSUB2.BIN",
+        "dll_sha256": "a1e7fb7df6411486c559173bc842fb169a812ef2ccdea0d1e2206d9966fbd216",
+        "manifest_sha256": "03523ce4b4f5431a9f4aace57c3b67c6ee5190e83d32eb62214f0cd9afd7dd57"
+      },
+      {
+        "dll": "000E7000_1CD2089F.dll",
+        "functions": 55,
+        "matched_recipe": "017-SYSTEM/I5NFO3.BIN",
+        "dll_sha256": "f31ee90fdb5098cb9529e502a27dd8d438b0844ed1d2566176f8dee399bf50d7",
+        "manifest_sha256": "ec6210cdef72d725eec478885ac5e371b668bf3e1adcd41b51ab6f727f2f54df"
+      },
+      {
+        "dll": "000E7000_1E24CC36.dll",
+        "functions": 1,
+        "matched_recipe": "014-SYSTEM/D5SPSUB3.BIN",
+        "dll_sha256": "a0cb57c83a70202315557c16c65958ffe9d8824d1c70692f3caf2071d4a1f571",
+        "manifest_sha256": "6ba9d37c64598a0f21fd622961bc27d5315e04514386da26ed1fad9aed9cc165"
+      },
+      {
+        "dll": "000E7000_1E40CE35.dll",
+        "functions": 589,
+        "matched_recipe": "021-SYSTEM/X501.BIN",
+        "dll_sha256": "c1bc0ce329bcf6bb530f86c352e2b72ab09f806a0912b9e9e3c037cb36113c98",
+        "manifest_sha256": "395aaae07ac38f848bf6d9507371378db46e4b7323133f959bc2ae0e46f75206"
+      },
+      {
+        "dll": "000E7000_23FC1A04.dll",
+        "functions": 55,
+        "matched_recipe": "028-SYSTEM/I6NFO3.BIN",
+        "dll_sha256": "644d9def4bd73e1474c5683e1c063266aab5937522b4250a8d1c690f11b5c989",
+        "manifest_sha256": "0bb15f6c530f73c891ee3d62081e020e64d02280890dedef42fe9e25ec7ad3ed"
+      },
+      {
+        "dll": "000E7000_28CCBC7F.dll",
+        "functions": 1,
+        "matched_recipe": "033-SYSTEM/D7SPSUB.BIN",
+        "dll_sha256": "d9a5ecf4488389e85f00238475e797edff28a0cdffce68359f2d26600782155b",
+        "manifest_sha256": "06b20b2cb573a38d457feb6b127d23577064306d95bd37715eeba0c84e1da0c7"
+      },
+      {
+        "dll": "000E7000_2E2BBB83.dll",
+        "functions": 27,
+        "matched_recipe": "007-SYSTEM/O0PTSUB0.BIN",
+        "dll_sha256": "b5bc44e23139479c52f869f577879ca5072e2b502ad205af7648ea738a9da7b9",
+        "manifest_sha256": "2051cc07915c3633f3011210ad30cbb40e46167651098007c876f206572b66f8"
+      },
+      {
+        "dll": "000E7000_35608140.dll",
+        "functions": 589,
+        "matched_recipe": "010-SYSTEM/X001.BIN",
+        "dll_sha256": "8592fb66128ba2bcaae3bcfd2e7f44d66c78de05530faa943bd55883eb00bbf9",
+        "manifest_sha256": "fab508355a92876eb2dcb0b8eacf8e4b1f713bc712f29e4be425484030b4b28c"
+      },
+      {
+        "dll": "000E7000_38F237DA.dll",
+        "functions": 55,
+        "matched_recipe": "006-SYSTEM/I0NFO3.BIN",
+        "dll_sha256": "cddc0443ac512f62119a53e634ed8d1549dbefbeb3f782e6e611ed73f302873e",
+        "manifest_sha256": "d0acd5744425dc72281775bb5c7aea3461705bac7a42931afb95737debba7102"
+      },
+      {
+        "dll": "000E7000_3B0160F8.dll",
+        "functions": 32,
+        "matched_recipe": "024-SYSTEM/D6SPSUB2.BIN",
+        "dll_sha256": "13f581fee93ff6dc6bb6c615e48446fc50d188c3763076c6d49fbe5f1f0f0f27",
+        "manifest_sha256": "12f63ea56bb32c6a4abb8be54512789567db5dbbf6433e3cc381788c9f45e858"
+      },
+      {
+        "dll": "000E7000_448FBC0C.dll",
+        "functions": 62,
+        "matched_recipe": "001-SYSTEM/D0SPSUB.BIN",
+        "dll_sha256": "89158f7429ea3ed6cebc1fd34b20bb982ff70123d41a828669c44a37cdb2fb3b",
+        "manifest_sha256": "9e56dae2a39b07b06bbad8eeb2a4c1b432686e35e240c358922fafafd295d298"
+      },
+      {
+        "dll": "000E7000_4A74B3F7.dll",
+        "functions": 62,
+        "matched_recipe": "012-SYSTEM/D5SPSUB.BIN",
+        "dll_sha256": "2ac215d30f45c3acc154fc799ab03e3669e755fa5694ba00a73821254e0f7e95",
+        "manifest_sha256": "b28a0a413a1ba607589141179efd4c64ba9c5670971457e82b648078440b6fd1"
+      },
+      {
+        "dll": "000E7000_4C8CF675.dll",
+        "functions": 7,
+        "matched_recipe": "040-SYSTEM/G7OVER.BIN",
+        "dll_sha256": "a6318a4c3f102550d0169a27195942f7878eb91744177b4c1f5c6a603f738a7c",
+        "manifest_sha256": "1d067a998434ebd1f54cdb3b880a4be5df31a7cc54906c0519cd6763e41ecf1d"
+      },
+      {
+        "dll": "000E7000_4CDF50AE.dll",
+        "functions": 589,
+        "matched_recipe": "053-SYSTEM/X801.BIN",
+        "dll_sha256": "ef2ea33c52327dd3e17e5270f9254b0af22b896c8aa6bf091a10b6683be80036",
+        "manifest_sha256": "41236f613195ebb77a135c46af5bfe766c9bfc7f5df6e84b71cb523be6d13a69"
+      },
+      {
+        "dll": "000E7000_4E5CAC27.dll",
+        "functions": 47,
+        "matched_recipe": "046-SYSTEM/D8SPSUB3.BIN",
+        "dll_sha256": "a2676fd3718c8e614cf3d47fe1b15d99bd0502ed5e355c83ffa727c40f253041",
+        "manifest_sha256": "e38415e33ef32e68e2792491c363ce085620ff1583f857d2595303b64dfcb48e"
+      },
+      {
+        "dll": "000E7000_4EA3145E.dll",
+        "functions": 1,
+        "matched_recipe": "025-SYSTEM/D6SPSUB3.BIN",
+        "dll_sha256": "36016ceae6061e0f407ceac2695db97c3850dc2f42e7a6d7ccdb504929aba70f",
+        "manifest_sha256": "cf6957a80a8e5dc95af1b67b9a8ab74ea5dae6263d58dd714ed956e68a15b9df"
+      },
+      {
+        "dll": "000E7000_54B274EF.dll",
+        "functions": 62,
+        "matched_recipe": "033-SYSTEM/D7SPSUB.BIN",
+        "dll_sha256": "50930b1aa11ed9368f0a3e957bd93ccf3e52db3e89636fc0fef8011420e7baf9",
+        "manifest_sha256": "8e9c4ce2d3f0ff33256b67d8ba41af520f35dcf57e8d4828f0d6229c67d47880"
+      },
+      {
+        "dll": "000E7000_553F89E8.dll",
+        "functions": 1,
+        "matched_recipe": "023-SYSTEM/D6SPSUB.BIN",
+        "dll_sha256": "724b5f687261c0d8047c4f1ce32e8e3d20613cda0a7d80036a68c904d8dab7e2",
+        "manifest_sha256": "2a063ab36fc9da3a762547debfe3c2f067422270215195c0b3231e28670c2d94"
+      },
+      {
+        "dll": "000E7000_55508FE9.dll",
+        "functions": 586,
+        "matched_recipe": "020-SYSTEM/X500.BIN",
+        "dll_sha256": "171564023879ef35197b43b3c01baef3d9a01a4e434c681ba60b1c21f3e630fa",
+        "manifest_sha256": "145d285d2397a0f8fd109aa92a17aaa5cc2f83b592a48b05929c548ea86a5b70"
+      },
+      {
+        "dll": "000E7000_5ADB1D77.dll",
+        "functions": 200,
+        "matched_recipe": "016-SYSTEM/I5NFO2.BIN",
+        "dll_sha256": "a47cdfec35d032dc9b79c930430ac6ba9891ebee9b9b7ae977eb9c317582e3a2",
+        "manifest_sha256": "dfe862181b333151cf1d712695111be43ed23915ec96b887f1651ad6495644b4"
+      },
+      {
+        "dll": "000E7000_5E2C7650.dll",
+        "functions": 586,
+        "matched_recipe": "030-SYSTEM/X600.BIN",
+        "dll_sha256": "71360410bf3dea970c70ec6bfcd369a913e236366a2d64ab0104f61d26029ec9",
+        "manifest_sha256": "98ea31664f09e0643e2a7695d5c3bc91bb6a989542443c228e45bef8c5b0ca2f"
+      },
+      {
+        "dll": "000E7000_654C0689.dll",
+        "functions": 589,
+        "matched_recipe": "042-SYSTEM/X701.BIN",
+        "dll_sha256": "a3c13bb9c2f6e86d69f1c6e9416128a899bd9d65ad780dd2c3582ca4b8aa555e",
+        "manifest_sha256": "5cb125d112fef8f762bb085eebd0f0888fe61ee51afac8b10bbeddc869bf6c7f"
+      },
+      {
+        "dll": "000E7000_65FA95F6.dll",
+        "functions": 27,
+        "matched_recipe": "039-SYSTEM/O7PTSUB0.BIN",
+        "dll_sha256": "1a8b9b3c857bb0021dbb5fd4cec92054c5045566264885025da121d0b8df7c8f",
+        "manifest_sha256": "592a5dfe4c6cadbb37ab291c5f3df77a1e362ac65ff7b3b8b5ce97cf4c200247"
+      },
+      {
+        "dll": "000E7000_6963633B.dll",
+        "functions": 7,
+        "matched_recipe": "008-SYSTEM/G0OVER.BIN",
+        "dll_sha256": "f99dcbc58b4642e9a10f3ff4a3441e8a9955983f4de78f01b2db4fc174f7be3c",
+        "manifest_sha256": "44e90ea38487e02dc6be26405c6d10373d77b0aed2347747606f4e2c66df8abc"
+      },
+      {
+        "dll": "000E7000_6B2AC407.dll",
+        "functions": 55,
+        "matched_recipe": "038-SYSTEM/I7NFO3.BIN",
+        "dll_sha256": "5ef95c969cd891c855a5d4fc49b04def4e4c50bf9c008625267c2bdca78713b5",
+        "manifest_sha256": "644e67072fd3e04059d566712802402f6dff25b4be0b06eb9781da2a1a9cb259"
+      },
+      {
+        "dll": "000E7000_6BFF0481.dll",
+        "functions": 32,
+        "matched_recipe": "002-SYSTEM/D0SPSUB2.BIN",
+        "dll_sha256": "ebb04913782dcb078a140316e98996ce4b77ac3edfb07ab0c83ebfaf95762362",
+        "manifest_sha256": "45994462d6bc916126916fa9b2533da87abd44c9c68fc896fadf058959316689"
+      },
+      {
+        "dll": "000E7000_6C4ECA27.dll",
+        "functions": 62,
+        "matched_recipe": "023-SYSTEM/D6SPSUB.BIN",
+        "dll_sha256": "762a666a06a8e26ce5f2dcce5bf57252037ffcec2ff6dc64835348aac548ba85",
+        "manifest_sha256": "d965dad47b2efdf2141991cde8af0efb903ec9395ab7fb1fef5abd077a675465"
+      },
+      {
+        "dll": "000E7000_6F5E4F0C.dll",
+        "functions": 54,
+        "matched_recipe": "004-SYSTEM/I0NFO.BIN",
+        "dll_sha256": "5d3db748c6ac31fed55bbcbcb8d7156fe0e6479f1c3ae7f6785c1501f3e4f056",
+        "manifest_sha256": "b885c4ac6cd1419b43a1cad204d2acfc3faefb45ef82fbe028e4dee2eeae7c0c"
+      },
+      {
+        "dll": "000E7000_733B56F2.dll",
+        "functions": 1,
+        "matched_recipe": "034-SYSTEM/D7SPSUB2.BIN",
+        "dll_sha256": "e7a20bea9ed2ef3d583591cba7198d6b846ebc77506e73e44c8ece4aa562fc74",
+        "manifest_sha256": "1d598378d2acf5ca85f725224ab81e58a9f27835e734329e95298f7ed42a17b3"
+      },
+      {
+        "dll": "000E7000_764BAFE2.dll",
+        "functions": 200,
+        "matched_recipe": "005-SYSTEM/I0NFO2.BIN",
+        "dll_sha256": "65aca388fb958350079c235d5e757b8a52d9eb1eea00b94f2e59e44a4ac5854c",
+        "manifest_sha256": "3411c223b57e3e04c5c244b54630599ee044a303386af6f8415984809682b208"
+      },
+      {
+        "dll": "000E7000_78091881.dll",
+        "functions": 27,
+        "matched_recipe": "050-SYSTEM/O8PTSUB0.BIN",
+        "dll_sha256": "7e887818b5b58246c251ccd5a3ca1dd5c22d5edbc061979bcb406d94aff0b481",
+        "manifest_sha256": "3babd13650c66f3a54e2539d81f5147d7e879659ad8211d19a4c3f2d2d9462cb"
+      },
+      {
+        "dll": "000E7000_7A2D8EA1.dll",
+        "functions": 47,
+        "matched_recipe": "025-SYSTEM/D6SPSUB3.BIN",
+        "dll_sha256": "a156d9c2e617607d68f6bb0d74f294af3bcd2b089efc6bd8f6c58d79975480c1",
+        "manifest_sha256": "7911213bf394075ccb261efa1da13c56a3d89eb16dae28c8eb4029f6794e103f"
+      },
+      {
+        "dll": "000E7000_7D8DB928.dll",
+        "functions": 7,
+        "matched_recipe": "051-SYSTEM/G8OVER.BIN",
+        "dll_sha256": "194bde0fd2de5602be8ad4992aea9e789eaf5e4ccf79a382e45fe0c2fb94d1c6",
+        "manifest_sha256": "4852f7180b76f5750781d83b7f0c3bb72346a443ba38ab6bcccc209c7b6d9117"
+      },
+      {
+        "dll": "000E7000_8A4D34A4.dll",
+        "functions": 1,
+        "matched_recipe": "013-SYSTEM/D5SPSUB2.BIN",
+        "dll_sha256": "aaf7bf5781d0247d74e88b8afd90f6309c270e70d25145e5022885889756a4e0",
+        "manifest_sha256": "310eef3e84a4963764243a5fbdbad812e900757a23bc4706e4dc6cfbfa4c1df9"
+      },
+      {
+        "dll": "000E7000_8C9F7DB2.dll",
+        "functions": 32,
+        "matched_recipe": "045-SYSTEM/D8SPSUB2.BIN",
+        "dll_sha256": "7fc344eb578d39f97cfe94b8080cb7e9a3379c25d67205c7335b69168f0b9f67",
+        "manifest_sha256": "81f6d2bb9bbbc728c56461217bd2f546921fe30454e3ffa2a37a65bbd85da12f"
+      },
+      {
+        "dll": "000E7000_92CCF9A3.dll",
+        "functions": 200,
+        "matched_recipe": "027-SYSTEM/I6NFO2.BIN",
+        "dll_sha256": "f7cfdce999e0f32b82ed8abd4713b782d3bacfb43450912d496b9ae3d417b61e",
+        "manifest_sha256": "2f3ad402dd18077eefed60ec21c141ef23fb8ea118e5682744ace476eb0575ac"
+      },
+      {
+        "dll": "000E7000_93946E93.dll",
+        "functions": 47,
+        "matched_recipe": "014-SYSTEM/D5SPSUB3.BIN",
+        "dll_sha256": "091263d22775b3acbc3c426bfede6ec1bc208f9f319e2eda3aa4af7e1e7944f1",
+        "manifest_sha256": "1f8a54b4a8507152ffbff5da1ea48a97e25cc40ba1306f93f93dad4b6ee0e83b"
+      },
+      {
+        "dll": "000E7000_9CC19C85.dll",
+        "functions": 54,
+        "matched_recipe": "015-SYSTEM/I5NFO.BIN",
+        "dll_sha256": "b81a29233d91c8592ea86467956014d7c7a62767fb7dedb39497af927a4bcbd1",
+        "manifest_sha256": "3c85fe0413acb9957805d877837ad0e85230055ce8e3a4461a67107844291ff4"
+      },
+      {
+        "dll": "000E7000_A3078D28.dll",
+        "functions": 7,
+        "matched_recipe": "019-SYSTEM/G5OVER.BIN",
+        "dll_sha256": "2d6f84fabdfb0ff034db1896fd769bc3c55cd11f72649470371e262525ec55e6",
+        "manifest_sha256": "d70b532213219a5a63a4ff67fc752318aad25eb9303f8b9bc5463e2d5666001b"
+      },
+      {
+        "dll": "000E7000_A33CAA0D.dll",
+        "functions": 27,
+        "matched_recipe": "029-SYSTEM/O6PTSUB0.BIN",
+        "dll_sha256": "f65e80eec0c1c94ed1248e80719085fec68e214acd01a94036133d0b17e806bf",
+        "manifest_sha256": "a9497709e36ffd695a8a6cbec6385063a1e4a67a9fba68984893118fa692483d"
+      },
+      {
+        "dll": "000E7000_A892FAB1.dll",
+        "functions": 54,
+        "matched_recipe": "047-SYSTEM/I8NFO.BIN",
+        "dll_sha256": "48d1b5c9fa171c79f50b02876413e186ecdd39912c157e4e28aeff6d14322abb",
+        "manifest_sha256": "05999b4ceb5855065903e3a53fba3d8975759e124c06e03b06a0db5792b2e4b5"
+      },
+      {
+        "dll": "000E7000_AA56FC62.dll",
+        "functions": 1,
+        "matched_recipe": "003-SYSTEM/D0SPSUB3.BIN",
+        "dll_sha256": "1d65fc4ac2baa6c9032353fb91fef5b46f116f12091df35956bc615f14a3267f",
+        "manifest_sha256": "96facdf1f9c2aea8c3f17dab42799663aa2bbca6eb7672a2e08bccb32f06bd03"
+      },
+      {
+        "dll": "000E7000_BE95507D.dll",
+        "functions": 586,
+        "matched_recipe": "052-SYSTEM/X800.BIN",
+        "dll_sha256": "b92f2d6fd509c33da2e03d97d39b68ec46a3a1500b5d1f6bb8dc50722b39e4fd",
+        "manifest_sha256": "6934f939204787ba9132ae73f1aedcc7d76f94fd442188cd1633173202b4b0ce"
+      },
+      {
+        "dll": "000E7000_C2C03694.dll",
+        "functions": 27,
+        "matched_recipe": "018-SYSTEM/O5PTSUB0.BIN",
+        "dll_sha256": "b392744e6cbcdd4b231564a09cca4157e517f672e6ca884dc89f86d94b08e3f6",
+        "manifest_sha256": "bf6af7e23c7bdf9641a3939596eb79a3334227b4c4e42a34a2458d3149e052af"
+      },
+      {
+        "dll": "000E7000_C310ADDE.dll",
+        "functions": 586,
+        "matched_recipe": "041-SYSTEM/X700.BIN",
+        "dll_sha256": "c7599c7d78bb4811bb015712d172200e7ef6ae068e656e9018dd2cb1596911b8",
+        "manifest_sha256": "fe8533595ef446fcec889664f8f9b2107c0385a7163bceb40d8552c0f0361ca2"
+      },
+      {
+        "dll": "000E7000_C762B6C4.dll",
+        "functions": 200,
+        "matched_recipe": "048-SYSTEM/I8NFO2.BIN",
+        "dll_sha256": "9cc1576810679ecb51796f57b8898e12a9aec5a1071d78c45169240915993d69",
+        "manifest_sha256": "6a50b50bd7de67583bd7ce4f29fd3e0109c7936744bfa7165463f7163162a47e"
+      },
+      {
+        "dll": "000E7000_D4E24D87.dll",
+        "functions": 200,
+        "matched_recipe": "037-SYSTEM/I7NFO2.BIN",
+        "dll_sha256": "53aa6d1a8a621149afcf446fa9cfbf316ce95d6c94d87b1324d7977331b5a73f",
+        "manifest_sha256": "d1bf4c8c2364a95e063f27b7919526ab0c0ebf807accb4529d5e6a4d0a676943"
+      },
+      {
+        "dll": "000E7000_DBD7A234.dll",
+        "functions": 32,
+        "matched_recipe": "013-SYSTEM/D5SPSUB2.BIN",
+        "dll_sha256": "f4bf491ef48a3501a8340d117df7fb73c001383d727c9d475fb8221891c14cc6",
+        "manifest_sha256": "022b7ecf76cebc6f7dfdfe8d691e29c428dec3d90b9d57397a1884807466c71b"
+      },
+      {
+        "dll": "000E7000_DC657C6C.dll",
+        "functions": 1,
+        "matched_recipe": "002-SYSTEM/D0SPSUB2.BIN",
+        "dll_sha256": "5a0126d41a1a6de78ae1a5e6933e4e4e9ec33de4b609bfa6af808b9c37db3c7e",
+        "manifest_sha256": "c9fe9ae92f7e83968cc2a07d60d229a3635d66f6234de674ef7a7e178b8e8ae9"
+      },
+      {
+        "dll": "000E7000_DF4A2D0E.dll",
+        "functions": 1,
+        "matched_recipe": "035-SYSTEM/D7SPSUB3.BIN",
+        "dll_sha256": "a1cd95d2ed06050ea828b99c6b510536db9c7eb4c477ff6beb4f3be5f70273ec",
+        "manifest_sha256": "944a6821f36019a23446565eebdf0f1989a982c42c217c5294a2c9a1df9db556"
+      },
+      {
+        "dll": "000E7000_DF4DE28D.dll",
+        "functions": 54,
+        "matched_recipe": "026-SYSTEM/I6NFO.BIN",
+        "dll_sha256": "348b4e15ee865b66209c344b8b2e4b82e963a7dc11f9addbd1fce1aa2ae4773e",
+        "manifest_sha256": "d5934d3cc25ee3ea2d988d831931440e01a205abfd5266c29f9ec37380842e54"
+      },
+      {
+        "dll": "000E7000_E9A6408D.dll",
+        "functions": 54,
+        "matched_recipe": "036-SYSTEM/I7NFO.BIN",
+        "dll_sha256": "75aef8ed9c261ca7be3f2a85592d60287a640ca889038879a5b1c04fb739268e",
+        "manifest_sha256": "b4599c9434d8e19736659982d899a12aa7c82364ae3ba1531493bcbb7e415435"
+      },
+      {
+        "dll": "000E7000_EB024107.dll",
+        "functions": 589,
+        "matched_recipe": "031-SYSTEM/X601.BIN",
+        "dll_sha256": "bcd7ce757746a51f8cbf033774c7309ade4221870bee27b975d26c495c9ff9c4",
+        "manifest_sha256": "5906cf0a3578f1914ba7ddbd5a375c67d9779a992c22fffef5aa956a34a8c787"
+      },
+      {
+        "dll": "000E7000_EE4AA265.dll",
+        "functions": 62,
+        "matched_recipe": "044-SYSTEM/D8SPSUB.BIN",
+        "dll_sha256": "9c01e59f38a53040e38017fdea3f1e3a7468bfc73f9ea5282a9e412bbd263d42",
+        "manifest_sha256": "a5e4d3feaef1166036733ce8d7c49fc5f1e65abfb55398c0a603ce49d873d0db"
+      },
+      {
+        "dll": "000E7000_EF5570DF.dll",
+        "functions": 55,
+        "matched_recipe": "049-SYSTEM/I8NFO3.BIN",
+        "dll_sha256": "4fbedbdd20b6f2e39888182f6dede46882985d2e051d930097c2e85be3f76cb3",
+        "manifest_sha256": "a1c576c2f4cbbc810df394f5e1a3a984b983d28e0fab630dc1941bb4cf20a01f"
+      }
+    ]
+  },
+  "languages": {
+    "en": {
+      "original_main_matched": true,
+      "regular_walk": {
+        "player": "0x800a5b38",
+        "walk": {
+          "before": {
+            "frame": 5636,
+            "state": 1,
+            "substate": 0,
+            "position": [
+              64.0,
+              -52.0,
+              0.0
+            ]
+          },
+          "after": {
+            "frame": 5687,
+            "state": 1,
+            "substate": 0,
+            "position": [
+              74.94140625,
+              -50.0,
+              0.0
+            ]
+          }
+        }
+      },
+      "native_loads": 3,
+      "native_dispatches": 20940699,
+      "evidence": "build-eu2/smoke-en-20261022T120756",
+      "runtime_autocompile_disabled": false,
+      "limitation": "No fallback compiler was installed during this earlier run; interpreter fallback was active."
+    },
+    "es": {
+      "language": "es",
+      "original_main_matched": true,
+      "native_dispatches": 12603809,
+      "native_loads": 3,
+      "interpreter_fallbacks": 112442,
+      "renderer": "software-headless",
+      "new_game_initialized": true,
+      "initial_player_detected": true,
+      "regular_walk_demonstrated": false,
+      "runtime_autocompile_disabled": true,
+      "evidence": "build-eu2/smoke-es-20261022T122241",
+      "opening_dialogue_screenshot_visually_checked": true
+    },
+    "pt": {
+      "language": "pt",
+      "original_main_matched": true,
+      "native_dispatches": 12546056,
+      "native_loads": 3,
+      "interpreter_fallbacks": 112228,
+      "renderer": "software-headless",
+      "new_game_initialized": true,
+      "initial_player_detected": true,
+      "regular_walk_demonstrated": false,
+      "runtime_autocompile_disabled": true,
+      "evidence": "build-eu2/smoke-pt-20261022T122304",
+      "opening_dialogue_screenshot_visually_checked": true
+    },
+    "sv": {
+      "language": "sv",
+      "original_main_matched": true,
+      "native_dispatches": 13398132,
+      "native_loads": 3,
+      "interpreter_fallbacks": 111887,
+      "renderer": "software-headless",
+      "new_game_initialized": true,
+      "initial_player_detected": true,
+      "regular_walk_demonstrated": false,
+      "runtime_autocompile_disabled": true,
+      "evidence": "build-eu2/smoke-sv-20261022T122327",
+      "opening_dialogue_screenshot_visually_checked": true
+    },
+    "da": {
+      "language": "da",
+      "original_main_matched": true,
+      "native_dispatches": 12570836,
+      "native_loads": 3,
+      "interpreter_fallbacks": 113799,
+      "renderer": "software-headless",
+      "new_game_initialized": true,
+      "initial_player_detected": true,
+      "regular_walk_demonstrated": false,
+      "runtime_autocompile_disabled": true,
+      "evidence": "build-eu2/smoke-da-20261022T122350",
+      "opening_dialogue_screenshot_visually_checked": true
+    }
+  },
+  "opengl": {
+    "language": "en",
+    "pipeline_ready_logged": true,
+    "evidence": "build-eu2/smoke-en-20261022T121300",
+    "limitations": "Startup/MAIN sample only; no wide renderer enabled."
+  },
+  "original_inventory_unchanged": true,
+  "regressions": [
+    "tools/test_runtime_config_metadata.py passed",
+    "EU1 default GAME/fingerprint derivation exercised from verified original MAIN0..4",
+    "eu2/analyze_geometry.py: 15 complete body comparisons passed",
+    "Wrong US disc rejected by eu2/prepare.py before staging",
+    "git diff --check passed"
+  ],
+  "open": [
+    "Regular area transition and return",
+    "Save/full process exit/restart/load on fresh EU2 card",
+    "Movement/jump and extended font coverage in all languages",
+    "Native Portuguese game-over producer overlap",
+    "Seamless, Geometry HLE differential validation, Widescreen, PGXP and other EU2 PC feature qualification",
+    "Unified multi-backend launcher dispatch"
+  ],
+  "limits": [
+    "Original-byte/native provenance is not complete static coverage",
+    "Interpreter fallback remains",
+    "No campaign automation, quest writes or imported original cards",
+    "Original release packages inventoried by path/size; ROMs and cards additionally hashed",
+    "No Japanese implementation",
+    "No push, publication or pull request"
+  ]
+}
