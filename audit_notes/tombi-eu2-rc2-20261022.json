@@ -374,5 +374,15 @@
         "ordinary save and restart/load on test card"
       ]
     }
+  },
+  "release_hardening": {
+    "issue": "Long remembered disc paths could lose spaces at TOML continuation wraps",
+    "fix": "Unwrapped TOML selection serialization; existing atomic replacement and full-disc gates retained",
+    "framework_pr": "https://github.com/RetroPortingToolKit/psxrecomp/pull/748",
+    "framework_commit": "b20675cfb900664400bf67fe2a95de14372bdeb5",
+    "production_roundtrip_cases": 162,
+    "old_header_negative_control_failed": true,
+    "fixed_header_passed": true,
+    "both_european_cold_restart_covered_by_release_checks": true
   }
 }

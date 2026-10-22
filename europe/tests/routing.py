@@ -25,8 +25,9 @@ def main():
   cases.append(dict(case=len(cases)+1,passed=True))
  check(entry.with_name(entry.name.lower()),['--regional-probe','--disc',discs['SCES-01330']],True,'profile=SCES-01330')
  for region,disc in discs.items():check(entry,['--regional-probe','--disc',disc],True,'profile='+region)
- check(entry,['--regional-select-only','--disc',discs['SCES-01331']],True,'profile=SCES-01331')
- check(entry,['--regional-probe'],True,'profile=SCES-01331')
+ for region,disc in discs.items():
+  check(entry,['--regional-select-only','--disc',disc],True,'profile='+region)
+  check(entry,['--regional-probe'],True,'profile='+region)
  check(entry,['--regional-exec-probe'],True,'entered=SCES-01331')
  check(eu2,['--regional-exec-probe','--disc',discs['SCES-01330']],True,'entered=SCES-01330')
  check(entry,['--regional-ui-route-probe','--disc',discs['SCES-01331']],True,'entered=SCES-01331')
@@ -49,6 +50,6 @@ def main():
  for path,digest in protected:assert hashlib.sha256(path.read_bytes()).hexdigest()==digest,path
  (app/'europe-selection.toml').write_text('disc = "missing-disc.cue"\n')
  check(entry,['--regional-probe'],False)
- report=dict(result='passed',production_play_gate=a.check_play_gate,cases=len(cases),serial_and_full_sha256=True,both_regions=True,cold_restart_selection=True,actual_process_handoff_both_directions=True,production_ui_handoff_path=True,spaces_in_package_path=True,corrupted_same_size_disc_rejected=True,missing_backend_rejected=True,settings_mod_state_cards_preserved=True,desktop_automation=False)
+ report=dict(result='passed',production_play_gate=a.check_play_gate,cases=len(cases),serial_and_full_sha256=True,both_regions=True,cold_restart_selection=True,cold_restart_both_regions=True,actual_process_handoff_both_directions=True,production_ui_handoff_path=True,spaces_in_package_path=True,corrupted_same_size_disc_rejected=True,missing_backend_rejected=True,settings_mod_state_cards_preserved=True,desktop_automation=False)
  (out/'result.json').write_text(json.dumps(report,indent=2)+'\n');print(out,flush=True)
 if __name__=='__main__':main()
