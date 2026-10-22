@@ -1,0 +1,23 @@
+format_version = 5
+id = "tombi.experimental.seamless"
+version = "0.1.0"
+name = "Seamless Loading"
+author = "TombaRecomp contributors"
+description = "Reduces area loading interruptions using verified data prepared from your own EU disc. Original card operations and game speed are retained."
+resolver = "declarative"
+save_compatibility = "shared"
+
+[[target]]
+game_id = "SCES-01330"
+disc_sha256 = "25aa80a9f7000fc68a4621e17c60fd1505df540dd6ed383baac305c37087bce2"
+
+[[feature]]
+id = "resident-assets"
+name = "EU Seamless Loading"
+description = "Reduces area loading interruptions. Uses extra memory and prepares a local cache from your own disc on first use. Unsupported requests use the original loader; saves and game speed are unchanged."
+group = "Quality of Life"
+default_enabled = true
+
+[[plugin]]
+feature = "resident-assets"
+id = "tombi.seamless"

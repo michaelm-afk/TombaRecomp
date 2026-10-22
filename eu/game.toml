@@ -1,0 +1,43 @@
+# Separate, original-disc EU prototype. No US-language or enhancement hooks.
+[game]
+name = "Tombi! Europe Rev 1 Prototype"
+id = "SCES-01330"
+players = 1
+exe = "../disc/SCES_013.30"
+disc = "../disc/Tombi! (Europe) (En,Fr,De,It,Nl) (Rev 1).cue"
+load_address = "0x80010000"
+entry_pc = "0x8001E1F4"
+text_size = "0x0009E800"
+stack_base = "0x801FFFF0"
+
+[prepare_disc]
+out_dir = "../disc"
+bin_name = "Tombi! (Europe) (En,Fr,De,It,Nl) (Rev 1).bin"
+cue_name = "Tombi! (Europe) (En,Fr,De,It,Nl) (Rev 1).cue"
+boot_exe = "SCES_013.30"
+known_sizes = [492370032]
+known_md5 = ["5029ec8fee56ec6bb6316bd16ee77d54"]
+known_sha1 = ["2505d958b4439d04844cadd3f968fc7432a48e00"]
+
+[recompiler]
+bios_config = "../psxrecomp/bios/SCPH1001.toml" # ABI/address metadata only; runtime uses bundled OpenBIOS.
+seeds = "seeds/boot.txt"
+out_dir = "../build-eu-prototype/generated"
+strict = true
+
+[runtime]
+window_title = "Tombi! EU Rev-1 Prototype"
+memcard_dir = "../build-eu-prototype/saves"
+overlay_cache = true
+
+[video]
+renderer = "opengl"
+aspect_ratio = "4:3"
+auto_skip_fmv = false
+offer_skip_fmv = false
+
+[controller]
+default_mode = "digital"
+
+[widescreen]
+offer = false

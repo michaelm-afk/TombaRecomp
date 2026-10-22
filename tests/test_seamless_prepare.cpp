@@ -25,7 +25,10 @@ struct CatalogEntry {
     uint32_t decoded_size;
     const char *decoded_sha256;
 };
-#include "../src/mods/tomba_seamless_catalog.inc"
+#ifndef TOMBA_SEAMLESS_CATALOG_HEADER
+#define TOMBA_SEAMLESS_CATALOG_HEADER "../src/mods/tomba_seamless_catalog.inc"
+#endif
+#include TOMBA_SEAMLESS_CATALOG_HEADER
 /* mod_resident.cpp stamps its always-on request ring with the runtime's frame
  * and cycle clocks; this host-only test links it without the runtime. */
 extern "C" uint64_t s_frame_count;

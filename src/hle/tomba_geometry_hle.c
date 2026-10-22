@@ -32,6 +32,17 @@ extern void tomba_lle_func_800253C8(CPUState*);
 
 extern uint32_t g_debug_last_store_pc;
 
+/* Verified regional adapters override only the original cull height and
+ * store-PC provenance. The US entry points/default behavior remain unchanged. */
+#ifndef TOMBA_GEOMETRY_Y_LIMIT
+#define TOMBA_GEOMETRY_Y_LIMIT 224u
+#define TOMBA_GEOMETRY_FLAT_PC 0x80024F88u
+#define TOMBA_GEOMETRY_TRI_PC 0x8002525Cu
+#define TOMBA_GEOMETRY_QUAD_PC 0x80025464u
+#define TOMBA_GEOMETRY_FLAT_LAST_PC 0x80024FCCu
+#define TOMBA_GEOMETRY_QUAD_LAST_PC 0x800254A8u
+#endif
+
 static void vertex(CPUState* cpu, unsigned reg, uint32_t address) {
     for (unsigned k = 0; k < 2; ++k) {
         unsigned r = reg + k;
@@ -77,7 +88,7 @@ static void geometry(CPUState* cpu, unsigned kind) {
         cpu->write_word(0x1F800070u, (uint32_t)facing);
         if (facing <= 0) continue;
         uint32_t packet = cpu->read_word(0x1F800164u);
-        const uint32_t base_pc = flat ? 0x80024F88u : kind == 1 ? 0x8002525Cu : 0x80025464u;
+        const uint32_t base_pc = flat ? TOMBA_GEOMETRY_FLAT_PC : kind == 1 ? TOMBA_GEOMETRY_TRI_PC : TOMBA_GEOMETRY_QUAD_PC;
         xy(cpu, 12, packet + 8, base_pc);
         xy(cpu, 13, packet + 8 + xy_step, base_pc + 4);
         xy(cpu, 14, packet + 8 + xy_step * 2, base_pc + 8);
@@ -87,12 +98,12 @@ static void geometry(CPUState* cpu, unsigned kind) {
             flags = gte_read_ctrl(cpu, 31);
             cpu->write_word(0x1F800070u, flags);
             if ((int32_t)flags < 0) continue;
-            xy(cpu, 14, packet + 8 + xy_step * 3, flat ? 0x80024FCCu : 0x800254A8u);
+            xy(cpu, 14, packet + 8 + xy_step * 3, flat ? TOMBA_GEOMETRY_FLAT_LAST_PC : TOMBA_GEOMETRY_QUAD_LAST_PC);
         }
         int visible_y = 0, visible_x = 0;
         for (unsigned j = 0; j < nverts; ++j) {
             uint32_t projected = cpu->read_word(packet + 8 + xy_step * j);
-            visible_y |= (projected >> 16) < 224u;
+            visible_y |= (projected >> 16) < TOMBA_GEOMETRY_Y_LIMIT;
             visible_x |= psx_ws_cull_sltiu(projected & 0xFFFFu, 320);
         }
         if (!visible_y || !visible_x) continue;

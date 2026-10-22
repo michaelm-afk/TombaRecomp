@@ -1,0 +1,13 @@
+--- a/runtime/src/spu_shadow.c
++++ b/runtime/src/spu_shadow.c
+@@ -102,8 +102,8 @@
+             ml *= (float)fr->main_l * (1.0f / 16384.0f);
+             mr *= (float)fr->main_r * (1.0f / 16384.0f);
+         }
+-        shadow_l[f] = ml * gain;
+-        shadow_r[f] = mr * gain;
++        shadow_l[f] = ml * gain * SHADOW_NORM;
++        shadow_r[f] = mr * gain * SHADOW_NORM;
+     }
+ 
+     /* Feed (canon, shadow) to the verifier per output frame, in the canon's
