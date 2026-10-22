@@ -6,18 +6,22 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path[:0]=[str(ROOT/'psxrecomp/tools'),str(ROOT/'eu')]
 from aot_overlay_pipeline import Disc
 from session_state import profiles
+sys.path.insert(0,str(ROOT/'eu2'))
+from revisions import source, active
 spec=importlib.util.spec_from_file_location('eu_wide',ROOT/'eu/widescreen_profile.py');wide=importlib.util.module_from_spec(spec);spec.loader.exec_module(wide)
 old=Disc(ROOT/'disc/Tombi! (Europe) (En,Fr,De,It,Nl) (Rev 1).cue')
 parser=argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--reference-disc',type=Path,default=ROOT/'disc/eu2/disc.cue')
+parser.add_argument('--revision',choices=['original','rev1'],default='original')
 parser.add_argument('--write-contract',action='store_true',help='Write a newly reviewed contract instead of checking it')
 args=parser.parse_args()
 new=Disc(args.reference_disc)
 LANGUAGES={'en':0,'es':5,'pt':6,'sv':7,'da':8}
 # Isolated static-analysis copies only. These do not qualify the boot disc.
-refs=ROOT/'build-eu2-bindings/reference';(refs/'EXE').mkdir(parents=True,exist_ok=True)
+ref_dir='build-eu2-bindings/reference' if args.revision=='original' else 'build-eu2-bindings/reference-rev1'
+refs=ROOT/ref_dir;(refs/'EXE').mkdir(parents=True,exist_ok=True)
 for lang,i in LANGUAGES.items():(refs/f'EXE/MAIN{i}.EXE').write_bytes(new.read(f'EXE/MAIN{i}.EXE'))
-identity,states=profiles(ROOT,disc_dir='build-eu2-bindings/reference',languages=LANGUAGES)
+identity,states=profiles(ROOT,disc_dir=ref_dir,languages=LANGUAGES)
 def words(body):return struct.unpack('<%dI'%(len(body)//4),body)
 def normalize(raw):
  out=[]
@@ -50,7 +54,7 @@ code=dict(wide.CODE);code[0x8002cef8]=0x8002a3d4
 rows=[]
 for lang,i in LANGUAGES.items():
  raw=new.read(f'EXE/MAIN{i}.EXE');body=raw[2048:]
- expected=json.loads((ROOT/'eu2/seamless-contract.json').read_text())
+ expected=json.loads((source('seamless-contract.json',args.revision)).read_text())
  assert sha(raw)==next(r['main_sha256'] for r in expected['languages'] if r['language']==lang),'Unreviewed EU2 MAIN'
  mappings={};checks={};proof={}
  allpcs=set(code.values())|set(wide.FIELDS.values())|{0x8003a45c,0x8003b3cc,0x8004c5c4,0x80020318,0x8004f624,0x8004f628}
@@ -93,7 +97,7 @@ for lang,i in LANGUAGES.items():
  rows.append(row)
  print(lang,'verified',len(mappings),'code/data/overlay bindings; camera',hex(mappings[0x800a38b8]),'GAME',hex(mappings[0x8009bcc8]),'overlay',hex(newbase))
 contract=dict(schema=1,source_policy_sha256=wide.SOURCES,main_identity_bytes=64,languages=rows)
-destination=ROOT/'eu2/widescreen-contract.json'
+destination=source('widescreen-contract.json',args.revision)
 if args.write_contract:destination.write_text(json.dumps(contract,indent=2)+'\n',encoding='utf-8',newline='\n')
 else:assert json.loads(destination.read_text(encoding='utf-8'))==contract,'Derived EU2 bindings differ from reviewed contract'
 print('PASS: full correspondence contract reproduced; static images do not qualify a boot disc')

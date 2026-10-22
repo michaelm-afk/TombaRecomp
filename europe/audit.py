@@ -2,6 +2,13 @@
 import argparse,hashlib,json,re,tomllib,zipfile
 from pathlib import Path
 
+EU2_REVISIONS = {
+ '2eba3dfdd25f5d270d47f5fe408391971aa25ee09c6aac9874bba4e3bf6f32cc':
+  (492306528,65,{'0x8005E618','0x8005E630'}),
+ '48a55fabd29e185dfc7d2afa94490d6092694cbed75ec8511f363b19076c5c2e':
+  (492370032,66,{'0x8005E61C','0x8005E634'}),
+}
+
 def audit(path,kind):
  if path.is_file():
   with zipfile.ZipFile(path) as z:
@@ -39,10 +46,15 @@ def audit(path,kind):
    assert config['widescreen']['adaptive_view'] and config['widescreen']['native_wide']
    if region=='SCES-01331':
     assert not any(m['id']=='tomba.enhancement.skip-fmv' for m in manifests)
-    assert set(config['widescreen']['sprite_tag_funcs'])=={'0x8005E618','0x8005E630'}
+    profile=next(p for p in catalog['profile'] if p['id']==region)
+    size,expected_pairs,sprite_tags=EU2_REVISIONS[profile['sha256']]
+    assert profile['size']==size
+    assert set(config['widescreen']['sprite_tag_funcs'])==sprite_tags
+    assert profile['size'] in config['prepare_disc']['known_sizes']
+    assert all(t.get('disc_sha256',profile['sha256'])==profile['sha256'] for m in manifests for t in m['target'] if t['game_id']==region)
    geometry=next(m for m in manifests if m['id']=='tombi.enhancement.geometry');assert geometry['feature'][0]['default_enabled']
    cache=[n for n in data if n.startswith(prefix+'cache/'+region+'/') and n.endswith('.dll')]
-   counts[region]=len(cache);assert len(cache)==(66 if region=='SCES-01330' else 65)
+   counts[region]=len(cache);assert len(cache)==(66 if region=='SCES-01330' else expected_pairs)
    assert all(n[:-4]+'.ranges' in data for n in cache)
   report.update(native_pairs=counts,regional_mod_targets=True,declared_plugin_strings_present=True,defaults_match_eu1=True,only_openbios=True)
  else:

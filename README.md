@@ -21,7 +21,9 @@ Download **TombaRecomp-USA** for the US disc or **TombiRecomp-Europe** for
 the European disc from [Releases](https://github.com/mstan/TombaRecomp/releases/latest).
 The published v0.21.0 Europe package supports SCES-01330 only. The additional
 [SCES-01331 integration](eu2/README.md) adds the En/Es/Pt/Sv/Da backend and
-adaptive Widescreen; its original-disc runtime qualification is still pending.
+adaptive Widescreen. SCES-01331 Rev 1 passed sampled English/Spanish runtime
+QA and a fresh native-cache audit; it is available on the integration branch,
+with a qualified local Windows ZIP awaiting publication.
 
 [![PSXRecomp demo](https://img.youtube.com/vi/CID9oVhgCyY/maxresdefault.jpg)](https://www.youtube.com/watch?v=CID9oVhgCyY)
 

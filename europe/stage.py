@@ -9,7 +9,12 @@ def main():
  for region,build,audit,cache,target in [('eu1',a.eu1_build,a.eu1_audit,a.eu1_build,out),('eu2',a.eu2_build,a.eu2_audit,a.eu2_cache,out/'backends/SCES-01331')]:
   extra=['--runtime-toolchain',str(a.runtime_toolchain.resolve())] if a.runtime_toolchain else []
   subprocess.run([sys.executable,'-I','-B',str(ROOT/'eu2/stage_release.py'),'--region',region,'--output',str(target),'--build-dir',str(build),'--audit',str(audit),'--cache-root',str(cache),*extra],cwd=ROOT,check=True)
- shutil.copy2(ROOT/'europe/regional-launch.toml',out/'regional-launch.toml')
+ sys.path.insert(0,str(ROOT/'eu2'))
+ from revisions import PROFILES
+ revision=(a.eu2_build/'disc-revision.txt').read_text().strip()
+ profile=PROFILES[revision]
+ catalog=(ROOT/'europe/regional-launch.toml').read_text().replace('size = 492306528','size = '+str(profile['size'])).replace(PROFILES['original']['sha256'],profile['sha256'])
+ (out/'regional-launch.toml').write_text(catalog,encoding='utf-8',newline='\n')
  config=out/'game.toml';config.write_text(config.read_text().replace('memcard_dir = "saves"','memcard_dir = "saves/SCES-01330"'))
  for source,target in [('README_EN.md','README_EN.md'),('FEATURES.md','FEATURES.md'),('MANUAL_TESTS_DE.md','MANUAL_TESTS_DE.md')]:shutil.copy2(ROOT/'europe'/source,out/target)
  subprocess.run([sys.executable,'-I','-B',str(ROOT/'europe/audit.py'),'--path',str(out),'--kind','player','--output',str(out/'PACKAGE_AUDIT.json')],cwd=ROOT,check=True)

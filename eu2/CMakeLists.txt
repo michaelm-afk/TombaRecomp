@@ -26,7 +26,7 @@ if(TOMBI_EU2_SEAMLESS)
     endif()
     execute_process(COMMAND "${Python3_EXECUTABLE}" -I -B
         "${CMAKE_CURRENT_SOURCE_DIR}/geometry_profile.py" ${geometry_args} COMMAND_ERROR_IS_FATAL ANY)
-    set(eu2_mods "${CMAKE_CURRENT_SOURCE_DIR}/mods")
+    set(eu2_mods "${TOMBA_ROOT}/build-eu2-seamless/generated/mods")
     execute_process(COMMAND "${Python3_EXECUTABLE}" -I -B
         "${CMAKE_CURRENT_SOURCE_DIR}/widescreen_profile.py" COMMAND_ERROR_IS_FATAL ANY)
 endif()
@@ -64,6 +64,12 @@ if(TOMBI_EU2_SEAMLESS)
     if(NOT TOMBI_EU2_PLAYER_RELEASE)
     add_executable(tombi-eu2-widescreen-tests "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_widescreen_identity.c"
         "${eu2_widescreen}/eu_widescreen.c")
+    execute_process(COMMAND "${Python3_EXECUTABLE}" -I -B -c
+        "import sys; sys.path.insert(0,r'${CMAKE_CURRENT_SOURCE_DIR}'); from revisions import active; print(active())"
+        OUTPUT_VARIABLE eu2_revision OUTPUT_STRIP_TRAILING_WHITESPACE COMMAND_ERROR_IS_FATAL ANY)
+    if(eu2_revision STREQUAL "rev1")
+        target_compile_definitions(tombi-eu2-widescreen-tests PRIVATE TOMBI_EU2_REV1=1)
+    endif()
     target_include_directories(tombi-eu2-widescreen-tests PRIVATE
         "${eu2_widescreen}" "${PSXRECOMP_ROOT}/runtime/include")
     add_executable(tombi-eu2-hd-install-tests "${TOMBA_ROOT}/eu/tests/test_hd_install.cpp"

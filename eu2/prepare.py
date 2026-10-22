@@ -6,9 +6,11 @@ import shutil
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT/'eu2'))
 sys.path[:0] = [str(ROOT / 'tools'), str(ROOT / 'psxrecomp/tools')]
 from build_regions import data_track, sha1
 from extract_overlays import DiscReader, enumerate_files
+from revisions import identify, PROFILES
 
 SHA1 = '684dbf0ad03f872511046d40d3cc85b17d839dbf'
 BOOT_SHA256 = 'dc65210e6601cbb4ab1cc0878a73f926a2ffd1bd3d8d7923d781164fd2835f29'
@@ -20,18 +22,19 @@ def main():
     parser.add_argument('--disc', type=Path, required=True)
     args = parser.parse_args()
     source = data_track(args.disc)
-    if source.stat().st_size != 492306528 or sha1(source) != SHA1:
-        raise ValueError('Unsupported disc revision; exact original track required')
+    revision = identify(source)
+    expected_sha1 = PROFILES[revision]['sha1']
+    print('Verified SCES-01331 revision:', revision)
     home = ROOT / 'disc/eu2'
     home.mkdir(parents=True, exist_ok=True)
     target = home / 'disc.bin'
     if target.exists():
-        if sha1(target) != SHA1:
+        if sha1(target) != expected_sha1:
             raise ValueError('Conflicting working copy; refusing to overwrite')
     else:
         with source.open('rb') as reader, target.open('xb') as writer:
             shutil.copyfileobj(reader, writer)
-        if sha1(target) != SHA1:
+        if sha1(target) != expected_sha1:
             raise ValueError('Working copy verification failed')
     cue = home / 'disc.cue'
     cue_text = 'FILE "disc.bin" BINARY\n  TRACK 01 MODE2/2352\n    INDEX 01 00:00:00\n'

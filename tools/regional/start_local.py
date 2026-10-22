@@ -34,8 +34,11 @@ def main():
         executable=build/'TombiRecompEU2.exe'
         disc=ROOT/'disc/eu2/disc.cue'
         config=build/'game.toml'
-        sha='684dbf0ad03f872511046d40d3cc85b17d839dbf'
-        size=492306528
+        sys.path.insert(0,str(ROOT/'eu2'))
+        from revisions import active, PROFILES
+        profile=PROFILES[active()]
+        sha=profile['sha1']
+        size=profile['size']
         boot='SCES_013.31'
         destination=ROOT/'disc/eu2'/boot
         cards=ROOT/'build-eu2-launcher/manual-cards'

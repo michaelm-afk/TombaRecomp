@@ -38,13 +38,32 @@ static uint32_t field(uint32_t pc) {
     assert(high>>26==15 && (high>>16&31)==(low>>21&31));
     return ((high&65535u)<<16)+(int16_t)low;
 }
+#ifdef TOMBI_EU2_REV1
+#define SHADE_EN 0x8005e634u
+#define SHADE_ES 0x8005e61cu
+#define AP_EN 0x80058a48u
+#define AP_ES 0x80058a30u
+#define PARENT_EN 0x800586ecu
+#define PARENT_ES 0x800586d4u
+#define WORLD_EN 0x80054338u
+#define WORLD_ES 0x80054320u
+#else
+#define SHADE_EN 0x8005e630u
+#define SHADE_ES 0x8005e618u
+#define AP_EN 0x80058ac0u
+#define AP_ES 0x80058aa8u
+#define PARENT_EN 0x80058764u
+#define PARENT_ES 0x8005874cu
+#define WORLD_EN 0x800543ccu
+#define WORLD_ES 0x800543b4u
+#endif
 int main(int argc,char** argv) {
     assert(argc==2 || argc==3);
     /* Registration runs before MAIN exists and covers distinct entries once. */
     eu_ws_register_entry("test",0x8005e08cu,unused);
     assert(registrations==2);
-    assert((registered[0]==0x8005e630u && registered[1]==0x8005e618u) ||
-           (registered[1]==0x8005e630u && registered[0]==0x8005e618u));
+    assert((registered[0]==SHADE_EN && registered[1]==SHADE_ES) ||
+           (registered[1]==SHADE_EN && registered[0]==SHADE_ES));
     const unsigned mains[5]={0,5,6,7,8};
     for (unsigned language=0;language<5;language++) {
         char path[4096];
@@ -60,10 +79,11 @@ int main(int argc,char** argv) {
         assert(eu_ws_address(0x800a38b8u)==field(0x80017e1cu));
         assert(!eu_ws_address(0x80001234u));
         const unsigned spanish=language==1;
-        const uint32_t shade=spanish?0x8005e618u:0x8005e630u;
+        const uint32_t shade=spanish?SHADE_ES:SHADE_EN;
         assert(eu_ws_address(0x8005e08cu)==shade);
-        const uint32_t ap=spanish?0x80058aa8u:0x80058ac0u;
-        const uint32_t parent=spanish?0x8005874cu:0x80058764u;
+        const uint32_t ap=spanish?AP_ES:AP_EN;
+        const uint32_t parent=spanish?PARENT_ES:PARENT_EN;
+        assert(psx_mod_read_word(ap-8)==(0x0c000000u|((shade&0x0fffffffu)>>2)));
         const uint32_t sp=0x80090000u;
         write_word(sp+0x2c,parent);
         assert(tomba_hud_edge(ap,sp,psx_mod_read_word)==1);
@@ -71,10 +91,10 @@ int main(int argc,char** argv) {
         assert(!tomba_hud_edge(ap,sp,psx_mod_read_word));
         /* The other language's return address must not tag a primitive. */
         write_word(sp+0x2c,parent);
-        assert(!tomba_hud_edge(spanish?0x80058ac0u:0x80058aa8u,sp,psx_mod_read_word));
+        assert(!tomba_hud_edge(spanish?AP_EN:AP_ES,sp,psx_mod_read_word));
         write_word(sp+0x2c,0x8004e4d4u);
         assert(!tomba_hud_edge(0x8004e830u,sp,psx_mod_read_word));
-        const uint32_t world=spanish?0x800543b4u:0x800543ccu;
+        const uint32_t world=spanish?WORLD_ES:WORLD_EN;
         assert(tomba_is_world_sprite(world));
         assert(!tomba_is_world_sprite(ap));
         assert(!tomba_is_world_sprite(0x8004a170u));
@@ -85,10 +105,18 @@ int main(int argc,char** argv) {
         assert(!tomba_hud_edge(ap,sp,psx_mod_read_word));
     }
     if(argc==3) {
-        /* The other PAL group's real MAINs are also unsupported here. */
+        /* Originals from a different revision must clear this profile.
+         * Rev1 EN is shared with EU1, so RAM identity cannot distinguish its
+         * disc serial; the production whole-disc gate handles that boundary. */
         for(unsigned language=0;language<5;language++) {
             char path[4096];
-            snprintf(path,sizeof path,"%s/EXE/MAIN%u.EXE",argv[2],language);
+            snprintf(path,sizeof path,"%s/EXE/MAIN%u.EXE",argv[2],
+#ifdef TOMBI_EU2_REV1
+                     mains[language]
+#else
+                     language
+#endif
+            );
             FILE* file=fopen(path,"rb"); assert(file);
             image_size=fread(image,1,sizeof image,file); assert(!ferror(file)); fclose(file);
             started=1; assert(!eu_ws_refresh()); assert(!eu_ws_address(0x8009bcc8u));

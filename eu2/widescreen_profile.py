@@ -13,7 +13,9 @@ import struct
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT/'eu2'))
 LANGUAGES = {'en': 0, 'es': 5, 'pt': 6, 'sv': 7, 'da': 8}
+from revisions import source as revision_source, PROFILES, active, stage_mods
 CODE_KEYS = {
     0x80022c34,0x80022d68,0x80022e44,0x80022e78,0x80022e80,
     0x80022f94,0x80022f9c,0x80022fe8,0x80022ff0,0x80023068,
@@ -27,14 +29,15 @@ CODE_KEYS = {
 }
 
 
-def generate(reference_disc=None):
+def generate(reference_disc=None, revision=None):
+    if reference_disc is not None and revision is None: revision='original'
     sys.path.insert(0, str(ROOT/'psxrecomp/tools'))
     from aot_overlay_pipeline import Disc, check_disc
     disc = Disc(reference_disc or ROOT/'disc/eu2/disc.cue')
     if reference_disc is None:
-        check_disc(dict(disc_hashes={'sha1':'684dbf0ad03f872511046d40d3cc85b17d839dbf'}),
+        check_disc(dict(disc_hashes={'sha1':PROFILES[active()]['sha1']}),
                    disc, ROOT/'disc/eu2/disc.cue')
-    contract = json.loads((ROOT/'eu2/widescreen-contract.json').read_text(encoding='utf-8'))
+    contract = json.loads((revision_source('widescreen-contract.json', revision)).read_text(encoding='utf-8'))
     rows = contract['languages']
     if [r['language'] for r in rows] != list(LANGUAGES):
         raise ValueError('Unreviewed language order')
@@ -65,6 +68,7 @@ def generate(reference_disc=None):
                 if hashlib.sha256(raw[at-16:at+16]).hexdigest() != digest:
                     raise ValueError('Area instruction contract changed: '+pc)
 
+    if reference_disc is None: stage_mods()
     out = ROOT/'build-eu2-seamless/generated/widescreen'
     out.mkdir(parents=True,exist_ok=True)
     header = '''/* Generated SCES-01331 adapter; every callback checks original state. */
@@ -166,5 +170,6 @@ static inline uint32_t eu_ws_jal(uint32_t key) {
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--reference-disc',type=Path,help='Static matching-image analysis only; not a boot-disc override')
+    parser.add_argument('--revision',choices=('original','rev1'),help='Explicit static reference profile; production defaults to the prepared disc')
     args=parser.parse_args()
-    generate(args.reference_disc)
+    generate(args.reference_disc,args.revision)

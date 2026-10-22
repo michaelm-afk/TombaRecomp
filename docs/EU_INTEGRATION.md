@@ -108,3 +108,10 @@ Widescreen content, full EU AOT expansion, an integrated-build native Memory
 Card save/full-exit/restart/load roundtrip and other host packaging remain
 follow-ups. Do not turn this into an exhaustive five-language runtime matrix.
 Private debug/reference binaries are not redistribution packages.
+
+
+SCES-01331 builds also accept the En/Es/Pt/Sv/Da **Rev 1** track (SHA-1
+`ec50074b6fd98f611bae11e3de68d6e76ffdd6d4`). `--eu2-disc` selects the exact
+revision automatically; `--eu2-revision rev1 --plan` previews its commands.
+Each build and native cache binds one revision. See the [EU2 guide](../eu2/README.md)
+for both original inputs, contracts and the bounded EN/ES runtime sample.

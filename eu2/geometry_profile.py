@@ -2,10 +2,13 @@
 import argparse,hashlib,json,re,struct
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
+import sys
+sys.path.insert(0, str(ROOT/'eu2'))
 LANGUAGES={'en':0,'es':5,'pt':6,'sv':7,'da':8}
+from revisions import source as revision_source, active
 
 def generate(references=False):
-    evidence=json.loads((ROOT/'docs/regional/eu2-geometry-evidence.json').read_text())
+    evidence=json.loads((revision_source('geometry-evidence.json') if active()=='rev1' else ROOT/'docs/regional/eu2-geometry-evidence.json').read_text())
     rows=[];first=None
     for lang,index in LANGUAGES.items():
         body=(ROOT/f'disc/eu2/EXE/MAIN{index}.EXE').read_bytes()[2048:]
@@ -21,7 +24,7 @@ def generate(references=False):
     out=ROOT/'build-eu2-seamless/generated';out.mkdir(parents=True,exist_ok=True)
     (out/'eu_geometry_profile.inc').write_text('static const struct { uint32_t pc,size,hash; } eu_geometry_profile[] = {\n'+',\n'.join('{%su,%su,%su}'%tuple(hex(v) for v in r) for r in rows)+'\n};\n')
     adapter=(ROOT/'eu/geometry.c').read_text()
-    for pc in (0x800223F8,0x800226CC,0x800228D4,0x8002243C,0x80022918):adapter=adapter.replace(f'0x{pc:08X}u',f'0x{pc-0x4c:08X}u')
+    for pc in (0x800223F8,0x800226CC,0x800228D4,0x8002243C,0x80022918):adapter=adapter.replace(f'0x{pc:08X}u',f'0x{pc-(0 if active()=="rev1" else 0x4c):08X}u')
     # Shared include owns all geometry math and validation. Only original store
     # provenance PCs and the generated complete-body contracts differ.
     (out/'eu2_geometry.c').write_text(adapter.replace('../src/hle/tomba_geometry_hle.c',str(ROOT/'src/hle/tomba_geometry_hle.c').replace('\\','/')))

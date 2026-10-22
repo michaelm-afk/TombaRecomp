@@ -12,7 +12,8 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path[:0] = [str(ROOT/'eu2'), str(ROOT/'eu'), str(ROOT/'tools'), str(ROOT/'psxrecomp/tools')]
-from prepare import LANGUAGES, SHA1
+from prepare import LANGUAGES
+from revisions import source, PROFILES, active
 from toolchain import executable
 from probe_eu_title_layouts import find_tables
 import aot_overlay_pipeline as pipeline
@@ -42,7 +43,7 @@ def main():
     parser.add_argument('--config',type=Path)
     args = parser.parse_args()
     work = ROOT/('build-eu2-seamless/aot' if args.seamless else 'build-eu2/aot')
-    config=ROOT/('eu2/pc.toml' if args.seamless else 'eu2/game.toml')
+    config=source('pc.toml' if args.seamless else 'game.toml')
     destination=ROOT/('build-eu2-launcher/native' if args.seamless else 'build-eu2/native')
     work=(args.work_dir or work).resolve()
     config=(args.config or config).resolve()
@@ -66,7 +67,7 @@ def main():
         return
     disc = pipeline.Disc(ROOT/'disc/eu2/disc.cue')
     profile = dict(schema='psxrecomp AOT methods v1', game_id='SCES-01331',
-        disc_hashes={'sha1': SHA1}, strict_bounds=True, bios_resident=False, checks=[], images=[])
+        disc_hashes={'sha1': PROFILES[active()]['sha1']}, strict_bounds=True, bios_resident=False, checks=[], images=[])
     pipeline.check_disc(profile, disc, ROOT/'disc/eu2/disc.cue')
     for language in args.languages:
         i = LANGUAGES[language]

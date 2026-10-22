@@ -7,8 +7,10 @@ import subprocess
 import sys
 
 ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT/'eu2'))
 sys.path.insert(0,str(ROOT/'eu'))
 from toolchain import executable
+from revisions import source, active, write_standalone_catalog
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
@@ -47,7 +49,9 @@ def main():
                            creationflags=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0)
     # Direct QA launches and production packages use the same reviewed wide
     # configuration. Never relabel the handoff's narrow native modules.
-    shutil.copy2(ROOT/'eu2/release/game.toml',build/'game.toml')
+    shutil.copy2(source('release/game.toml'),build/'game.toml')
+    (build/'disc-revision.txt').write_text(active()+'\n',encoding='ascii')
+    write_standalone_catalog(build)
     (build/'seeds').mkdir(exist_ok=True)
     shutil.copy2(ROOT/'eu2/seeds/boot.txt',build/'seeds/boot.txt')
     print('Player build complete:',build/'TombiRecompEU2.exe',flush=True)

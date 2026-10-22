@@ -7,17 +7,19 @@ import struct
 import sys
 
 ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT/'eu2'))
 sys.path[:0]=[str(ROOT/'eu'),str(ROOT/'psxrecomp/tools')]
 from session_state import profiles
 from seamless_profiles import fnv
 from aot_overlay_pipeline import Disc,check_disc
+from revisions import source, PROFILES, active
 
 LANGUAGES={'en':0,'es':5,'pt':6,'sv':7,'da':8}
 
 
 def generate():
     loader=(ROOT/'eu/seamless/loader.c').read_text()
-    reviewed=json.loads((ROOT/'eu2/seamless-contract.json').read_text())
+    reviewed=json.loads((source('seamless-contract.json')).read_text())
     if hashlib.sha256(loader.encode()).hexdigest()!=reviewed['loader_source_sha256'] or \
        hashlib.sha256((ROOT/'eu/seamless/profile.h').read_text().encode()).hexdigest()!=reviewed['profile_header_sha256']:
         raise ValueError('Shared loader changed; review the EU2 source contract before rebuilding')
@@ -31,7 +33,7 @@ def generate():
     out.mkdir(parents=True,exist_ok=True)
     identity_address,states=profiles(ROOT,disc_dir='disc/eu2',languages=LANGUAGES)
     disc=Disc(ROOT/'disc/eu2/disc.cue')
-    check_disc(dict(disc_hashes={'sha1':'684dbf0ad03f872511046d40d3cc85b17d839dbf'}),disc,ROOT/'disc/eu2/disc.cue')
+    check_disc(dict(disc_hashes={'sha1':PROFILES[active()]['sha1']}),disc,ROOT/'disc/eu2/disc.cue')
     mappings=[];bindings=[];contracts=[]
     fields=dict(queue=(0x8004ebec,0x2442),files=(0x8004ec1c,0x24a5),
         scratch=(0x8004ed18,0x2442),alternate=(0x8004ed08,0x2442),errors=(0x8004eb4c,0xac20),

@@ -42,15 +42,23 @@ def package(region, build, aot, out, version):
     title, serial = (('Tombi! (Europe, En/Es/Pt/Sv/Da)', 'SCES-01331') if eu2 else
                      ('Tombi! (Europe, En/Fr/De/It/Nl)', 'SCES-01330') if eu else
                      ('Tomba! (USA)', 'SCUS-94236'))
+    if eu2:
+        sys.path.insert(0,str(ROOT/'eu2'))
+        from revisions import source, PROFILES, write_standalone_catalog
+        revision=(build/'disc-revision.txt').read_text().strip()
+        if revision not in PROFILES:raise ValueError('Unqualified EU2 build revision')
+    if eu2 and revision=='rev1':title+=' (Rev 1)'
     folder = ('TombiRecomp-Europe-SCES01331-windows-x64' if eu2 else
               'TombiRecomp-Europe-windows-x64' if eu else 'TombaRecomp-USA-windows-x64')
+    if eu2 and revision=='rev1':folder=folder.replace('SCES01331-','SCES01331-Rev1-')
     player = out / folder
     player.mkdir(parents=True, exist_ok=False)
     exe = 'TombiRecompEU2.exe' if eu2 else 'TombiRecompEU.exe' if eu else 'TombaRecomp.exe'
     copy(build / (exe if eu else 'Tomba__Recompiled.exe'), player / exe)
-    config = ROOT / ('eu2/release/game.toml' if eu2 else
+    config = source('release/game.toml',revision) if eu2 else ROOT / (
                      'eu/release/game.toml' if eu else 'packaging/release/game.toml')
     copy(config, player / 'game.toml')
+    if eu2:write_standalone_catalog(player,revision)
     if eu:
         copy(ROOT / ('eu2/seeds/boot.txt' if eu2 else 'eu/seeds/boot.txt'), player / 'seeds/boot.txt')
     else:
@@ -139,8 +147,8 @@ def package(region, build, aot, out, version):
     readme = 'README.txt' if eu2 else 'README.md'
     copy(ROOT / ('eu2/release/README_EN.txt' if eu2 else 'eu/release/docs/README.md' if eu else 'README.md'),
          player / readme)
-    disc = ('Tombi! (Europe) (En,Es,Pt,Sv,Da), SCES-01331.\n'
-            'BIN SHA-1: 684dbf0ad03f872511046d40d3cc85b17d839dbf.\n'
+    disc = (f'Tombi! (Europe) (En,Es,Pt,Sv,Da){PROFILES[revision]["suffix"]}, SCES-01331.\n'
+            f'BIN SHA-1: {PROFILES[revision]["sha1"]}.\n'
             'SCES-01330 uses the separate Europe SCES-01330 build.' if eu2 else
             'Tombi! (Europe) (En,Fr,De,It,Nl) (Rev 1), SCES-01330.\n'
             'BIN SHA-1: 2505d958b4439d04844cadd3f968fc7432a48e00.\n'
@@ -165,10 +173,12 @@ def package(region, build, aot, out, version):
                             'F:/Temp/Codex', 'F:\\Temp\\Codex'):
                 if private.encode().lower() in data.lower() or private.encode('utf-16le').lower() in data.lower():
                     raise ValueError(f'Private path in {file.relative_to(player)}')
+    if eu2:report['disc_revision']=revision
     report.update(region=region, game_id=serial, version=version, mod_names=names,
                   native_pairs=receipt['published_pairs'], cache_tag=tag, debug_tools=False)
     (out / f'{region}-package-audit.json').write_text(json.dumps(report, indent=2) + '\n')
     release_region = 'Europe-SCES01331' if eu2 else 'Europe' if eu else 'USA'
+    if eu2 and revision=='rev1':release_region+='-Rev1'
     archive = out / f'{"TombiRecomp" if eu else "TombaRecomp"}-v{version}-{release_region}-windows-x64.zip'
     create_release_zip(player, archive)
     with zipfile.ZipFile(archive) as bundle:

@@ -227,7 +227,7 @@ def main():
                     raise RuntimeError('Jump did not occur')
                 counters = probe.rpc('mod_counters')
                 counts = {item['name']: item['count'] for item in counters['counters']}
-                if not args.us and not args.eu2:
+                if not args.us:
                     assert counts.get('tombi.geometry.entries', 0) > 0, 'Geometry HLE not exercised'
                     assert sum(counts.get('tombi.geometry.' + kind, 0)
                                for kind in ('flat', 'triangle', 'quad')) > 0, 'No geometry HLE batches completed'

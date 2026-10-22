@@ -26,7 +26,14 @@ def main():
     home='eu' if args.region=='eu1' else 'eu2'
     binary='TombiRecompEU.exe' if args.region=='eu1' else 'TombiRecompEU2.exe'
     copy(build/binary,out/binary)
-    copy(ROOT/home/'release/game.toml',out/'game.toml')
+    if args.region=='eu2':
+        sys.path.insert(0,str(ROOT/'eu2'))
+        from revisions import source, PROFILES
+        revision=(build/'disc-revision.txt').read_text().strip()
+        if revision not in PROFILES:raise ValueError('Unqualified EU2 build revision')
+        release_config=source('release/game.toml',revision)
+    else:release_config=ROOT/home/'release/game.toml'
+    copy(release_config,out/'game.toml')
     copy(ROOT/home/'seeds/boot.txt',out/'seeds/boot.txt')
     for folder in ('assets','bios','mods/bundled'):shutil.copytree(build/folder,out/folder)
     shutil.copytree(ROOT/'psxrecomp/runtime/licenses',out/'licenses')
@@ -54,7 +61,7 @@ def main():
     assert receipt['all_pairs_valid'] and receipt['all_guards_match_known_input_bytes']
     assert receipt['game_id']==('SCES-01330' if args.region=='eu1' else 'SCES-01331')
     expected_tag=pipeline.compiler.cache_tag(str(ROOT/'psxrecomp/runtime/include'),
-        str(ROOT/'build-eu-tools/psxrecomp-game.exe'),str(ROOT/home/'release/game.toml'),0)
+        str(ROOT/'build-eu-tools/psxrecomp-game.exe'),str(release_config),0)
     assert receipt['cache_tag']==expected_tag,'Rebuild the native cache for this exact widescreen configuration'
     namespace=Path('cache')/receipt['game_id']/'gcc/win-x64'/receipt['cache_tag']
     cache=args.cache_root/namespace

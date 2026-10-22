@@ -77,7 +77,7 @@ def stage_disc(region: str, source: Path) -> None:
                        '  TRACK 01 MODE2/2352\n    INDEX 01 00:00:00\n', encoding='ascii')
 
 
-def build_plan(regions, jobs, tool, bash, scope, qa=False):
+def build_plan(regions, jobs, tool, bash, scope, qa=False, eu2_revision='original'):
     python = [sys.executable, '-I', '-B']
     compiler = ('clang.exe', 'clang++.exe') if any(r in regions for r in ('eu','eu2')) else ('gcc.exe', 'g++.exe')
     cmake = tool('cmake.exe')
@@ -127,9 +127,10 @@ def build_plan(regions, jobs, tool, bash, scope, qa=False):
             final += ['--debug-tools', '--build-dir', 'build-eu-qa/native']
         add('EU private QA executable' if qa else 'EU release executable', final)
     if 'eu2' in regions:
+        eu2_source='eu2/rev1' if eu2_revision=='rev1' else 'eu2'
         add('EU2 original-disc verification and extraction', [*python, 'eu2/prepare.py',
             '--disc', ROOT / 'disc' / (DISCS['eu2'][0] + '.cue')])
-        add('EU2 boot code generation', [emitter, '--config', 'eu2/game.toml'])
+        add('EU2 boot code generation', [emitter, '--config', eu2_source+'/game.toml'])
         add('EU2 original wide bindings', [*python, 'eu2/widescreen_profile.py'])
         add('EU2 resident catalog', [*python, 'eu/seamless_catalog.py', '--variant', 'eu2'])
         add('Canonical codegen hash before EU2 audit', [cmake,
@@ -152,6 +153,7 @@ def main():
     parser.add_argument('--us-disc', type=Path)
     parser.add_argument('--eu-disc', type=Path)
     parser.add_argument('--eu2-disc', type=Path)
+    parser.add_argument('--eu2-revision',choices=('original','rev1'),help='Defaults to original; an explicit disc selects its exact revision')
     parser.add_argument('--jobs', type=int, default=3)
     parser.add_argument('--eu-aot-scope', choices=('opening', 'full'), default='opening',
                         help='opening is release-qualified; full is experimental and may fail code-safety audit')
@@ -172,7 +174,17 @@ def main():
     def tool(name):
         found = shutil.which(name, path=path)
         return str(Path(found).resolve()) if found else name
-    steps = build_plan(regions, args.jobs, tool, args.bash, args.eu_aot_scope, args.qa)
+    revision=args.eu2_revision or 'original'
+    if 'eu2' in regions:
+        sys.path.insert(0,str(ROOT/'eu2'))
+        from revisions import PROFILES, identify
+        if args.eu2_disc:
+            detected=identify(data_track(args.eu2_disc))
+            if args.eu2_revision and revision!=detected:parser.error('Requested revision differs from the supplied original disc')
+            revision=detected
+        profile=PROFILES[revision]
+        DISCS['eu2']=('Tombi! (Europe) (En,Es,Pt,Sv,Da)'+profile['suffix'],profile['size'],profile['sha1'],'SCES-01331')
+    steps = build_plan(regions, args.jobs, tool, args.bash, args.eu_aot_scope, args.qa, revision)
     if args.plan:
         for label, command, cwd, extra in steps:
             print(f'[{label}] cwd={cwd}')

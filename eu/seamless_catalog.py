@@ -26,13 +26,18 @@ def main():
     started = time.monotonic()
     cue = ROOT/('disc/eu2/disc.cue' if args.variant=='eu2' else 'disc/Tombi! (Europe) (En,Fr,De,It,Nl) (Rev 1).cue')
     disc = Disc(cue)
-    check_disc(dict(disc_hashes={'sha1': '684dbf0ad03f872511046d40d3cc85b17d839dbf' if args.variant=='eu2'
-                               else '2505d958b4439d04844cadd3f968fc7432a48e00'}), disc, cue)
+    eu2_profile = None
+    if args.variant=='eu2':
+        sys.path.insert(0,str(ROOT/'eu2'))
+        from revisions import PROFILES, active, source
+        eu2_profile=PROFILES[active()]
+    check_disc(dict(disc_hashes={'sha1': eu2_profile['sha1'] if eu2_profile else
+                               '2505d958b4439d04844cadd3f968fc7432a48e00'}), disc, cue)
     oracle = None
     if args.oracle:
         sys.path.insert(0, str(ROOT/('build-eu2-seamless/python-deps' if args.variant=='eu2' else 'build-eu-seamless/python-deps')))
         oracle = DecoderOracle(disc.read('EXE/MAIN0.EXE' if args.variant=='eu2' else 'EXE/MAIN2.EXE'),
-                               entry=0x8003BB90 if args.variant=='eu2' else 0x8003BAFC)
+                               entry=int(json.loads(source('seamless-contract.json').read_text())['languages'][0]['code']['0x8003bafc']['address'],16) if eu2_profile else 0x8003BAFC)
     out = ROOT/('build-eu2-seamless/generated' if args.variant=='eu2' else 'build-eu-seamless/generated')
     out.mkdir(parents=True, exist_ok=True)
     rows, streams, decoded = [], [], {}

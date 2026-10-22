@@ -10,9 +10,11 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--package',type=Path,required=True)
     p.add_argument('--name',required=True)
+    p.add_argument('--output-root',type=Path,default=ROOT.parent/'release-qa')
     a=p.parse_args()
     if Path(a.name).name!=a.name:p.error('Name must be one folder component')
-    out=ROOT.parent/'release-qa'/a.name
+    out=a.output_root.resolve()/a.name
+    if out.drive.upper()=='C:':p.error('Portable QA output must stay off C:')
     out.mkdir(parents=True,exist_ok=False)
     build=out/'relocated player';shutil.copytree(a.package.resolve(),build)
     assert not (build/'settings.toml').exists() and not list(build.rglob('*.mcd'))
@@ -28,7 +30,7 @@ def main():
             if name.lower() not in names and not (system/name).exists() and not name.lower().startswith(('api-ms-win-','ext-ms-win-')):missing.setdefault(f.relative_to(build).as_posix(),[]).append(name)
     assert not missing,missing
     with (out/'runtime.log').open('w') as log:
-        child=subprocess.Popen([str(build/'TombiRecompEU2.exe'),'--headless','--no-launcher','--game',str(build/'game.toml'),'--disc',str(ROOT/'disc/eu2/disc.cue')],cwd=out,env=env,stdout=log,stderr=subprocess.STDOUT)
+        child=subprocess.Popen([str(build/'TombiRecompEU2.exe'),'--headless','--no-launcher','--game',str(build/'game.toml'),'--disc',str(ROOT/'disc/eu2/disc.cue')],cwd=out,env=env,stdout=log,stderr=subprocess.STDOUT,creationflags=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0)
         try:
             deadline=time.monotonic()+30
             while time.monotonic()<deadline:
@@ -40,7 +42,7 @@ def main():
             time.sleep(2)
         finally:
             child.terminate();child.wait(timeout=10)
-    r=subprocess.run([str(build/'overlay_toolchain/python/python.exe'),'-I','-c','print("portable-python-ok")'],cwd=out,env=env,capture_output=True,text=True,check=True)
+    r=subprocess.run([str(build/'overlay_toolchain/python/python.exe'),'-I','-c','print("portable-python-ok")'],cwd=out,env=env,capture_output=True,text=True,check=True,creationflags=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0)
     assert 'portable-python-ok' in r.stdout
     config=(build/'game.toml').read_text()
     assert 'memcard_dir = "saves/SCES-01331"' in config

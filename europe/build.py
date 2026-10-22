@@ -31,19 +31,21 @@ def main():
   shutil.copyfile(source,ROOT/'disc/eu1.bin')
   cue.write_text('FILE "eu1.bin" BINARY\n  TRACK 01 MODE2/2352\n    INDEX 01 00:00:00\n')
  run([*py,'eu2/prepare.py','--disc',a.eu2_disc.resolve()])
+ sys.path.insert(0,str(ROOT/'eu2'))
+ from revisions import source as revision_source
  cmake=executable('cmake.exe');mapping='-ffile-prefix-map='+ROOT.as_posix()+'=. -fmacro-prefix-map='+ROOT.as_posix()+'=.'
  run([cmake,'-S','psxrecomp/recompiler','-B','build-eu-tools','-G','Ninja','-DCMAKE_BUILD_TYPE=Release','-DCMAKE_C_COMPILER='+executable('clang.exe'),'-DCMAKE_CXX_COMPILER='+executable('clang++.exe'),'-DCMAKE_MAKE_PROGRAM='+executable('ninja.exe'),'-DCMAKE_C_FLAGS='+mapping,'-DCMAKE_CXX_FLAGS='+mapping])
  run([cmake,'--build','build-eu-tools','--target','psxrecomp-game','psxrecomp-bios','-j','3'])
  # Native preparation precedes runtime configuration on a clean checkout.
  # Use the framework's canonical hash generator before auditing any cache.
  run([cmake,'-DOUT='+str(ROOT/'psxrecomp/runtime/include/overlay_codegen_hash.h'),'-DPSXRECOMP_CODEGEN_HASH_ROOT='+str(ROOT/'psxrecomp'),'-P',ROOT/'psxrecomp/runtime/hash_codegen.cmake'])
- for config in ['eu/game.toml','eu2/game.toml']:run([ROOT/'build-eu-tools/psxrecomp-game.exe','--config',config])
+ for config in ['eu/game.toml',revision_source('game.toml')]:run([ROOT/'build-eu-tools/psxrecomp-game.exe','--config',config])
  run([*py,'eu/seamless_catalog.py']);run([*py,'eu/seamless_catalog.py','--variant','eu2'])
  run([*py,'eu/build_aot.py','--scope','opening','--prepare-only'])
  run([*py,'eu2/build_aot.py','--seamless','--prepare-only','--work-dir','build-eu2-parity/aot'])
  if a.reuse_native_from:
   source=a.reuse_native_from.resolve()
-  for config,cache,inventory,receipt in [('eu/seamless/game.toml','build-eu-seamless/hook-aot/cache','build-eu-prototype/aot-opening/runtime-input-inventory.json','build-eu-seamless/hook-aot/audit.json'),('eu2/pc.toml','build-eu2-parity/qa/native/cache','build-eu2-parity/aot/runtime-input-inventory.json','build-eu2-parity/aot/audit.json')]:
+  for config,cache,inventory,receipt in [('eu/seamless/game.toml','build-eu-seamless/hook-aot/cache','build-eu-prototype/aot-opening/runtime-input-inventory.json','build-eu-seamless/hook-aot/audit.json'),(revision_source('pc.toml'),'build-eu2-parity/qa/native/cache','build-eu2-parity/aot/runtime-input-inventory.json','build-eu2-parity/aot/audit.json')]:
    target=ROOT/cache;shutil.copytree(source/cache,target,dirs_exist_ok=True)
    pipeline.audit(ROOT/config,ROOT/'build-eu-tools/psxrecomp-game.exe',target,ROOT/inventory,ROOT/receipt)
   eu2=json.loads((ROOT/'build-eu2-parity/aot/audit.json').read_text())
