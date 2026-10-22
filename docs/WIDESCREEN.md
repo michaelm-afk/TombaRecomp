@@ -41,7 +41,16 @@ USA hooks are maintained under `src/mods/`. Europe uses
 `eu/widescreen_profile.py` and `eu/widescreen-contract.json` to check original
 instruction windows and generate address adapters for the shared policies.
 Language MAIN fingerprints gate guest callbacks; unknown images are rejected.
-All selected EU native overlays are rebuilt with the PAL screen signatures.
+The SCES-01331 integration adds `eu2/widescreen_profile.py` and its reviewed
+instruction/data contract. It normalizes verified HUD return sites and selects
+camera, pool and area bindings from the live language identity, including the
+distinct Spanish code layout. Original-MAIN fixtures pass for the original revision and Rev 1.
+Rev 1 has separate checked contracts under `eu2/rev1/`; a fresh exact-disc
+player/AOT rebuild, EN/ES Fit, English fixed/off, geometry/loading and
+combined-launcher probes passed.
+See the [EU2 status and QA guide](../eu2/README.md).
+
+All selected EU native overlays must be rebuilt with the PAL screen signatures.
 Original disc identity, native-byte guards and scene checks remain enforced.
 
 Package, feature and plugin IDs remain stable when display labels change.

@@ -20,19 +20,28 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--oracle', action='store_true',
                         help='Compare unique streams with the original EU MIPS decoder, two fills')
+    parser.add_argument('--variant',choices=['eu1','eu2'],default='eu1')
+    parser.add_argument('--oracle-limit',type=int,help='Explicit bounded original-MIPS sample; never claims full corpus')
     args = parser.parse_args()
     started = time.monotonic()
-    cue = ROOT/'disc/Tombi! (Europe) (En,Fr,De,It,Nl) (Rev 1).cue'
+    cue = ROOT/('disc/eu2/disc.cue' if args.variant=='eu2' else 'disc/Tombi! (Europe) (En,Fr,De,It,Nl) (Rev 1).cue')
     disc = Disc(cue)
-    check_disc(dict(disc_hashes={'sha1': '2505d958b4439d04844cadd3f968fc7432a48e00'}), disc, cue)
+    eu2_profile = None
+    if args.variant=='eu2':
+        sys.path.insert(0,str(ROOT/'eu2'))
+        from revisions import PROFILES, active, source
+        eu2_profile=PROFILES[active()]
+    check_disc(dict(disc_hashes={'sha1': eu2_profile['sha1'] if eu2_profile else
+                               '2505d958b4439d04844cadd3f968fc7432a48e00'}), disc, cue)
     oracle = None
     if args.oracle:
-        sys.path.insert(0, str(ROOT/'build-eu-seamless/python-deps'))
-        oracle = DecoderOracle(disc.read('EXE/MAIN2.EXE'), entry=0x8003BAFC)
-    out = ROOT/'build-eu-seamless/generated'
+        sys.path.insert(0, str(ROOT/('build-eu2-seamless/python-deps' if args.variant=='eu2' else 'build-eu-seamless/python-deps')))
+        oracle = DecoderOracle(disc.read('EXE/MAIN0.EXE' if args.variant=='eu2' else 'EXE/MAIN2.EXE'),
+                               entry=int(json.loads(source('seamless-contract.json').read_text())['languages'][0]['code']['0x8003bafc']['address'],16) if eu2_profile else 0x8003BAFC)
+    out = ROOT/('build-eu2-seamless/generated' if args.variant=='eu2' else 'build-eu-seamless/generated')
     out.mkdir(parents=True, exist_ok=True)
     rows, streams, decoded = [], [], {}
-    source_bytes = decoded_bytes = gam_count = 0
+    source_bytes = decoded_bytes = gam_count = oracle_count = 0
     for name, (lba, size) in sorted(disc.files.items()):
         if name.endswith('.STR'):
             streams.append(name)
@@ -46,8 +55,9 @@ def main():
             if key not in decoded:
                 result = decode_gam(original)
                 decoded[key] = (len(result), hashlib.sha256(result).hexdigest())
-                if oracle:
+                if oracle and (args.oracle_limit is None or oracle_count<args.oracle_limit):
                     oracle.verify(original, result)
+                    oracle_count+=1
                     if len(decoded) % 50 == 0:
                         print(f'Original EU MIPS verified: {len(decoded)} unique streams', flush=True)
             n, result_hash = decoded[key]
@@ -66,7 +76,8 @@ def main():
         streams_excluded=streams, elapsed_seconds=time.monotonic()-started,
         scope='Offline sector/decode audit only; no live loader or card changes',
         original_mips_oracle=args.oracle,
-        original_mips_verified_streams=len(decoded) if args.oracle else 0)
+        original_mips_verified_streams=oracle_count,variant=args.variant,
+        original_mips_full_corpus=bool(args.oracle and oracle_count==len(decoded)))
     (out/'catalog-report.json').write_text(json.dumps(report, indent=2)+'\n')
     print(json.dumps(report, indent=2))
 

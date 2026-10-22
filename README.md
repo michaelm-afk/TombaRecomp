@@ -9,17 +9,28 @@
 > accelerate this game's polish. More on the why at:
 > [Recomp + AI: 5 Months Later »](https://1379.tech/recomp-ai-5-months-later/)_
 
-Tomba! (USA, SCUS-94236) and Tombi! (Europe, SCES-01330 Rev 1) statically
-recompiled to separate native PC executables with
+Tomba! (USA, SCUS-94236) and Tombi! (Europe, SCES-01330 Rev 1 and
+SCES-01331 Rev 1) statically recompiled to three separate native PC executables with
 [PSXRecomp](https://github.com/mstan/psxrecomp).
 
 The European target lives in `eu/` and supports the En/Fr/De/It/Nl Rev 1 disc.
 See [US/EU build integration](docs/EU_INTEGRATION.md) for supported disc inputs,
 the common build entry point, and scoped validation results.
 
-Download **TombaRecomp-USA** for the US disc or **TombiRecomp-Europe** for
-the European disc from [Releases](https://github.com/mstan/TombaRecomp/releases/latest).
-The European En/Es/Pt/Sv/Da release (SCES-01331) is not supported.
+Download the matching Windows ZIP from
+[Releases](https://github.com/mstan/TombaRecomp/releases/latest):
+
+| ZIP label | Disc | Game languages |
+| --- | --- | --- |
+| **TombaRecomp-USA** | SCUS-94236 | English |
+| **TombiRecomp-Europe-SCES01330-Rev1** | SCES-01330 Rev 1 | English, French, German, Italian, Dutch |
+| **TombiRecomp-Europe-SCES01331-Rev1** | SCES-01331 Rev 1 | English, Spanish, Portuguese, Swedish, Danish |
+
+All three include optional adaptive **Widescreen**, Geometry Optimization,
+Seamless Loading and audited native opening overlays. Widescreen starts off;
+enable it in Mods and choose Fit to Window or a fixed ratio. EU2 FMV Skip
+remains unavailable. See the [SCES-01331 guide](eu2/README.md) for its exact
+original-disc inputs and scoped validation.
 
 [![PSXRecomp demo](https://img.youtube.com/vi/CID9oVhgCyY/maxresdefault.jpg)](https://www.youtube.com/watch?v=CID9oVhgCyY)
 
@@ -66,7 +77,7 @@ Important files:
 ## Status
 
 The game is playable from BIOS boot through gameplay. Latest release:
-**v0.21.0-alpha**, with separate USA and Europe Windows builds.
+**v0.22.0-alpha**, with separate USA, SCES-01330 Rev 1 and SCES-01331 Rev 1 Windows builds.
 
 | Area | State |
 |---|---|

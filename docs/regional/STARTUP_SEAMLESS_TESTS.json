@@ -1,0 +1,729 @@
+{
+  "date": "2026-10-22",
+  "scope": "Private local test builds; no release or campaign certification",
+  "direct_measurements": [
+    {
+      "region": "us",
+      "run": 0,
+      "mode": "direct",
+      "application_warm": false,
+      "main_enter_s": 0.047,
+      "launcher_ready_s": null,
+      "gl_ready_s": 113.532,
+      "guest_start_s": 113.532,
+      "first_vblank_s": 113.641,
+      "stop_reason": "first-vblank-observed",
+      "limitation": "First vblank is not first playable gameplay; launcher wait/input excluded from direct cases.",
+      "codegen_lines": [],
+      "log": "build-startup/measure-direct-20261022T133136/us-0/runtime.json"
+    },
+    {
+      "region": "us",
+      "run": 1,
+      "mode": "direct",
+      "application_warm": true,
+      "main_enter_s": 0.047,
+      "launcher_ready_s": null,
+      "gl_ready_s": 1.157,
+      "guest_start_s": 1.157,
+      "first_vblank_s": 1.25,
+      "stop_reason": "first-vblank-observed",
+      "limitation": "First vblank is not first playable gameplay; launcher wait/input excluded from direct cases.",
+      "codegen_lines": [],
+      "log": "build-startup/measure-direct-20261022T133136/us-1/runtime.json"
+    },
+    {
+      "region": "eu1",
+      "run": 0,
+      "mode": "direct",
+      "application_warm": false,
+      "main_enter_s": 0.047,
+      "launcher_ready_s": null,
+      "gl_ready_s": 2.61,
+      "guest_start_s": 2.61,
+      "first_vblank_s": 2.703,
+      "stop_reason": "first-vblank-observed",
+      "limitation": "First vblank is not first playable gameplay; launcher wait/input excluded from direct cases.",
+      "codegen_lines": [],
+      "log": "build-startup/measure-direct-20261022T133136/eu1-0/runtime.json"
+    },
+    {
+      "region": "eu1",
+      "run": 1,
+      "mode": "direct",
+      "application_warm": true,
+      "main_enter_s": 0.047,
+      "launcher_ready_s": null,
+      "gl_ready_s": 1.688,
+      "guest_start_s": 1.688,
+      "first_vblank_s": 1.797,
+      "stop_reason": "first-vblank-observed",
+      "limitation": "First vblank is not first playable gameplay; launcher wait/input excluded from direct cases.",
+      "codegen_lines": [],
+      "log": "build-startup/measure-direct-20261022T133136/eu1-1/runtime.json"
+    },
+    {
+      "region": "us",
+      "run": 0,
+      "mode": "direct",
+      "application_warm": false,
+      "main_enter_s": 0.031,
+      "launcher_ready_s": null,
+      "gl_ready_s": null,
+      "guest_start_s": null,
+      "first_vblank_s": null,
+      "stop_reason": "deadline",
+      "limitation": "First vblank is not first playable gameplay; launcher wait/input excluded from direct cases.",
+      "codegen_lines": [],
+      "log": "build-startup/measure-direct-20261022T132843/us-0/runtime.json"
+    },
+    {
+      "region": "eu1",
+      "run": 0,
+      "mode": "direct",
+      "application_warm": false,
+      "main_enter_s": 0.031,
+      "launcher_ready_s": null,
+      "gl_ready_s": 47.859,
+      "guest_start_s": 47.859,
+      "first_vblank_s": 47.953,
+      "stop_reason": "first-vblank-observed",
+      "limitation": "First vblank is not first playable gameplay; launcher wait/input excluded from direct cases.",
+      "codegen_lines": [],
+      "log": "build-startup/measure-direct-20261022T132843/eu1-0/runtime.json"
+    },
+    {
+      "region": "eu2",
+      "run": 0,
+      "mode": "direct",
+      "application_warm": false,
+      "main_enter_s": 0.047,
+      "launcher_ready_s": null,
+      "gl_ready_s": 1.062,
+      "guest_start_s": 1.062,
+      "first_vblank_s": 1.156,
+      "stop_reason": "first-vblank-observed",
+      "limitation": "First vblank is not first playable gameplay; launcher wait/input excluded from direct cases.",
+      "codegen_lines": [],
+      "log": "build-startup/measure-direct-20261022T132843/eu2-0/runtime.json"
+    }
+  ],
+  "launcher_measurements": [
+    {
+      "region": "us",
+      "run": 0,
+      "mode": "launcher",
+      "application_warm": false,
+      "main_enter_s": 0.047,
+      "launcher_ready_s": 0.563,
+      "gl_ready_s": null,
+      "guest_start_s": null,
+      "first_vblank_s": null,
+      "stop_reason": "process-exit",
+      "limitation": "First vblank is not first playable gameplay; launcher wait/input excluded from direct cases.",
+      "codegen_lines": [],
+      "log": "build-startup/measure-launcher-20261022T133404/us-0/runtime.json"
+    },
+    {
+      "region": "eu1",
+      "run": 0,
+      "mode": "launcher",
+      "application_warm": false,
+      "main_enter_s": 0.031,
+      "launcher_ready_s": 0.609,
+      "gl_ready_s": null,
+      "guest_start_s": null,
+      "first_vblank_s": null,
+      "stop_reason": "process-exit",
+      "limitation": "First vblank is not first playable gameplay; launcher wait/input excluded from direct cases.",
+      "codegen_lines": [],
+      "log": "build-startup/measure-launcher-20261022T133404/eu1-0/runtime.json"
+    },
+    {
+      "region": "eu2",
+      "run": 0,
+      "mode": "launcher",
+      "application_warm": false,
+      "main_enter_s": 0.25,
+      "launcher_ready_s": 0.797,
+      "gl_ready_s": null,
+      "guest_start_s": null,
+      "first_vblank_s": null,
+      "stop_reason": "process-exit",
+      "limitation": "First vblank is not first playable gameplay; launcher wait/input excluded from direct cases.",
+      "codegen_lines": [],
+      "log": "build-startup/measure-launcher-20261022T133823/eu2-0/runtime.json"
+    }
+  ],
+  "controlled_gameplay": [
+    {
+      "evidence": "build-eu-qa/startup-us-normal-20261022b/en/result.json",
+      "region": "us",
+      "result": "passed",
+      "first_proved_control_seconds": 72.43799999999828,
+      "normal_video_pacing": true,
+      "walk": {
+        "before": {
+          "frame": 4332,
+          "state": 1,
+          "substate": 0,
+          "position": [
+            64.0,
+            -52.0,
+            0.0
+          ]
+        },
+        "after": {
+          "frame": 4380,
+          "state": 1,
+          "substate": 0,
+          "position": [
+            74.94140625,
+            -50.0,
+            0.0
+          ]
+        }
+      },
+      "native_loads": 4,
+      "native_dispatches": 1375793,
+      "host_stages": [
+        {
+          "stage": "overlay_worker",
+          "duration_ms": 408.379,
+          "package": "",
+          "scope_id": 2,
+          "parent_id": 0
+        },
+        {
+          "stage": "overlay_join",
+          "duration_ms": 408.823,
+          "package": "",
+          "scope_id": 1,
+          "parent_id": 0
+        },
+        {
+          "stage": "disc_hash",
+          "duration_ms": 252.181,
+          "package": "",
+          "scope_id": 5,
+          "parent_id": 4
+        },
+        {
+          "stage": "prepare_resources",
+          "duration_ms": 0.019,
+          "package": "",
+          "scope_id": 6,
+          "parent_id": 4
+        },
+        {
+          "stage": "resolve",
+          "duration_ms": 0.033,
+          "package": "",
+          "scope_id": 7,
+          "parent_id": 4
+        },
+        {
+          "stage": "overlay_verify",
+          "duration_ms": 0.001,
+          "package": "",
+          "scope_id": 8,
+          "parent_id": 4
+        },
+        {
+          "stage": "derived_disc",
+          "duration_ms": 0.0,
+          "package": "",
+          "scope_id": 9,
+          "parent_id": 4
+        },
+        {
+          "stage": "save_state",
+          "duration_ms": 1.287,
+          "package": "",
+          "scope_id": 10,
+          "parent_id": 4
+        },
+        {
+          "stage": "build_disc_index",
+          "duration_ms": 0.001,
+          "package": "",
+          "scope_id": 11,
+          "parent_id": 4
+        },
+        {
+          "stage": "commit",
+          "duration_ms": 253.543,
+          "package": "",
+          "scope_id": 4,
+          "parent_id": 3
+        },
+        {
+          "stage": "runtime_commit",
+          "duration_ms": 253.546,
+          "package": "",
+          "scope_id": 3,
+          "parent_id": 0
+        },
+        {
+          "stage": "plugin_callback",
+          "duration_ms": 255.145,
+          "package": "tomba.experimental.seamless",
+          "scope_id": 13,
+          "parent_id": 12
+        },
+        {
+          "stage": "plugin_activation",
+          "duration_ms": 255.16,
+          "package": "",
+          "scope_id": 12,
+          "parent_id": 0
+        }
+      ]
+    },
+    {
+      "evidence": "build-eu-qa/startup-eu1-normal-20261022c/en/result.json",
+      "region": "eu",
+      "result": "passed",
+      "first_proved_control_seconds": 102.90599999999904,
+      "normal_video_pacing": true,
+      "walk": {
+        "before": {
+          "frame": 5089,
+          "state": 1,
+          "substate": 0,
+          "position": [
+            64.0,
+            -52.0,
+            0.0
+          ]
+        },
+        "after": {
+          "frame": 5137,
+          "state": 1,
+          "substate": 0,
+          "position": [
+            74.94140625,
+            -50.0,
+            0.0
+          ]
+        }
+      },
+      "native_loads": 3,
+      "native_dispatches": 18356513,
+      "host_stages": [
+        {
+          "stage": "overlay_worker",
+          "duration_ms": 253.654,
+          "package": "",
+          "scope_id": 2,
+          "parent_id": 0
+        },
+        {
+          "stage": "overlay_join",
+          "duration_ms": 254.105,
+          "package": "",
+          "scope_id": 1,
+          "parent_id": 0
+        },
+        {
+          "stage": "disc_hash",
+          "duration_ms": 449.658,
+          "package": "",
+          "scope_id": 5,
+          "parent_id": 4
+        },
+        {
+          "stage": "prepare_resources",
+          "duration_ms": 0.011,
+          "package": "",
+          "scope_id": 6,
+          "parent_id": 4
+        },
+        {
+          "stage": "resolve",
+          "duration_ms": 0.019,
+          "package": "",
+          "scope_id": 7,
+          "parent_id": 4
+        },
+        {
+          "stage": "overlay_verify",
+          "duration_ms": 0.0,
+          "package": "",
+          "scope_id": 8,
+          "parent_id": 4
+        },
+        {
+          "stage": "derived_disc",
+          "duration_ms": 0.0,
+          "package": "",
+          "scope_id": 9,
+          "parent_id": 4
+        },
+        {
+          "stage": "save_state",
+          "duration_ms": 0.983,
+          "package": "",
+          "scope_id": 10,
+          "parent_id": 4
+        },
+        {
+          "stage": "build_disc_index",
+          "duration_ms": 0.001,
+          "package": "",
+          "scope_id": 11,
+          "parent_id": 4
+        },
+        {
+          "stage": "commit",
+          "duration_ms": 450.677,
+          "package": "",
+          "scope_id": 4,
+          "parent_id": 3
+        },
+        {
+          "stage": "runtime_commit",
+          "duration_ms": 450.681,
+          "package": "",
+          "scope_id": 3,
+          "parent_id": 0
+        },
+        {
+          "stage": "plugin_callback",
+          "duration_ms": 0.272,
+          "package": "tombi.enhancement.geometry",
+          "scope_id": 13,
+          "parent_id": 12
+        },
+        {
+          "stage": "plugin_callback",
+          "duration_ms": 0.0,
+          "package": "tombi.enhancement.language-confirmation",
+          "scope_id": 14,
+          "parent_id": 12
+        },
+        {
+          "stage": "plugin_callback",
+          "duration_ms": 1117.514,
+          "package": "tombi.experimental.seamless",
+          "scope_id": 15,
+          "parent_id": 12
+        },
+        {
+          "stage": "plugin_activation",
+          "duration_ms": 1117.794,
+          "package": "",
+          "scope_id": 12,
+          "parent_id": 0
+        }
+      ]
+    },
+    {
+      "evidence": "build-eu-qa/startup-eu2-normal-20261022c/en/result.json",
+      "region": "eu2",
+      "result": "passed",
+      "first_proved_control_seconds": 102.89099999999962,
+      "normal_video_pacing": true,
+      "walk": {
+        "before": {
+          "frame": 5106,
+          "state": 1,
+          "substate": 0,
+          "position": [
+            64.0,
+            -52.0,
+            0.0
+          ]
+        },
+        "after": {
+          "frame": 5154,
+          "state": 1,
+          "substate": 0,
+          "position": [
+            74.94140625,
+            -50.0,
+            0.0
+          ]
+        }
+      },
+      "native_loads": 3,
+      "native_dispatches": 18465985,
+      "host_stages": [
+        {
+          "stage": "overlay_worker",
+          "duration_ms": 23.098,
+          "package": "",
+          "scope_id": 2,
+          "parent_id": 0
+        },
+        {
+          "stage": "overlay_join",
+          "duration_ms": 23.555,
+          "package": "",
+          "scope_id": 1,
+          "parent_id": 0
+        },
+        {
+          "stage": "disc_hash",
+          "duration_ms": 430.478,
+          "package": "",
+          "scope_id": 5,
+          "parent_id": 4
+        },
+        {
+          "stage": "prepare_resources",
+          "duration_ms": 0.028,
+          "package": "",
+          "scope_id": 6,
+          "parent_id": 4
+        },
+        {
+          "stage": "resolve",
+          "duration_ms": 0.069,
+          "package": "",
+          "scope_id": 7,
+          "parent_id": 4
+        },
+        {
+          "stage": "overlay_verify",
+          "duration_ms": 0.001,
+          "package": "",
+          "scope_id": 8,
+          "parent_id": 4
+        },
+        {
+          "stage": "derived_disc",
+          "duration_ms": 0.0,
+          "package": "",
+          "scope_id": 9,
+          "parent_id": 4
+        },
+        {
+          "stage": "save_state",
+          "duration_ms": 1.118,
+          "package": "",
+          "scope_id": 10,
+          "parent_id": 4
+        },
+        {
+          "stage": "build_disc_index",
+          "duration_ms": 0.0,
+          "package": "",
+          "scope_id": 11,
+          "parent_id": 4
+        },
+        {
+          "stage": "commit",
+          "duration_ms": 431.717,
+          "package": "",
+          "scope_id": 4,
+          "parent_id": 3
+        },
+        {
+          "stage": "runtime_commit",
+          "duration_ms": 431.72,
+          "package": "",
+          "scope_id": 3,
+          "parent_id": 0
+        },
+        {
+          "stage": "plugin_callback",
+          "duration_ms": 1155.624,
+          "package": "tombi.eu2.experimental.seamless",
+          "scope_id": 13,
+          "parent_id": 12
+        },
+        {
+          "stage": "plugin_activation",
+          "duration_ms": 1155.654,
+          "package": "",
+          "scope_id": 12,
+          "parent_id": 0
+        }
+      ]
+    }
+  ],
+  "eu2_smokes": [
+    {
+      "language": "da",
+      "original_main_matched": true,
+      "native_dispatches": 13403476,
+      "native_loads": 3,
+      "interpreter_fallbacks": 110820,
+      "renderer": "software-headless",
+      "new_game_initialized": true,
+      "initial_player_detected": true,
+      "regular_walk_demonstrated": false,
+      "runtime_autocompile_disabled": true,
+      "seamless": "on",
+      "gameplay_checkpoint_seconds": 22.75,
+      "result": "passed",
+      "evidence": "build-eu2-launcher/smoke-da-20261022T140451/result.json"
+    },
+    {
+      "language": "en",
+      "original_main_matched": true,
+      "native_dispatches": 19209696,
+      "native_loads": 3,
+      "interpreter_fallbacks": 176589,
+      "renderer": "software-headless",
+      "new_game_initialized": true,
+      "initial_player_detected": true,
+      "regular_walk_demonstrated": true,
+      "runtime_autocompile_disabled": true,
+      "seamless": "on",
+      "gameplay_checkpoint_seconds": 146.26499999999942,
+      "evidence": "build-eu2-launcher/smoke-en-20261022T134632/result.json"
+    },
+    {
+      "language": "en",
+      "original_main_matched": true,
+      "native_dispatches": 13338176,
+      "native_loads": 3,
+      "interpreter_fallbacks": 112262,
+      "renderer": "software-headless",
+      "new_game_initialized": true,
+      "initial_player_detected": true,
+      "regular_walk_demonstrated": false,
+      "runtime_autocompile_disabled": true,
+      "seamless": "off",
+      "gameplay_checkpoint_seconds": 22.437999999998283,
+      "result": "passed",
+      "evidence": "build-eu2-launcher/smoke-en-20261022T135117/result.json"
+    },
+    {
+      "language": "es",
+      "original_main_matched": true,
+      "native_dispatches": 13404459,
+      "native_loads": 3,
+      "interpreter_fallbacks": 111977,
+      "renderer": "software-headless",
+      "new_game_initialized": true,
+      "initial_player_detected": true,
+      "regular_walk_demonstrated": false,
+      "runtime_autocompile_disabled": true,
+      "seamless": "on",
+      "gameplay_checkpoint_seconds": 23.031000000002678,
+      "result": "passed",
+      "evidence": "build-eu2-launcher/smoke-es-20261022T135541/result.json"
+    },
+    {
+      "language": "pt",
+      "original_main_matched": true,
+      "native_dispatches": 13743297,
+      "native_loads": 3,
+      "interpreter_fallbacks": 112428,
+      "renderer": "software-headless",
+      "new_game_initialized": true,
+      "initial_player_detected": true,
+      "regular_walk_demonstrated": false,
+      "runtime_autocompile_disabled": true,
+      "seamless": "on",
+      "gameplay_checkpoint_seconds": 23.312999999998283,
+      "result": "passed",
+      "evidence": "build-eu2-launcher/smoke-pt-20261022T140404/result.json"
+    },
+    {
+      "language": "sv",
+      "original_main_matched": true,
+      "native_dispatches": 12530373,
+      "native_loads": 3,
+      "interpreter_fallbacks": 114313,
+      "renderer": "software-headless",
+      "new_game_initialized": true,
+      "initial_player_detected": true,
+      "regular_walk_demonstrated": false,
+      "runtime_autocompile_disabled": true,
+      "seamless": "on",
+      "gameplay_checkpoint_seconds": 22.57800000000134,
+      "result": "passed",
+      "evidence": "build-eu2-launcher/smoke-sv-20261022T140428/result.json"
+    }
+  ],
+  "final_launcher": {
+    "evidence": "build-eu2-launcher/launcher-qa-20261022T140729/result.json",
+    "result": "passed",
+    "visible_original_language_selector_reviewed": true,
+    "settings_controller_screenshots_reviewed": true
+  },
+  "catalog": {
+    "files": 2257,
+    "gam_files": 816,
+    "unique_gam": 401,
+    "source_sector_bytes": 207900672,
+    "decoded_bytes": 44677880,
+    "streams_excluded": [
+      "MOVIE/100_B.STR",
+      "MOVIE/100_D.STR",
+      "MOVIE/100_F.STR",
+      "MOVIE/100_G.STR",
+      "MOVIE/100_H.STR",
+      "MOVIE/100_I.STR",
+      "MOVIE/100_P.STR",
+      "MOVIE/100_S.STR",
+      "MOVIE/100_W.STR",
+      "MOVIE/ARASHI.STR",
+      "MOVIE/BAKKASU.STR",
+      "MOVIE/BOY.STR",
+      "MOVIE/BUNMEI.STR",
+      "MOVIE/BUNMEI2.STR",
+      "MOVIE/END_EU.STR",
+      "MOVIE/HANA.STR",
+      "MOVIE/HONOO2.STR",
+      "MOVIE/JUNGLE.STR",
+      "MOVIE/KARAKURI.STR",
+      "MOVIE/LOGO.STR",
+      "MOVIE/MABUTA.STR",
+      "MOVIE/MANTION.STR",
+      "MOVIE/MCC.STR",
+      "MOVIE/MILLION.STR",
+      "MOVIE/MIST.STR",
+      "MOVIE/NOZOITE1.STR",
+      "MOVIE/NOZOITE2.STR",
+      "MOVIE/OP_INST.STR",
+      "MOVIE/SORA1.STR",
+      "MOVIE/SORA2.STR"
+    ],
+    "elapsed_seconds": 18.75,
+    "scope": "Offline sector/decode audit only; no live loader or card changes",
+    "original_mips_oracle": true,
+    "original_mips_verified_streams": 401,
+    "variant": "eu2",
+    "original_mips_full_corpus": true
+  },
+  "loader_fixtures": {
+    "eu1": "passed",
+    "eu2_five_profiles": "passed",
+    "evidence": "build-eu2-launcher/build-logs/step-8.log"
+  },
+  "original_integrity": {
+    "inventories_equal": true,
+    "files": 1308,
+    "rom_and_save_sha256_equal": true,
+    "release_packages_compared_by_size": true
+  },
+  "limitations": [
+    "No complete campaign or physical-controller/audio-output certification",
+    "Memory Card save/restart/load and area roundtrip remain manual acceptance items",
+    "First vblank is not playable control; gameplay timing includes original menus and dialogue",
+    "Application ABI memo state differs in the initial cold/warm observations; OS caches not controlled",
+    "Portuguese game-over native recipe retains original audited interpreter fallback"
+  ],
+  "native_namespace": "cg18_0bea7895_gc935eec19_f0",
+  "manual_starter_checks": [
+    {
+      "region": "eu2",
+      "launcher": true,
+      "verified_sha1": "684dbf0ad03f872511046d40d3cc85b17d839dbf",
+      "disc_verification_seconds": 0.4068002999993041,
+      "exit_code": 0
+    },
+    {
+      "region": "eu1",
+      "launcher": true,
+      "verified_sha1": "2505d958b4439d04844cadd3f968fc7432a48e00",
+      "disc_verification_seconds": 0.425749399997585,
+      "exit_code": 0
+    }
+  ]
+}

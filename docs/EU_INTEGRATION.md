@@ -11,11 +11,16 @@ local and ignored by Git.
 | Build | Required disc | Raw data-track SHA-1 |
 | --- | --- | --- |
 | USA | Tomba! (USA), SCUS-94236 | `c259ec7ff6ef4163913991f4e4db2eff71702818` |
-| Europe | Tombi! (Europe) (En,Fr,De,It,Nl) (Rev 1), SCES-01330 | `2505d958b4439d04844cadd3f968fc7432a48e00` |
+| Europe SCES-01330 | Tombi! (Europe) (En,Fr,De,It,Nl) (Rev 1), SCES-01330 | `2505d958b4439d04844cadd3f968fc7432a48e00` |
+| Europe SCES-01331 | Tombi! (Europe) (En,Es,Pt,Sv,Da) (Rev 1), SCES-01331 | `ec50074b6fd98f611bae11e3de68d6e76ffdd6d4` |
 
-The EU track is 492,370,032 bytes. SCES-01331 (En/Es/Pt/Sv/Da) and other
-SCES-01330 revisions are unsupported. A matching serial alone cannot qualify
-a disc for guest-address hooks. Keep each region's native Memory Cards separate.
+Both released European tracks are 492,370,032 bytes and use separate native
+players. SCES-01331 Rev 1 passed sampled English/Spanish runtime qualification;
+see the [EU2 build and QA guide](../eu2/README.md). The original SCES-01331 RC2
+revision (492,306,528 bytes, SHA-1 `684dbf0ad03f872511046d40d3cc85b17d839dbf`)
+retains a separate static profile and is not the released EU2 input.
+EU1/EU2 denote language groups of the first game. A matching serial alone cannot
+qualify a disc for guest-address hooks. Keep each region's Memory Cards separate.
 
 ## Build
 
@@ -29,6 +34,11 @@ python -I -B tools/build_regions.py --region both --plan
 python -I -B tools/build_regions.py --region both --check
 python -I -B tools/build_regions.py --region both --us-disc 'G:/owned/Tomba.cue' --eu-disc 'G:/owned/Tombi.cue' --jobs 3
 ```
+
+`--region eu2` selects the new SCES-01331 target and accepts `--eu2-disc`.
+`--region all` selects USA, EU1 and EU2; `both` retains its USA/EU1 meaning.
+The combined European launcher is built separately by `europe/build.py` and
+routes between its two serial-specific backends. See the EU2 guide above.
 
 `--plan` writes nothing. `--check` verifies the selected disc hashes and tool
 prerequisites without copying or building. A build stages verified copies in
@@ -49,7 +59,7 @@ provenance do not establish complete gameplay execution coverage.
 ## Package
 
 ```powershell
-python -I -B tools/package_regions.py --region both
+python -I -B tools/package_regions.py --region all
 ```
 
 `--us-build`/`--us-aot` and the EU counterparts select other build workspaces.
@@ -100,3 +110,10 @@ Widescreen content, full EU AOT expansion, an integrated-build native Memory
 Card save/full-exit/restart/load roundtrip and other host packaging remain
 follow-ups. Do not turn this into an exhaustive five-language runtime matrix.
 Private debug/reference binaries are not redistribution packages.
+
+
+SCES-01331 builds also accept the En/Es/Pt/Sv/Da **Rev 1** track (SHA-1
+`ec50074b6fd98f611bae11e3de68d6e76ffdd6d4`). `--eu2-disc` selects the exact
+revision automatically; `--eu2-revision rev1 --plan` previews its commands.
+Each build and native cache binds one revision. See the [EU2 guide](../eu2/README.md)
+for both original inputs, contracts and the bounded EN/ES runtime sample.

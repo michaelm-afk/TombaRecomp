@@ -1,0 +1,77 @@
+[game]
+name = "Tombi! (Europe, SCES-01331)"
+region = "Europe (PAL)"
+id = "SCES-01331"
+players = 1
+exe = "user-data/SCES_013.31"
+load_address = "0x80010000"
+entry_pc = "0x8001E1F8"
+text_size = "0x0009E800"
+stack_base = "0x801FFFF0"
+
+[prepare_disc]
+boot_exe = "SCES_013.31"
+known_sizes = [492306528]
+known_md5 = ["5cbbd8800409d992ce4b6d0df4bd7fab"]
+known_sha1 = ["684dbf0ad03f872511046d40d3cc85b17d839dbf"]
+
+[recompiler]
+seeds = "seeds/boot.txt"
+out_dir = "cache/generated"
+strict = true
+mod_function_entry_funcs = ["0x800171B8", "0x80017238", "0x8001BE1C", "0x80022310", "0x800225E4", "0x800227EC", "0x8004C280", "0x800504A8", "0x800504C0", "0x8005E618", "0x8005E630", "0x80063C30", "0x80063C48"]
+
+[runtime]
+window_title = "Tombi! (Europe, SCES-01331)"
+memcard_dir = "saves/SCES-01331"
+overlay_cache = true
+disc_speed = "1x"
+idle_skip = false
+turbo_loads = false
+offer_turbo_loads = false
+bios_hle = true
+fast_boot = false
+
+[video]
+renderer = "opengl"
+vsync = "off"
+fullscreen = 0
+low_latency_input = true
+render_thread = false
+present_thread = false
+frame_generation = false
+frame_interpolation = false
+internal_resolution = "1080p"
+pgxp_mod_only = true
+offer_vulkan = false
+offer_render_pipeline = false
+offer_frame_interpolation = false
+aspect_ratio = "4:3"
+auto_skip_fmv = false
+offer_skip_fmv = false
+
+[audio]
+spu_hq = true
+
+[controller]
+default_mode = "digital"
+multitap_analog = false
+
+[widescreen]
+offer = false
+
+adaptive_view = true
+native_wide = true
+sprite_tag_funcs = ["0x8005E618", "0x8005E630"]
+sprite_anchor_addr = "0x1F800070"
+
+[widescreen.cull]
+guard_pixels = 32
+activation_guard_pixels = 32
+bias_sites = ["0x800202E8", "0x80020404", "0x80020458", "0x800204D8"]
+range_sites = ["0x800202F0", "0x8002040C", "0x80020460", "0x800204E0"]
+a1_sites = ["0x800200A4", "0x800201D8", "0x8002056C"]
+auto_screen_x = true
+# PAL funnels compare Y against 256; keep the shared 224/241 variants too.
+screen_h_imms = ["0x100", "0x101", "0xE0", "0xF1"]
+auto_backdrop = true

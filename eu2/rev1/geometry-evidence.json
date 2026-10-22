@@ -1,0 +1,121 @@
+{
+  "enabled": false,
+  "languages": {
+    "en": {
+      "game": "0x8009c960",
+      "routines": [
+        {
+          "pc": "0x8002235c",
+          "size": 724,
+          "sha256": "54daa3092828b289d6a3de30de16f57c927d63aa27666464d1e3cb1c00c2d424",
+          "verified_internal_relocations": []
+        },
+        {
+          "pc": "0x80022630",
+          "size": 520,
+          "sha256": "1286a4d0c55df2bf2b6bf5d0313480560d00a35243a659599b7e197c51f400e4",
+          "verified_internal_relocations": []
+        },
+        {
+          "pc": "0x80022838",
+          "size": 644,
+          "sha256": "2fb503d7fc2018bdca649ea9377422c28e7ef1e0aa08f8c7c86c9e455bb1a146",
+          "verified_internal_relocations": []
+        }
+      ]
+    },
+    "es": {
+      "game": "0x8009c988",
+      "routines": [
+        {
+          "pc": "0x8002235c",
+          "size": 724,
+          "sha256": "54daa3092828b289d6a3de30de16f57c927d63aa27666464d1e3cb1c00c2d424",
+          "verified_internal_relocations": []
+        },
+        {
+          "pc": "0x80022630",
+          "size": 520,
+          "sha256": "1286a4d0c55df2bf2b6bf5d0313480560d00a35243a659599b7e197c51f400e4",
+          "verified_internal_relocations": []
+        },
+        {
+          "pc": "0x80022838",
+          "size": 644,
+          "sha256": "2fb503d7fc2018bdca649ea9377422c28e7ef1e0aa08f8c7c86c9e455bb1a146",
+          "verified_internal_relocations": []
+        }
+      ]
+    },
+    "pt": {
+      "game": "0x8009c990",
+      "routines": [
+        {
+          "pc": "0x8002235c",
+          "size": 724,
+          "sha256": "54daa3092828b289d6a3de30de16f57c927d63aa27666464d1e3cb1c00c2d424",
+          "verified_internal_relocations": []
+        },
+        {
+          "pc": "0x80022630",
+          "size": 520,
+          "sha256": "1286a4d0c55df2bf2b6bf5d0313480560d00a35243a659599b7e197c51f400e4",
+          "verified_internal_relocations": []
+        },
+        {
+          "pc": "0x80022838",
+          "size": 644,
+          "sha256": "2fb503d7fc2018bdca649ea9377422c28e7ef1e0aa08f8c7c86c9e455bb1a146",
+          "verified_internal_relocations": []
+        }
+      ]
+    },
+    "sv": {
+      "game": "0x8009c970",
+      "routines": [
+        {
+          "pc": "0x8002235c",
+          "size": 724,
+          "sha256": "54daa3092828b289d6a3de30de16f57c927d63aa27666464d1e3cb1c00c2d424",
+          "verified_internal_relocations": []
+        },
+        {
+          "pc": "0x80022630",
+          "size": 520,
+          "sha256": "1286a4d0c55df2bf2b6bf5d0313480560d00a35243a659599b7e197c51f400e4",
+          "verified_internal_relocations": []
+        },
+        {
+          "pc": "0x80022838",
+          "size": 644,
+          "sha256": "2fb503d7fc2018bdca649ea9377422c28e7ef1e0aa08f8c7c86c9e455bb1a146",
+          "verified_internal_relocations": []
+        }
+      ]
+    },
+    "da": {
+      "game": "0x8009c990",
+      "routines": [
+        {
+          "pc": "0x8002235c",
+          "size": 724,
+          "sha256": "54daa3092828b289d6a3de30de16f57c927d63aa27666464d1e3cb1c00c2d424",
+          "verified_internal_relocations": []
+        },
+        {
+          "pc": "0x80022630",
+          "size": 520,
+          "sha256": "1286a4d0c55df2bf2b6bf5d0313480560d00a35243a659599b7e197c51f400e4",
+          "verified_internal_relocations": []
+        },
+        {
+          "pc": "0x80022838",
+          "size": 644,
+          "sha256": "2fb503d7fc2018bdca649ea9377422c28e7ef1e0aa08f8c7c86c9e455bb1a146",
+          "verified_internal_relocations": []
+        }
+      ]
+    }
+  },
+  "evidence": "Complete hash-qualified EU1 geometry bodies; identical internal continuations"
+}

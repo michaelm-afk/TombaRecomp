@@ -1,0 +1,23 @@
+format_version = 5
+id = "tombi.enhancement.geometry"
+version = "0.1.0"
+name = "Geometry Optimization"
+author = "TombaRecomp contributors"
+description = "Shared Tomba geometry batches adapted to verified PAL MAIN overlays."
+resolver = "declarative"
+save_compatibility = "shared"
+
+[[target]]
+game_id = "SCES-01331"
+disc_sha256 = "2eba3dfdd25f5d270d47f5fe408391971aa25ee09c6aac9874bba4e3bf6f32cc"
+
+[[feature]]
+id = "geometry"
+name = "Geometry Optimization"
+description = "Uses optimized PC terrain geometry processing with original-code checks. Complete original-body guards; optional and on by default."
+group = "Graphics"
+default_enabled = true
+
+[[plugin]]
+feature = "geometry"
+id = "tombi.geometry"

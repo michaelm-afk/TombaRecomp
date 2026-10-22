@@ -1,0 +1,199 @@
+{
+  "date": "2026-10-22",
+  "status": "RC2: working-directory configuration regression fixed; visible GUI acceptance remains manual",
+  "publication": false,
+  "desktop_automation": false,
+  "architecture": "one shared European launcher entry with two existing native backends",
+  "routing": {
+    "result": "passed",
+    "cases": 13,
+    "serial_and_full_sha256": true,
+    "both_regions": true,
+    "cold_restart_selection": true,
+    "actual_process_handoff_both_directions": true,
+    "production_ui_handoff_path": true,
+    "spaces_in_package_path": true,
+    "corrupted_same_size_disc_rejected": true,
+    "missing_backend_rejected": true,
+    "settings_mod_state_cards_preserved": true,
+    "desktop_automation": false,
+    "case_insensitive_executable_name": true
+  },
+  "languages": [
+    {
+      "region": "eu1",
+      "language": "en",
+      "result": "passed"
+    },
+    {
+      "region": "eu1",
+      "language": "fr",
+      "result": "passed"
+    },
+    {
+      "region": "eu1",
+      "language": "de",
+      "result": "passed"
+    },
+    {
+      "region": "eu1",
+      "language": "it",
+      "result": "passed"
+    },
+    {
+      "region": "eu1",
+      "language": "nl",
+      "result": "passed"
+    },
+    {
+      "region": "eu2",
+      "language": "en",
+      "result": "passed"
+    },
+    {
+      "region": "eu2",
+      "language": "es",
+      "result": "passed"
+    },
+    {
+      "region": "eu2",
+      "language": "pt",
+      "result": "passed"
+    },
+    {
+      "region": "eu2",
+      "language": "sv",
+      "result": "passed"
+    },
+    {
+      "region": "eu2",
+      "language": "da",
+      "result": "passed"
+    }
+  ],
+  "portable_release": {
+    "result": "passed",
+    "both_exact_player_executables_boot": true,
+    "original_pal": true,
+    "regionally_separate_default_cards": true,
+    "unresolved_imports": {},
+    "bundled_python_both": true,
+    "developer_tools_removed_from_path": true,
+    "desktop_automation": false
+  },
+  "portable_isolated_rebuild": {
+    "result": "passed",
+    "both_exact_player_executables_boot": true,
+    "original_pal": true,
+    "regionally_separate_default_cards": true,
+    "unresolved_imports": {},
+    "bundled_python_both": true,
+    "developer_tools_removed_from_path": true,
+    "desktop_automation": false
+  },
+  "portable_native_main_without_developer_tools": {
+    "eu1": "passed",
+    "eu2": "passed"
+  },
+  "isolated_rebuild": {
+    "result": "passed",
+    "exact_upstream_bases": 3,
+    "patches": 3,
+    "recompiler_and_both_players_rebuilt": true,
+    "native_pairs_reaudited": {
+      "SCES-01330": 66,
+      "SCES-01331": 65
+    },
+    "native_reuse": true,
+    "canonical_codegen_header_generated_before_audit": true,
+    "source_only_build_helper_followup": true,
+    "private_cards_used": false,
+    "final_windows_path_followup_recompiled_both_backends": true
+  },
+  "card_tests": {
+    "shared_sio_protocol_checks": 333,
+    "failures": 0,
+    "separate_directories_write_flush_reinitialize_read": "passed",
+    "existing_cards_and_paths_preserved": true,
+    "gui_browse_and_new_save_sign_roundtrip": "manual pending"
+  },
+  "official_picker_source_parity": true,
+  "eu2_previous_evidence_reused": {
+    "geometry_original_comparisons": 3000,
+    "all_five_languages": true,
+    "pgxp_exact_dataflow_and_perspective": true,
+    "shared_hybrid_fast_forward_hq_spu_hd_bezel_tests": "passed"
+  },
+  "defaults": {
+    "VSync": "OFF",
+    "internal_resolution": "1080p",
+    "fullscreen": "windowed",
+    "HQ_SPU": "ON",
+    "geometry": "ON",
+    "seamless": "ON",
+    "PGXP": "OFF",
+    "Hybrid": "OFF",
+    "HD": "OFF",
+    "Bezel": "OFF",
+    "FMV": "EU1 OFF / EU2 hidden",
+    "Widescreen": "EU1 OFF / EU2 hidden"
+  },
+  "limitations": [
+    "Manual GUI disc/card selection and new save-sign/restart/load acceptance remain",
+    "No full campaign or exhaustive physical-controller/audio certification",
+    "EU2 FMV live language-aware teardown bindings unimplemented",
+    "EU2 widescreen camera/HUD/cull/overlay contracts unimplemented",
+    "Portuguese game-over retains audited interpreter fallback",
+    "Uncommitted launcher setting edits are discarded on regional handoff"
+  ],
+  "portable_final": {
+    "result": "passed",
+    "both_exact_player_executables_boot": true,
+    "original_pal": true,
+    "regionally_separate_default_cards": true,
+    "unresolved_imports": {},
+    "bundled_python_both": true,
+    "developer_tools_removed_from_path": true,
+    "desktop_automation": false
+  },
+  "rc2_verification": {
+    "result": "passed",
+    "real_disc_inputs": true,
+    "extracted_release_zip": true,
+    "production_launcher_callback": true,
+    "verified_cases": 7,
+    "missing_own_config_rejected": true,
+    "actual_process_handoff": true,
+    "remembered_selection": true,
+    "foreign_cwd_configs_ignored": true,
+    "saved_settings_unchanged": true,
+    "developer_tools_removed_from_path": true,
+    "desktop_automation": false
+  },
+  "rc2_portable": {
+    "result": "passed",
+    "both_exact_player_executables_boot": true,
+    "package_root_working_directory": true,
+    "correct_regional_config": true,
+    "original_pal": true,
+    "regionally_separate_default_cards": true,
+    "unresolved_imports": {},
+    "bundled_python_both": true,
+    "developer_tools_removed_from_path": true,
+    "desktop_automation": false
+  },
+  "rc2_reproduction": {
+    "original_final_zip_freshly_extracted": true,
+    "actual_eu2_disc": true,
+    "correct_backend_and_disc_argument": true,
+    "package_root_cwd_loaded_eu1_config_in_eu2_backend": true,
+    "external_cwd_loaded_correct_eu2_config": true,
+    "prior_routing_returned_before_real_callback": true,
+    "prior_portable_test_used_neutral_cwd": true
+  },
+  "rc2_isolated_incremental_rebuild": {
+    "both_backends": true,
+    "game_native_modules_unchanged": true
+  },
+  "save_compatibility": "Deferred to owner manual tests on card copies; no conversions or cross-region save tests; separate defaults unchanged"
+}

@@ -22,6 +22,8 @@ DISCS = {
            'c259ec7ff6ef4163913991f4e4db2eff71702818', 'SCUS-94236'),
     'eu': ('Tombi! (Europe) (En,Fr,De,It,Nl) (Rev 1)', 492370032,
            '2505d958b4439d04844cadd3f968fc7432a48e00', 'SCES-01330'),
+    'eu2': ('Tombi! (Europe) (En,Es,Pt,Sv,Da)', 492306528,
+            '684dbf0ad03f872511046d40d3cc85b17d839dbf', 'SCES-01331'),
 }
 
 
@@ -52,7 +54,7 @@ def checked_track(region: str, source: Path) -> Path:
     _, size, expected, serial = DISCS[region]
     actual = sha1(track)
     if track.stat().st_size != size or actual != expected:
-        hint = ' SCES-01331 is not supported by this EU handoff.' if region == 'eu' else ''
+        hint = ' SCES-01331 uses --region eu2.' if region == 'eu' else ''
         raise ValueError(f'{region.upper()} requires {serial}: expected SHA1 {expected}; '
                          f'got {actual} ({track.stat().st_size} bytes).{hint}')
     return track
@@ -75,9 +77,9 @@ def stage_disc(region: str, source: Path) -> None:
                        '  TRACK 01 MODE2/2352\n    INDEX 01 00:00:00\n', encoding='ascii')
 
 
-def build_plan(regions, jobs, tool, bash, scope, qa=False):
+def build_plan(regions, jobs, tool, bash, scope, qa=False, eu2_revision='original'):
     python = [sys.executable, '-I', '-B']
-    compiler = ('clang.exe', 'clang++.exe') if 'eu' in regions else ('gcc.exe', 'g++.exe')
+    compiler = ('clang.exe', 'clang++.exe') if any(r in regions for r in ('eu','eu2')) else ('gcc.exe', 'g++.exe')
     cmake = tool('cmake.exe')
     common = ['-G', 'Ninja', '-DCMAKE_BUILD_TYPE=Release',
               '-DCMAKE_C_COMPILER=' + tool(compiler[0]),
@@ -124,14 +126,34 @@ def build_plan(regions, jobs, tool, bash, scope, qa=False):
         if qa:
             final += ['--debug-tools', '--build-dir', 'build-eu-qa/native']
         add('EU private QA executable' if qa else 'EU release executable', final)
+    if 'eu2' in regions:
+        eu2_source='eu2/rev1' if eu2_revision=='rev1' else 'eu2'
+        add('EU2 original-disc verification and extraction', [*python, 'eu2/prepare.py',
+            '--disc', ROOT / 'disc' / (DISCS['eu2'][0] + '.cue')])
+        add('EU2 boot code generation', [emitter, '--config', eu2_source+'/game.toml'])
+        add('EU2 original wide bindings', [*python, 'eu2/widescreen_profile.py'])
+        add('EU2 resident catalog', [*python, 'eu/seamless_catalog.py', '--variant', 'eu2'])
+        add('Canonical codegen hash before EU2 audit', [cmake,
+            '-DOUT=' + str(ROOT/'psxrecomp/runtime/include/overlay_codegen_hash.h'),
+            '-DPSXRECOMP_CODEGEN_HASH_ROOT=' + str(ROOT/'psxrecomp'),
+            '-P', ROOT/'psxrecomp/runtime/hash_codegen.cmake'])
+        native=ROOT/('build-eu2-qa/native' if qa else 'build-eu2-release/native')
+        add('EU2 wide AOT and audit', [*python, 'eu2/build_aot.py', '--seamless',
+            '--destination', native, '--workers', jobs])
+        final=[*python, 'eu2/build_release.py', '--jobs', jobs, '--build-dir', native]
+        if qa:final+=['--debug-tools']
+        add('EU2 private QA executable' if qa else 'EU2 release executable', final)
     return steps
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--region', choices=('us', 'eu', 'both'), default='both')
+    parser.add_argument('--region', choices=('us', 'eu', 'eu2', 'both', 'all'), default='both',
+                        help='both preserves USA/EU1; all builds USA/EU1/EU2')
     parser.add_argument('--us-disc', type=Path)
     parser.add_argument('--eu-disc', type=Path)
+    parser.add_argument('--eu2-disc', type=Path)
+    parser.add_argument('--eu2-revision',choices=('original','rev1'),help='Defaults to original; an explicit disc selects its exact revision')
     parser.add_argument('--jobs', type=int, default=3)
     parser.add_argument('--eu-aot-scope', choices=('opening', 'full'), default='opening',
                         help='opening is release-qualified; full is experimental and may fail code-safety audit')
@@ -147,12 +169,22 @@ def main():
         parser.error('--jobs must be positive')
     if args.toolchain_bin:
         args.toolchain_bin = args.toolchain_bin.resolve()
-    regions = ('us', 'eu') if args.region == 'both' else (args.region,)
+    regions = ('us','eu','eu2') if args.region=='all' else (('us','eu') if args.region=='both' else (args.region,))
     path = os.pathsep.join(filter(None, [str(args.toolchain_bin or ''), os.environ.get('PATH', '')]))
     def tool(name):
         found = shutil.which(name, path=path)
         return str(Path(found).resolve()) if found else name
-    steps = build_plan(regions, args.jobs, tool, args.bash, args.eu_aot_scope, args.qa)
+    revision=args.eu2_revision or 'original'
+    if 'eu2' in regions:
+        sys.path.insert(0,str(ROOT/'eu2'))
+        from revisions import PROFILES, identify
+        if args.eu2_disc:
+            detected=identify(data_track(args.eu2_disc))
+            if args.eu2_revision and revision!=detected:parser.error('Requested revision differs from the supplied original disc')
+            revision=detected
+        profile=PROFILES[revision]
+        DISCS['eu2']=('Tombi! (Europe) (En,Es,Pt,Sv,Da)'+profile['suffix'],profile['size'],profile['sha1'],'SCES-01331')
+    steps = build_plan(regions, args.jobs, tool, args.bash, args.eu_aot_scope, args.qa, revision)
     if args.plan:
         for label, command, cwd, extra in steps:
             print(f'[{label}] cwd={cwd}')
@@ -175,7 +207,7 @@ def main():
             if data_track(cue) != canonical.resolve():
                 raise ValueError(f'Existing canonical CUE references a different file: {cue}')
     required = ['cmake.exe', 'ninja.exe']
-    required += ['clang.exe', 'clang++.exe'] if 'eu' in regions else ['gcc.exe', 'g++.exe']
+    required += ['clang.exe', 'clang++.exe'] if any(r in regions for r in ('eu','eu2')) else ['gcc.exe', 'g++.exe']
     for name in required:
         if not shutil.which(name, path=path):
             raise ValueError(f'Missing developer tool: {name}')
@@ -206,7 +238,8 @@ def main():
         stage_disc(region, source)
     for label, command, cwd, extra in steps:
         print(f'[{label}]', flush=True)
-        subprocess.run(command, cwd=cwd, env=dict(env, **extra), check=True)
+        subprocess.run(command, cwd=cwd, env=dict(env, **extra), check=True,
+                       creationflags=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0)
     print('Candidates built. EU packaging: eu/stage_release.py; gameplay validation remains separate.')
 
 

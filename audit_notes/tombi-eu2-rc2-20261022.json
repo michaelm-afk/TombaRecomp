@@ -1,0 +1,388 @@
+{
+  "date": "2026-10-22",
+  "issue": "beads-j62e",
+  "status": "SCES-01331 Rev1 rebuilt and sampled runtime qualified; original RC2 revision retains static-only qualification",
+  "source_contributor": "michaelm-afk",
+  "handoff_archives": {
+    "TombiRecomp-Europe-SCES01330-SCES01331-Developer-RC2-20261022.zip": {
+      "bytes": 135029,
+      "sha256": "8621af327de0f7a78ce2cd118ca102ebdbc004fb65a1d72f474ad046e10c6e3d"
+    },
+    "TombiRecomp-Europe-SCES01330-SCES01331-Windows-x64-RC2-20261022.zip": {
+      "bytes": 160891681,
+      "sha256": "b77b14f6b643f612630de6c9ffe34fd38a94e5826a6d74f92ededeaa9c158b1e"
+    }
+  },
+  "imported_commits": {
+    "game": "4634730",
+    "framework": "8636183f",
+    "ui": "ea005b6"
+  },
+  "original_bases": {
+    "game": "ec11a7e8afa1a15d4599483f0c80f0a3b1389bff",
+    "framework": "847762995c0fa1af65f0e43604bb2a3e23d92bff",
+    "ui": "e08082d10c38d0c4293455c3d15b3ab35ef1afe3"
+  },
+  "implementation": {
+    "shared_renderer_policy": true,
+    "regional_bindings_per_language": 56,
+    "language_specific_code": true,
+    "static_profiles": [
+      "en",
+      "es",
+      "pt",
+      "sv",
+      "da"
+    ],
+    "runtime_sample_plan": [
+      "en",
+      "es"
+    ],
+    "views": [
+      "Fit",
+      "16:9",
+      "21:9",
+      "32:9"
+    ],
+    "fit_max": "34:9",
+    "default_enabled": false,
+    "labels": "Widescreen",
+    "unknown_images_rejected": true,
+    "unknown_return_sites_rejected": true,
+    "old_nonwide_cache_rejected": true,
+    "required_eu2_cache_tag": "cg18_0bea7895_gcc4151ec0_f0",
+    "us_eu1_both_selection_preserved": true,
+    "all_selection": [
+      "us",
+      "eu",
+      "eu2"
+    ],
+    "eu2_package_region_label": "Europe-SCES01331",
+    "revision_specific_build_and_mod_targets": true,
+    "rev1_required_cache_tag": "cg18_0bea7895_gc45238ccf_f0",
+    "rev1_package_region_label": "Europe-SCES01331-Rev1"
+  },
+  "tests": {
+    "original_correspondence_reproduced": true,
+    "generated_adapter_syntax": true,
+    "original_main_field_hud_and_identity_fixture": true,
+    "profile_model": true,
+    "blank_card_creation_and_no_overwrite": true,
+    "independent_regional_card_io": true,
+    "python_syntax_files": 85,
+    "build_plans": [
+      "us,eu",
+      "eu2",
+      "us,eu,eu2"
+    ],
+    "eu1_cli_preflight": true,
+    "eu1_rebuilt": {
+      "result": "passed",
+      "native_pairs_reaudited": 66,
+      "native_original_byte_guards": 15440,
+      "pal_hz": 50,
+      "ordinary_walk_jump": true,
+      "native_module_loads": 3,
+      "native_dispatches": 23792663,
+      "runtime_compilation_disabled": true,
+      "audio_output": "muted SDL dummy",
+      "fresh_private_cards": true,
+      "live_fit_resize_sizes": [
+        [
+          800,
+          600
+        ],
+        [
+          1280,
+          720
+        ],
+        [
+          1680,
+          720
+        ],
+        [
+          1920,
+          540
+        ],
+        [
+          1920,
+          270
+        ],
+        [
+          800,
+          600
+        ]
+      ],
+      "hud_roles": true,
+      "camera_anchor": true,
+      "real_margin_captures_visually_reviewed": true,
+      "evidence": "build-eu-qa/eu1-rc2-fit-regression-title-20261022"
+    },
+    "us_rebuilt": {
+      "result": "passed",
+      "native_pairs_reaudited": 176,
+      "recipe_count": 25,
+      "native_original_byte_guards": 8191,
+      "ordinary_walk_jump": true,
+      "native_module_loads": 4,
+      "native_dispatches": 2219260,
+      "runtime_compilation_disabled": true,
+      "audio_output": "muted SDL dummy",
+      "fresh_private_cards": true,
+      "live_fit_resize_sizes": [
+        [
+          800,
+          600
+        ],
+        [
+          1280,
+          720
+        ],
+        [
+          1680,
+          720
+        ],
+        [
+          1920,
+          540
+        ],
+        [
+          1920,
+          270
+        ],
+        [
+          800,
+          600
+        ]
+      ],
+      "hud_roles": true,
+      "camera_anchor": true,
+      "real_margin_capture_visually_reviewed": true,
+      "evidence": "build-eu-qa/us-rc2-fit-regression-20261022"
+    },
+    "all_five_real_eu1_main_images_rejected_by_eu2_adapter": true
+  },
+  "corrected_test_harness": {
+    "first_resize_attempt": "failed: stale hardcoded window title",
+    "correction": "read active config title; capture probe diagnostics",
+    "repeat": "passed"
+  },
+  "disc_status": {
+    "required_serial": "SCES-01331",
+    "required_bytes": 492306528,
+    "required_sha1": "684dbf0ad03f872511046d40d3cc85b17d839dbf",
+    "required_sha256": "2eba3dfdd25f5d270d47f5fe408391971aa25ee09c6aac9874bba4e3bf6f32cc",
+    "exact_disc_available": false,
+    "matching_main_reference_sha1": "48833672d22ddbafe8c3e904dd3aa013a280e1ee",
+    "matching_main_reference_boot_serial": "SCES-01330",
+    "all_five_eu2_main_sha256_match_handoff": true,
+    "reference_not_accepted_as_supported_boot_disc": true,
+    "additional_en_fr_de_it_nl_rev1_7z_sha1": "2505d958b4439d04844cadd3f968fc7432a48e00"
+  },
+  "unverified": [
+    "original RC2 revision exact-disc runtime (no original-revision disc supplied)",
+    "EU2 FMV teardown remains unimplemented/hidden",
+    "full campaign/all-area content, spawning, collision and exits",
+    "physical controller/exhaustive audio",
+    "native in-game Memory Card save/full-exit/restart/load",
+    "public release publication and other host platforms"
+  ],
+  "publication": {
+    "release": false,
+    "default_branches_unchanged": true,
+    "integration_branch": "integrate/tombi-eu2-rc2-20261022",
+    "draft_review_pending": false,
+    "local_release_candidate": true,
+    "ready_for_source_review": true,
+    "pull_requests": [
+      "https://github.com/mstan/TombaRecomp/pull/48",
+      "https://github.com/RetroPortingToolKit/psxrecomp/pull/738",
+      "https://github.com/RetroPortingToolKit/recomp-ui/pull/111"
+    ]
+  },
+  "personal_cards_and_original_discs_preserved": true,
+  "storage": {
+    "new_us_build_drive": "F:",
+    "new_eu_build_and_extraction_drive": "G:",
+    "all_agent_profiles_and_caches_redirected": true
+  },
+  "rev1": {
+    "serial": "SCES-01331",
+    "revision": "Rev 1",
+    "languages": [
+      "en",
+      "es",
+      "pt",
+      "sv",
+      "da"
+    ],
+    "bytes": 492370032,
+    "sha1": "ec50074b6fd98f611bae11e3de68d6e76ffdd6d4",
+    "sha256": "48a55fabd29e185dfc7d2afa94490d6092694cbed75ec8511f363b19076c5c2e",
+    "boot_sha256": "dc65210e6601cbb4ab1cc0878a73f926a2ffd1bd3d8d7923d781164fd2835f29",
+    "boot_matches_rc2": true,
+    "english_main_and_opening_overlays_match_eu1_rev1": true,
+    "exact_disc_available": true,
+    "explicit_revision_profile": "eu2/rev1",
+    "loader_sites_per_language": 38,
+    "widescreen_bindings_per_language": 56,
+    "geometry_complete_bodies_verified": 15,
+    "same_size_eu1_rejected": true,
+    "original_revision_guards_preserved": true,
+    "aot": {
+      "game_id": "SCES-01331",
+      "cache_tag": "cg18_0bea7895_gc45238ccf_f0",
+      "recipe_count": 54,
+      "published_pairs": 66,
+      "manifest_rows": 15440,
+      "all_pairs_valid": true,
+      "all_guards_match_known_input_bytes": true,
+      "full_static_coverage_proven": false
+    },
+    "runtime_samples": [
+      {
+        "evidence": "build-eu-qa/eu2-rev1-fit-20261022/en",
+        "language": "en",
+        "result": "passed",
+        "native_loads": 3,
+        "native_dispatches": 24240164,
+        "geometry_entries": 317771,
+        "geometry_batches": 317771,
+        "seamless_batches": 4,
+        "resize_cases": 6,
+        "normal_inputs": true,
+        "ram_writes": false,
+        "states_loaded": false,
+        "runtime_compilation_disabled": true,
+        "muted": true
+      },
+      {
+        "evidence": "build-eu-qa/eu2-rev1-fit-20261022/es",
+        "language": "es",
+        "result": "passed",
+        "native_loads": 3,
+        "native_dispatches": 23520532,
+        "geometry_entries": 315306,
+        "geometry_batches": 315306,
+        "seamless_batches": 4,
+        "resize_cases": 6,
+        "normal_inputs": true,
+        "ram_writes": false,
+        "states_loaded": false,
+        "runtime_compilation_disabled": true,
+        "muted": true
+      },
+      {
+        "evidence": "build-eu-qa/eu2-rev1-fixed-20261022/en",
+        "language": "en",
+        "result": "passed",
+        "native_loads": 3,
+        "native_dispatches": 25631423,
+        "geometry_entries": 376100,
+        "geometry_batches": 376100,
+        "seamless_batches": 4,
+        "resize_cases": 6,
+        "normal_inputs": true,
+        "ram_writes": false,
+        "states_loaded": false,
+        "runtime_compilation_disabled": true,
+        "muted": true
+      },
+      {
+        "evidence": "build-eu-qa/eu2-rev1-off-20261022/en",
+        "language": "en",
+        "result": "passed",
+        "native_loads": 3,
+        "native_dispatches": 18686844,
+        "geometry_entries": 158030,
+        "geometry_batches": 158030,
+        "seamless_batches": 4,
+        "resize_cases": 6,
+        "normal_inputs": true,
+        "ram_writes": false,
+        "states_loaded": false,
+        "runtime_compilation_disabled": true,
+        "muted": true
+      }
+    ],
+    "routing": {
+      "result": "passed",
+      "production_play_gate": true,
+      "cases": 18,
+      "serial_and_full_sha256": true,
+      "both_regions": true,
+      "cold_restart_selection": true,
+      "actual_process_handoff_both_directions": true,
+      "production_ui_handoff_path": true,
+      "spaces_in_package_path": true,
+      "corrupted_same_size_disc_rejected": true,
+      "missing_backend_rejected": true,
+      "settings_mod_state_cards_preserved": true,
+      "desktop_automation": false
+    },
+    "captures_visually_inspected": [
+      "build-eu-qa/eu2-rev1-fit-20261022/en/resize/stock-800x600.png",
+      "build-eu-qa/eu2-rev1-fit-20261022/es/resize/wide-1680x720.png"
+    ],
+    "visible_margin_content_and_hud_anchors": true,
+    "ram_identity_limit": "Rev1 English MAIN is shared with EU1; exact whole-disc identity enforces the serial/revision boundary before launch. Original-revision and corrupt-image fixture cases reject.",
+    "release_candidate": {
+      "result": "passed",
+      "archive": "TombiRecomp-v0.21.0-alpha-Europe-SCES01331-Rev1-windows-x64.zip",
+      "sha256": "b04729cb990aed78aa23c0c8ed4973023f64d80b55289968e65912e188957777",
+      "bytes": 81598948,
+      "extracted_on": "F:",
+      "relocated_release_executable": true,
+      "production_play_gate": true,
+      "developer_tools_removed_from_path": true,
+      "case_labels": [
+        "relocated-identity",
+        "production-play-gate",
+        "remembered-disc",
+        "reject-eu1",
+        "reject-same-serial-altered"
+      ],
+      "native_pairs": 66,
+      "all_stripped_module_and_manifest_hashes_match": true,
+      "full_disc_sha256_gate": true,
+      "settings_and_synthetic_progress_card_preserved": true,
+      "cd_speed_and_host_paced_fast_loading_absent": true,
+      "mods": [
+        "psx.enhancement.pgxp",
+        "psx.presentation.bezel",
+        "tomba.enhancement.widescreen",
+        "tombi.enhancement.geometry",
+        "tombi.enhancement.hd-textures",
+        "tombi.enhancement.hybrid-controller",
+        "tombi.eu2.experimental.seamless"
+      ],
+      "audio_output": "SDL dummy",
+      "no_owner_files_changed": true
+    },
+    "portable_release_smoke": {
+      "result": "passed",
+      "relocated_outside_checkout": true,
+      "no_host_developer_tools_on_path": true,
+      "headless_boot": true,
+      "original_pal": true,
+      "imports_unresolved": {},
+      "bundled_python": true,
+      "no_personal_cards_or_settings_copied": true,
+      "portable_default_cards": "saves/SCES-01331",
+      "manual_pending": [
+        "GUI dialog selection and settings persistence",
+        "ordinary save and restart/load on test card"
+      ]
+    }
+  },
+  "release_hardening": {
+    "issue": "Long remembered disc paths could lose spaces at TOML continuation wraps",
+    "fix": "Unwrapped TOML selection serialization; existing atomic replacement and full-disc gates retained",
+    "framework_pr": "https://github.com/RetroPortingToolKit/psxrecomp/pull/748",
+    "framework_commit": "b20675cfb900664400bf67fe2a95de14372bdeb5",
+    "production_roundtrip_cases": 162,
+    "old_header_negative_control_failed": true,
+    "fixed_header_passed": true,
+    "both_european_cold_restart_covered_by_release_checks": true
+  }
+}

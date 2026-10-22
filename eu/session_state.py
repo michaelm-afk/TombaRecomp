@@ -7,11 +7,12 @@ from disc_identity import LANGUAGES, main_fingerprints
 GAME_SIZE = 0x988
 
 
-def profiles(root):
-    offset, fingerprints = main_fingerprints(root)
+def profiles(root, *, disc_dir='disc', languages=None):
+    languages = dict(zip(LANGUAGES, range(5))) if languages is None else languages
+    offset, fingerprints = main_fingerprints(root, disc_dir=disc_dir, languages=languages)
     result = {}
-    for i, language in enumerate(LANGUAGES):
-        payload = (Path(root)/f'disc/EXE/MAIN{i}.EXE').read_bytes()[2048:]
+    for language, i in languages.items():
+        payload = (Path(root)/disc_dir/f'EXE/MAIN{i}.EXE').read_bytes()[2048:]
         words = struct.unpack('<%dI' % (len(payload)//4), payload)
         candidates = []
         # initGameConfig: saved pointer -> a0, memset(a0, 0, sizeof(GAME)).
