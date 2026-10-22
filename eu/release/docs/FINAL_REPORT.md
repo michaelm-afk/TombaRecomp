@@ -1,5 +1,9 @@
 # Final candidate - TombiRecomp EU 0.1.0-eu-rc4
 
+Historical RC4 handoff report. The subsequent adaptive Widescreen integration
+has separate implementation and QA evidence in `docs/EU_INTEGRATION.md` in the
+source repository. The acceptance below predates that integration.
+
 Local Windows x64 handoff, 2026-10-22. Nothing published, uploaded, submitted or
 sent to developers. Owner RC4 acceptance: German and French tested successfully,
 Seamless Loading working and prerendered cutscenes correctly synchronized. This final

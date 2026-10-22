@@ -43,6 +43,10 @@ use a dedicated host shortcut when convenient.
 
 ## PC enhancements
 
+- Widescreen: optional native-wide gameplay with Fit to Window (4:3 through
+  34:9), plus fixed 16:9, 21:9 and 32:9. It expands scenery and object culling
+  and anchors the HUD to the edges. Wider windows retain side bars. Enable it
+  in Mods; it is disabled by default. Campaign-wide content remains experimental.
 - Seamless Loading: enabled by default; prepares verified resident data from
   your own disc and reduce area-loading interruptions. Unknown requests use
   the original loader; original card operations are retained.
@@ -84,8 +88,8 @@ The development session logger/controller replay is not part of this package.
 
 ## Known limits and test status
 
-Original PAL simulation remains approximately 50 Hz. True 16:9 widescreen,
-interpolated 100/120 FPS, independent normal-speed fast-forward music and
+Original PAL simulation remains approximately 50 Hz. Interpolated 100/120 FPS,
+independent normal-speed fast-forward music and
 fast-forward mute are deliberately omitted. A television reporting 100 Hz
 VRR does not establish 100 different game images.
 
@@ -95,6 +99,9 @@ five-language area/geometry regressions and feature tests also passed there.
 See `TEST_STATUS.md` for the release candidate's separate acceptance status.
 The entire campaign has not been validated. This candidate still needs a
 final hands-on launcher and controller acceptance test before redistribution.
+The added adaptive Widescreen integration has separate sampled English/German
+resize validation; the original RC4 acceptance does not qualify the new renderer
+across the whole campaign.
 
 ## Credits and licensing
 

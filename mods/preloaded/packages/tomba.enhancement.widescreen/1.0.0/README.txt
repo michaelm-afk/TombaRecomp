@@ -1,4 +1,4 @@
-Tomba Custom Renderer
+Widescreen
 
 This default-disabled mod enables Tomba's native-wide adaptive rendering path.
 Fit to Window is the default and follows live resizing from 4:3 through 34:9.

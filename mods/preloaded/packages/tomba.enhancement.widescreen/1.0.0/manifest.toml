@@ -1,7 +1,7 @@
 format_version = 5
 id = "tomba.enhancement.widescreen"
 version = "1.0.0"
-name = "Tomba Custom Renderer"
+name = "Widescreen"
 author = "mstan"
 description = "Experimental rendering that fits the window from 4:3 through 34:9, with clean side bars in wider windows."
 resolver = "declarative"
@@ -13,7 +13,7 @@ disc_sha256 = "25ada3dd51e70eb9f9218cd83fb02d73139750229fb44b012d62d183ab32eb13"
 
 [[feature]]
 id = "widescreen"
-name = "Custom Renderer"
+name = "Widescreen"
 description = "Enable Tomba's native-wide gameplay view. The render target and resident-object culling expand with the current window; extreme-width content and enemy spawning are experimental."
 group = "Display"
 default_enabled = false
@@ -22,7 +22,7 @@ default_enabled = false
 feature = "widescreen"
 id = "aspect"
 label = "View"
-description = "Fit to Window follows live resizing from 4:3 through 34:9. Wider windows keep clean side bars. Fixed ratios use the same custom renderer."
+description = "Fit to Window follows live resizing from 4:3 through 34:9. Wider windows keep clean side bars. Fixed ratios use the same widescreen renderer."
 group = "Display"
 type = "choice"
 default = "Fit"

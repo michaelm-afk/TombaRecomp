@@ -100,7 +100,7 @@ def build_plan(regions, jobs, tool, bash, scope, qa=False):
         add('US code generation', [emitter, '--config', 'game.toml'])
         add('US configuration', [cmake, '-S', ROOT, '-B', native, *common, *runtime])
         add('US native executable', [cmake, '--build', native, '--target', 'psx-runtime', '-j', jobs])
-        add('US original-disc AOT and audit', [*python, 'psxrecomp/tools/aot_overlay_pipeline.py',
+        add('US original-disc AOT and audit', [*python, 'tools/build_us_aot.py',
             'release', '--profile', 'aot/overlays.json', '--game-toml', 'game.toml',
             '--runtime-config', 'game.toml', '--recompiler', emitter,
             '--runtime-build-dir', native, '--runtime-target', 'psx-runtime',

@@ -68,10 +68,11 @@ def generate(references=False):
                 word=struct.unpack_from('<I',bodies[0],address-0x80010000)[0]
                 assert word>>26 in (1,2,3,4,5,6,7) or (word>>26==0 and word&63 in (8,9)),hex(address)
             assert 'psx_mod_function_entry' not in chunk, 'Unexpected reference hook form'
+            assert 'psx_ws_cull_sltiu' in chunk, 'PAL reference lacks widescreen culling; rebuild hooks with the PAL height signature'
             chunks.append(chunk.replace(symbol,f'tombi_geometry_lle_{kind}'))
         (out/'eu_geometry_reference.c').write_text(
             '/* LOCAL GENERATED GAME CODE: NEVER COMMIT OR DISTRIBUTE. */\n'
-            '#include "psx_runtime.h"\n#include "ws_cull_edge.h"\n'
+            '#include "psx_runtime.h"\n#include "gpu.h"\n#include "ws_cull_edge.h"\n'
             'extern void debug_server_cyc_observe(uint32_t pc);\n'+ '\n'.join(chunks))
     (out/'geometry-contract.json').write_text(json.dumps(dict(
         mains=5,routines=[dict(pc=hex(pc),size=size,sha256=sha) for pc,size,sha in ROUTINES],

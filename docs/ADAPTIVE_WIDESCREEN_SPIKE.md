@@ -1,7 +1,7 @@
 # Tomba adaptive-widescreen spike
 
-The bundled **Tomba Custom Renderer** mod selects the framework's
-enhanced renderer and defaults to `Fit to Window`. It starts a
+The bundled **Widescreen** mod selects the framework's
+widescreen renderer and defaults to `Fit to Window`. It starts a
 16:9 window, then tracks live window resizing with no upper aspect limit
 (native 4:3 minimum). This grows the native-wide render target; the native-wide
 path leaves GTE projection unsquashed. Fixed 16:9, 21:9 and 32:9 use this same path. Disabling the mod
@@ -89,7 +89,7 @@ the requested viewport. Fixed 16:9, 21:9 and 32:9 are choices in the same mod.
 
 ## Validation route
 
-1. Enable **Tomba Custom Renderer** and leave **View** on **Fit to Window**.
+1. Enable **Widescreen** and leave **View** on **Fit to Window**.
 2. In gameplay, resize through 4:3, 16:9, 21:9, 32:9, and beyond. Verify the view grows/shrinks
    without a restart; title/menu/FMV screens should remain pillarboxed.
 3. Walk both directions through a populated horizontal area and pause at each

@@ -19,7 +19,7 @@ known_sha1 = ["2505d958b4439d04844cadd3f968fc7432a48e00"]
 seeds = "seeds/boot.txt"
 out_dir = "cache/generated"
 strict = true
-mod_function_entry_funcs = ["0x800171B8", "0x80017238", "0x8001BE1C", "0x8005042C", "0x8002235C", "0x80022630", "0x80022838"]
+mod_function_entry_funcs = ["0x800171B8", "0x80017238", "0x8001BE1C", "0x8005042C", "0x8002235C", "0x80022630", "0x80022838", "0x8005E634", "0x8004C1EC", "0x80063C4C"]
 
 [runtime]
 window_title = "TombiRecomp EU"
@@ -58,3 +58,17 @@ multitap_analog = false
 
 [widescreen]
 offer = false
+adaptive_view = true
+native_wide = true
+sprite_tag_funcs = ["0x8005E634"]
+sprite_anchor_addr = "0x1F800070"
+
+[widescreen.cull]
+guard_pixels = 32
+activation_guard_pixels = 32
+bias_sites = ["0x800202E8", "0x80020404", "0x80020458", "0x800204D8"]
+range_sites = ["0x800202F0", "0x8002040C", "0x80020460", "0x800204E0"]
+a1_sites = ["0x800200A4", "0x800201D8", "0x8002056C"]
+auto_screen_x = true
+screen_h_imms = ["0x100", "0x101", "0xE0", "0xF1"]
+auto_backdrop = true

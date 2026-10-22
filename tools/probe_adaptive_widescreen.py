@@ -33,13 +33,17 @@ def main():
                         "1680x720", "1920x540", "1920x270", "800x600"])
     parser.add_argument("--keep-size", action="store_true",
                         help="Leave the window at the final test size")
+    parser.add_argument("--require-anchor", action="store_true",
+                        help="Require the opening boundary camera anchor")
+    parser.add_argument("--require-hud", action="store_true",
+                        help="Require producer-tagged HUD packets to reach rendering")
     parser.add_argument("--hidden-window", action="store_true",
                         help="Probe a --hidden-window process without showing its window")
     parser.add_argument("--load-slot", type=int,
                         help="Restore this diagnostic slot before each size (never saves)")
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument("--fixed-aspect", choices=["16:9", "21:9", "32:9"],
-                       help="Validate a fixed custom-renderer choice instead of Fit")
+                       help="Validate a fixed Widescreen choice instead of Fit")
     modes.add_argument("--disabled", action="store_true",
                        help="Assert stock rendering even when the window is wide")
     args = parser.parse_args()
@@ -112,10 +116,16 @@ def main():
             expected = 0
             aspect_w, aspect_h = (map(int, args.fixed_aspect.split(":"))
                                   if args.fixed_aspect else (width, height))
+            if not args.fixed_aspect and aspect_w * 9 > aspect_h * 34:
+                aspect_w, aspect_h = 34, 9
             if not args.disabled and aspect_w * 3 > aspect_h * 4:
                 offset = (state["width"] * (3 * aspect_w - 4 * aspect_h)
                           + 4 * aspect_h) // (8 * aspect_h)
-                expected = offset + 32
+                # The boundary anchor moves reveal to one side. Culling uses
+                # the larger reveal envelope, plus its independent 32px guard.
+                expected = offset + abs(ws['view_shift']) + 32
+                if args.require_anchor:
+                    assert ws['view_anchor'] and ws['view_shift']==-offset, ws
             assert ws["mode"] == (2 if expected else 0), state
             assert ws["x_margin"] == expected, (width, height, expected, ws)
             if expected:
@@ -123,6 +133,12 @@ def main():
                     "Probe requires a parked gameplay scene, not a menu/FMV", state)
             row = dict(client=[width, height], native_width=state["width"],
                        expected_margin=expected, ws=ws)
+            row['tags'] = request(args.port, 'ws_tag_stats')
+            if expected and args.require_anchor:
+                assert ws['view_anchor'] and ws['view_shift'] <= 0, ws
+            if expected and args.require_hud:
+                assert row['tags']['hud_roles']['hit'] > 0, row['tags']
+                assert row['tags']['frame']-row['tags']['hud_roles']['last_hit_frame'] <= 4, row['tags']
             if ws["nw_extra"] > 0:
                 terrain = request(args.port, "ws_backdrop_ring")
                 (args.output / f"terrain-{width}x{height}.json").write_text(
@@ -130,6 +146,9 @@ def main():
                 shot = request(args.port, "wide_shot", path=str(
                     (args.output / f"wide-{width}x{height}.png").resolve()))
                 row["capture"] = shot
+            else:
+                row["capture"] = request(args.port, "screenshot_file", path=str(
+                    (args.output / f"stock-{width}x{height}.png").resolve()))
             rows.append(row)
             print(json.dumps(row), flush=True)
     finally:

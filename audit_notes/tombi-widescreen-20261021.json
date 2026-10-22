@@ -1,0 +1,421 @@
+{
+  "scope": "Adaptive Widescreen implementation and sampled Windows QA, 2026-10-21",
+  "branch": "integrate/tombi-eu-rc4-20261021",
+  "framework_commit": "4603ac93af69799e93246a8bacf3e51c63605b3b",
+  "ui_commit": "e08082d10c38d0c4293455c3d15b3ab35ef1afe3",
+  "disc_sha1": "2505d958b4439d04844cadd3f968fc7432a48e00",
+  "eu_aot": {
+    "cache_tag": "cg18_0bea7895_gcaa01377e_f0",
+    "recipes": 54,
+    "pairs": 66,
+    "guarded_entries": 15440,
+    "all_pairs_valid": true,
+    "all_guards_match_known_input_bytes": true,
+    "full_static_coverage_proven": false
+  },
+  "runs": [
+    {
+      "case": "widescreen-hud-fit-en-de-20261021",
+      "language": "en",
+      "result": "passed",
+      "native_loads": 3,
+      "native_dispatches": 23543840,
+      "original_main_verified": true,
+      "differential_batches": 600,
+      "client_sizes": [
+        [
+          800,
+          600
+        ],
+        [
+          1280,
+          720
+        ],
+        [
+          1680,
+          720
+        ],
+        [
+          1920,
+          540
+        ],
+        [
+          1920,
+          270
+        ],
+        [
+          800,
+          600
+        ]
+      ],
+      "margins": [
+        0,
+        138,
+        272,
+        566,
+        618,
+        0
+      ],
+      "anchor_shifts": [
+        0,
+        -53,
+        -120,
+        -267,
+        -293,
+        0
+      ],
+      "rendered_hud_hits": [
+        4278,
+        5221,
+        6233,
+        7268,
+        8326,
+        8418
+      ],
+      "rendered_world_hits": [
+        23996,
+        24160,
+        24336,
+        24722,
+        25100,
+        25132
+      ],
+      "captures_sha256": {
+        "stock-800x600.png": "b476ef6ec2ea9763216678842bb67a46462a3bdd188958ad2a6ac04f4ec27219",
+        "wide-1280x720.png": "87538f328b25bc20d34b82c55c08f27d439ccee6498e8c6029a3637d7e134cf2",
+        "wide-1680x720.png": "d7bd68ef527982f693619d6203d59896ab01c183de834aba66d41531dd86a993",
+        "wide-1920x270.png": "fe8c16759966fc232dc0445e2a6ff8d9ba7f70f043880418d762fbf52ecb44de",
+        "wide-1920x540.png": "ebad0bd64545d84b463eb051e18d9c14ebf0736e5c5c5d1b4379e6d470614680"
+      },
+      "evidence": "build-eu-qa/widescreen-hud-fit-en-de-20261021/en"
+    },
+    {
+      "case": "widescreen-hud-fit-en-de-20261021",
+      "language": "de",
+      "result": "passed",
+      "native_loads": 3,
+      "native_dispatches": 22999694,
+      "original_main_verified": true,
+      "differential_batches": 600,
+      "client_sizes": [
+        [
+          800,
+          600
+        ],
+        [
+          1280,
+          720
+        ],
+        [
+          1680,
+          720
+        ],
+        [
+          1920,
+          540
+        ],
+        [
+          1920,
+          270
+        ],
+        [
+          800,
+          600
+        ]
+      ],
+      "margins": [
+        0,
+        138,
+        272,
+        566,
+        618,
+        0
+      ],
+      "anchor_shifts": [
+        0,
+        -53,
+        -120,
+        -267,
+        -293,
+        0
+      ],
+      "rendered_hud_hits": [
+        4393,
+        5313,
+        6348,
+        7429,
+        8464,
+        8510
+      ],
+      "rendered_world_hits": [
+        23914,
+        24074,
+        24254,
+        24652,
+        25018,
+        25034
+      ],
+      "captures_sha256": {
+        "stock-800x600.png": "b9350c72e0aac3d375185cfc747abd9cf3a04b2a5fc242143d87b03a4d2945c4",
+        "wide-1280x720.png": "d82c9833c3f045abff559dc0d274ab0c10d4501bdb4be02a510b83d1e601ef00",
+        "wide-1680x720.png": "8671ffc1d7d3da7dc81dade0b6c1ab4f48fea06a0a5db588a9eeccde753f2f5c",
+        "wide-1920x270.png": "186d4db832b6721560d894632015a1a185fa93581ca6eefc3b632702ca802768",
+        "wide-1920x540.png": "e032c181f79e44e197beb2d4c5e6de234fcd0d5abe88aa5c3560a8755fee8874"
+      },
+      "evidence": "build-eu-qa/widescreen-hud-fit-en-de-20261021/de"
+    },
+    {
+      "case": "widescreen-us-hud-fit-20261021",
+      "language": "en",
+      "result": "passed",
+      "native_loads": 4,
+      "native_dispatches": 2180625,
+      "original_main_verified": false,
+      "differential_batches": 0,
+      "client_sizes": [
+        [
+          800,
+          600
+        ],
+        [
+          1280,
+          720
+        ],
+        [
+          1680,
+          720
+        ],
+        [
+          1920,
+          540
+        ],
+        [
+          1920,
+          270
+        ],
+        [
+          800,
+          600
+        ]
+      ],
+      "margins": [
+        0,
+        138,
+        272,
+        566,
+        618,
+        0
+      ],
+      "anchor_shifts": [
+        0,
+        -53,
+        -120,
+        -267,
+        -293,
+        0
+      ],
+      "rendered_hud_hits": [
+        3841,
+        4968,
+        6187,
+        7383,
+        8625,
+        8717
+      ],
+      "rendered_world_hits": [
+        23376,
+        23572,
+        23784,
+        24210,
+        24644,
+        24676
+      ],
+      "captures_sha256": {
+        "stock-800x600.png": "779b417441827883dad7415c2622c2821a7dca63d7d68aff35d50ea50029e6e1",
+        "wide-1280x720.png": "c31d3458461b4cee5522e45c7ac21eee8785aca197a9f8d3b9e4cff25ff77207",
+        "wide-1680x720.png": "9b6b1360be6dda3453dc4bfcd9d3cca8fe7e0f6b33fb6f21e91eaf5d285d7742",
+        "wide-1920x270.png": "1bb0c1d77720927edb693b98f1fc7f9f83b15fbc437c09149e170ced7b21eab7",
+        "wide-1920x540.png": "9ea2cbd2447275e2003f241a068c6a7e30b5c52a7cc7f75bfd0077a5a839a462"
+      },
+      "evidence": "build-eu-qa/widescreen-us-hud-fit-20261021/en"
+    },
+    {
+      "case": "widescreen-fixed-21-20261021",
+      "language": "en",
+      "result": "passed",
+      "native_loads": 3,
+      "native_dispatches": 24144641,
+      "original_main_verified": true,
+      "differential_batches": 600,
+      "client_sizes": [
+        [
+          800,
+          600
+        ],
+        [
+          1280,
+          720
+        ],
+        [
+          1680,
+          720
+        ],
+        [
+          1920,
+          540
+        ],
+        [
+          1920,
+          270
+        ],
+        [
+          800,
+          600
+        ]
+      ],
+      "margins": [
+        272,
+        272,
+        272,
+        272,
+        272,
+        272
+      ],
+      "anchor_shifts": [
+        -120,
+        -120,
+        -120,
+        -120,
+        -120,
+        -120
+      ],
+      "rendered_hud_hits": [
+        5474,
+        6509,
+        7521,
+        8579,
+        9637,
+        10649
+      ],
+      "rendered_world_hits": [
+        24254,
+        24434,
+        24610,
+        24794,
+        24978,
+        25154
+      ],
+      "captures_sha256": {
+        "wide-1280x720.png": "0105e16c9194668efd512c5aacf84189dc56eb80e6c8dd8f8711611deea0c941",
+        "wide-1680x720.png": "23f48e7fbca5bf8f25bbe3855fdbf827eb436685de9e4d2ea87fd8c96ae097a4",
+        "wide-1920x270.png": "dac46ea5bb9d6621677c0df5ecb49c602fb69c2c8c98d8bd781fa7f10cf22a68",
+        "wide-1920x540.png": "3b3c89f967cc05de506165ae25d8392884f6c5118fdc8e7ef8440bf11ac00473",
+        "wide-800x600.png": "c19f8b9bd981bc4a6b3ba530c950e0d5f3bb65a7df147cc78b5f3027134c52f7"
+      },
+      "evidence": "build-eu-qa/widescreen-fixed-21-20261021/en"
+    },
+    {
+      "case": "widescreen-disabled-20261021",
+      "language": "en",
+      "result": "passed",
+      "native_loads": 3,
+      "native_dispatches": 19322888,
+      "original_main_verified": true,
+      "differential_batches": 600,
+      "client_sizes": [
+        [
+          800,
+          600
+        ],
+        [
+          1280,
+          720
+        ],
+        [
+          1680,
+          720
+        ],
+        [
+          1920,
+          540
+        ],
+        [
+          1920,
+          270
+        ],
+        [
+          800,
+          600
+        ]
+      ],
+      "margins": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "anchor_shifts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "rendered_hud_hits": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "rendered_world_hits": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "captures_sha256": {
+        "stock-1280x720.png": "24d5911c7bda6067730efdfcb84ba8b2b904d6edbdedef46b53ffc3c53206539",
+        "stock-1680x720.png": "ba143c312e810b70ad7c334db80a7e8982bc572aa8c11c869e9fc38387e1191b",
+        "stock-1920x270.png": "9ac0b3c7da30fe0a5d7760a8b3d1f13d7d669a1192d1a4f3e89c44d1b57c0356",
+        "stock-1920x540.png": "a0b2f46d72aba9e29547b71df086c372caa10c34aecf786dabd078bbeb6f0d96",
+        "stock-800x600.png": "a154bfec615ff187941a068b780e45e3118ad42ec7b5801663a16ff73de766f9"
+      },
+      "evidence": "build-eu-qa/widescreen-disabled-20261021/en"
+    }
+  ],
+  "static_checks": [
+    "US/EU labels and stable IDs/default-off/Fit defaults",
+    "five original PAL profile identities and unknown-image rejection",
+    "actual GPU HUD shift fixture: left/right/center origins, debug and no-debug builds",
+    "US HUD/world/residency/adaptive-bounds and pause/resize/restore camera regressions",
+    "US/EU/both build planning and exact-disc input checks",
+    "US original-disc AOT: 25 recipes, 176 pairs, 8191 guarded entries",
+    "both built catalogs exclude CD Speed and host-paced Fast Loading"
+  ],
+  "visual_review": [
+    "EU English 16:9 and capped 34:9: real scenery/entities; life/AP at viewport edges",
+    "EU German and fixed 21:9 composited views",
+    "US 16:9 HUD/scenery",
+    "EU disabled native view at wide client size"
+  ],
+  "limitations": [
+    "Opening-scope EU AOT and gameplay only; village/campaign mechanics unqualified",
+    "Native Memory Card save/full-exit/restart/load and physical controllers unverified in this integration",
+    "Earlier F:-hosted US first launch hit startup watchdog; G:-hosted copy passed; F: behavior unqualified",
+    "Private debug/differential binaries are not redistribution artifacts; no release published or merged"
+  ],
+  "build_cache_routing": {
+    "verified_cache_directory": "build-eu-qa/build-temp/ccache",
+    "initial_deviation": "Earlier direct builds used the default C: compiler cache before correction",
+    "correction": "Standalone builder now overrides TEMP, TMP, compiler caches, XDG cache and AppData per process",
+    "existing_cache_contents": "Preserved; no cleanup or relocation"
+  },
+  "no_exhaustive_five_language_gameplay_matrix": true
+}

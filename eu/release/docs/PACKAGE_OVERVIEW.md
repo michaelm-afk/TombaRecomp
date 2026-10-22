@@ -14,8 +14,9 @@ Nothing in this package has been uploaded, published or sent to maintainers.
   Python's license and the OpenBIOS notice, plus the source provenance notes.
 - `PACKAGE_AUDIT.json` and `SHA256SUMS.txt`: final payload checks and hashes.
 
-Feature freeze deliberately excludes true widescreen, frame interpolation,
-new audio modes and controller recording/replay. Original PAL speed, five
+The integration adds optional adaptive Widescreen using the shared US renderer
+policies and checked EU language profiles. Frame interpolation, new audio modes
+and controller recording/replay remain excluded. Original PAL speed, five
 languages, EU-only disc validation and card compatibility are retained.
 Optional resource mods start off and require external files; no HD pack or
 bezel is supplied. Geometry and Seamless Loading default ON; partial PGXP

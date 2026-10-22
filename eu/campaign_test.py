@@ -26,8 +26,9 @@ ALLOWED = {'ping', 'frame', 'turbo', 'read_ram', 'screenshot_file',
 
 
 class Probe:
-    def __init__(self, out, port):
+    def __init__(self, out, port, rpc_timeout=15):
         self.out, self.port = out, port
+        self.rpc_timeout = rpc_timeout
         self.started = time.monotonic()
         self.events = []
 
@@ -36,7 +37,7 @@ class Probe:
             raise ValueError(f'Forbidden campaign-test operation: {cmd}')
         request = dict(id=1, cmd=cmd, **kwargs)
         with socket.create_connection(('127.0.0.1', self.port), timeout=3) as s:
-            s.settimeout(15)
+            s.settimeout(self.rpc_timeout)
             s.sendall((json.dumps(request)+'\n').encode())
             reply = json.loads(s.makefile('rb').readline())
         self.events.append(dict(real_seconds=time.monotonic()-self.started,

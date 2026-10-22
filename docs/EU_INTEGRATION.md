@@ -82,7 +82,7 @@ python -I -B eu/tests/test_sampled_gameplay.py
 | Geometry HLE | PAL adapter reuses shared implementation; original-body guards | Recheck sampled language execution and reference comparisons |
 | AOT overlays | Build/audit/staging helpers; reported RC4 cache used opening scope | Generate full inventory and exercise representative native transitions |
 | recomp-ui, controller, FMV policy | Shared UI and address-free policies; EU-specific manifests/metadata | Focused launcher and gameplay smoke tests |
-| Adaptive widescreen | Deliberately excluded; 4:3 only | Port EU camera/projection/culling, entity residency, backgrounds and HUD hooks |
+| Adaptive widescreen | Added in this integration; shared US policies with checked EU address adapters | Sampled English/German resize QA; campaign-wide entity/content qualification remains |
 | Native PAL speed | 50 Hz retained | Keep the regional baseline; 60 Hz was excluded |
 | Frame interpolation | Deliberately excluded | Separate feature work; US frame blending was also retired |
 | Other host platforms | EU helpers target Windows x64 and DLL caches | Adapt build/tool paths, native-module namespaces and packaging for other platforms |
@@ -136,4 +136,72 @@ No exhaustive five-language gameplay matrix was run.
 See the [machine-readable audit](../audit_notes/tombi-eu-integration-20261021.json).
 Full campaign/area roundtrips, full-scope AOT execution, physical controllers,
 FMV synchronization, in-game card persistence and non-Windows packaging remain
-unverified in this integration. Adaptive widescreen is not implemented.
+unverified in this integration.
+
+## Adaptive Widescreen integration
+
+Both regional mod catalogs display **Widescreen**, preserving the package,
+feature and plugin IDs and the disabled default. Fit to Window remains the
+initial choice, follows live window changes from 4:3 through 34:9, and retains
+side bars beyond the cap. Fixed 16:9, 21:9 and 32:9 use the same compositor.
+
+`eu/widescreen_profile.py` verifies committed instruction-window hashes in the
+five original MAIN images and area 0/1 overlays, derives each language's game,
+camera and object-pool addresses from original LUI/low-immediate pairs, and
+generates PAL adapters from the shared US project source. It embeds no original
+game code. Live MAIN fingerprints select the language profile and unknown
+images cannot run guest-state callbacks. Scene guards remain active after
+language changes and snapshot restores. The shared HUD, world-sprite, opening
+camera boundary, village roof residency and script-visibility policies all port
+through these mappings.
+
+All selected native overlays are rebuilt under the widescreen configuration:
+render funnels and backdrop producers also occur outside MAIN. The original
+byte/ranges audit still certifies every pair before staging. Full-scope coverage
+and campaign-wide content remain separate from opening-scope qualification.
+
+Private sampled QA (muted, hidden OpenGL window, fresh cards):
+
+```powershell
+python -I -B eu/tests/test_sampled_gameplay.py --view Fit --name widescreen-fit
+python -I -B eu/tests/test_sampled_gameplay.py --view 21:9 --languages en --name widescreen-fixed
+python -I -B eu/tests/test_sampled_gameplay.py --view off --languages en --name widescreen-stock
+```
+
+Each run proves ordinary walk/jump inputs and prebuilt native execution before
+resizing. Wide checks require the boundary anchor and actual rendered HUD-tag
+hits; composited wide PNGs and backdrop observations accompany the JSON results.
+These checks do not claim village mechanics or campaign-wide entity coverage.
+
+The shared GPU also cancels the boundary camera's screen-origin shift for
+producer-owned HUD. This keeps the life display visible at the left edge and
+the AP bar at the right edge in both regions. Real GPU-fixture checks cover
+left, right and centered origins, including the release path without debug
+tools. `ws_tag_stats` now reports `hud_roles` and `world_roles` separately from
+the older packet-tag counters, so QA can require current-frame render hits.
+
+The corrected sampled Fit runs passed in EU English/German and US English:
+six client sizes, 4:3 return, the 34:9 cap, real native overlay execution,
+ordinary walk/jump inputs and composited image review. EU additionally matched
+all three original geometry routines for 200 batches per language (1,200 total).
+The original disc checks, language-profile/unknown-image rejection and shared
+HUD/camera/residency regression checks passed. No exhaustive language matrix
+was run.
+
+The EU English fixed 21:9 and disabled cases also passed all six client sizes,
+walk/jump/native-cache checks and 600 geometry comparisons each. Including
+those cases, the final EU QA recorded 2,400 matching differential batches.
+See [the widescreen QA audit](../audit_notes/tombi-widescreen-20261021.json)
+for scoped results, capture hashes and retained evidence paths.
+
+An earlier F:-hosted US QA launch hit the startup watchdog before gameplay;
+the copied candidate ran successfully from G:. That first-launch/storage
+behavior remains unqualified and its diagnostics are retained locally. The
+private QA executables include debug tools and EU differential references;
+they are not redistribution packages. No release was published or merged.
+
+Earlier direct builds used the default C: compiler cache before its routing
+was corrected. The standalone EU builder now overrides temporary, compiler
+cache, XDG and AppData paths under its ignored build directory; the resolved
+compiler cache and its temporary directory were verified on G:. Existing C:
+cache contents were preserved without cleanup or relocation.

@@ -73,7 +73,7 @@ The game is playable from BIOS boot through gameplay. Latest release:
 ## Features
 
 - **Native geometry batches.** The release replaces three costly polygon
-  loops while preserving the enhanced renderer's full widescreen scene.
+  loops while preserving the widescreen renderer's full widescreen scene.
   Developers can build the maintained reference with
   `-DTOMBA_GEOMETRY_IMPL=LLE`; HLE is selected at build time and ships by default.
 - **Two renderers.** A CPU software rasterizer and a GPU-authoritative OpenGL
@@ -86,7 +86,7 @@ The game is playable from BIOS boot through gameplay. Latest release:
 - **FMV skip modes.** Skip every movie, or enable **Preserve title and
   ending FMVs (Any%)** to keep the opening before the title, post-final-pig
   cutscene, and credits. The exception setting is off by default.
-- **Optional Custom Renderer.** Fit to Window follows the window's aspect
+- **Optional Widescreen.** Fit to Window follows the window's aspect
   ratio through 34:9, with fixed 16:9, 21:9 and 32:9 choices. Terrain, objects and HUD adapt
   to the expanded view. Extreme widths and all-area coverage remain experimental.
 - **Controller modes.** Choose Analog (DualShock, variable stick movement) or

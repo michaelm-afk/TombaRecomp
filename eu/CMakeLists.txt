@@ -18,6 +18,10 @@ set(tombi_exclude)
 set(tombi_config "${CMAKE_CURRENT_SOURCE_DIR}/game.toml")
 if(TOMBI_PC_FEATURES)
     option(TOMBI_GEOMETRY_VALIDATE "Local-only original EU/HLE differential comparison" OFF)
+    find_package(Python3 REQUIRED COMPONENTS Interpreter)
+    execute_process(COMMAND "${Python3_EXECUTABLE}" -I -B
+        "${CMAKE_CURRENT_SOURCE_DIR}/widescreen_profile.py"
+        COMMAND_ERROR_IS_FATAL ANY)
     set(tombi_target tombi-eu-pc)
     set(tombi_mods "${CMAKE_CURRENT_SOURCE_DIR}/mods/preloaded")
     set(tombi_exclude psx.enhancement.hd-textures)
@@ -56,6 +60,15 @@ if(TOMBI_PLAYER_RELEASE)
 endif()
 if(TOMBI_PC_FEATURES)
     set_target_properties(${tombi_target} PROPERTIES OUTPUT_NAME "Tombi_EU_PC")
+    set(tombi_ws "${TOMBA_ROOT}/build-eu-seamless/generated/widescreen")
+    target_sources(${tombi_target} PRIVATE
+        "${tombi_ws}/eu_widescreen.c"
+        "${tombi_ws}/tomba_widescreen_plugin.c"
+        "${tombi_ws}/tomba_widescreen_residency.c"
+        "${tombi_ws}/tomba_widescreen_scripts.c"
+        "${TOMBA_ROOT}/src/mods/tomba_dispatch.c")
+    target_include_directories(${tombi_target} PRIVATE
+        "${tombi_ws}" "${TOMBA_ROOT}/src/mods")
     if(TOMBI_SEAMLESS)
         set_target_properties(${tombi_target} PROPERTIES OUTPUT_NAME "Tombi_EU_Seamless")
         if(TOMBI_PLAYER_RELEASE)
@@ -80,7 +93,7 @@ if(TOMBI_PC_FEATURES)
         target_compile_options(tombi-loader-tests PRIVATE -O2 -UNDEBUG -ffunction-sections -fdata-sections)
         target_link_options(tombi-loader-tests PRIVATE -Wl,--gc-sections)
     endif()
-    # Address-free host policy; no US guest hooks are linked.
+    # Address-free host policy; guest widescreen hooks use checked EU adapters.
     target_sources(${tombi_target} PRIVATE
         "${TOMBA_ROOT}/src/mods/tomba_hybrid_controller_plugin.c"
         "${TOMBA_ROOT}/src/mods/tomba_skip_fmv_plugin.c")
@@ -91,6 +104,11 @@ if(TOMBI_PC_FEATURES)
     endif()
     include(CTest)
     if(BUILD_TESTING)
+        add_executable(tombi-widescreen-identity-tests tests/test_widescreen_identity.c
+            "${tombi_ws}/eu_widescreen.c")
+        target_include_directories(tombi-widescreen-identity-tests PRIVATE
+            "${tombi_ws}" "${PSXRECOMP_ROOT}/runtime/include")
+        add_test(NAME tombi_widescreen_identity COMMAND tombi-widescreen-identity-tests "${TOMBA_ROOT}/disc")
         add_executable(tombi-hd-install-tests tests/test_hd_install.cpp
             "${PSXRECOMP_ROOT}/runtime/src/texture_pack_install.cpp"
             "${PSXRECOMP_ROOT}/runtime/src/duckstation_texture_pack.cpp")

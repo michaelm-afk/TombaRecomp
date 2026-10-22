@@ -32,6 +32,17 @@ def main():
     target.mkdir(parents=True,exist_ok=True)
     env=dict(os.environ)
     for key in ('PYTHONPATH','PYTHONHOME'):env.pop(key,None)
+    # Standalone invocation must route compiler-launcher caches too; TEMP alone
+    # does not override ccache's Windows default under the user's profile.
+    scratch=target.parent/'build-temp'
+    for key,path in {
+        'TEMP':scratch/'temp','TMP':scratch/'temp',
+        'CCACHE_DIR':scratch/'ccache','SCCACHE_DIR':scratch/'sccache',
+        'XDG_CACHE_HOME':scratch/'cache',
+        'LOCALAPPDATA':scratch/'profile/Local','APPDATA':scratch/'profile/Roaming',
+    }.items():
+        path.mkdir(parents=True,exist_ok=True)
+        env[key]=str(path)
     cmake=executable('cmake.exe')
     command=[cmake,'-S',str(ROOT/'eu'),'-B',str(target),'-G','Ninja',
         '-DCMAKE_BUILD_TYPE=Release','-DTOMBI_SEAMLESS=ON','-DTOMBI_PLAYER_RELEASE=ON',
@@ -61,6 +72,10 @@ def main():
     receipt=json.loads((work/'audit.json').read_text())
     if not receipt['all_pairs_valid'] or not receipt['all_guards_match_known_input_bytes']:
         raise RuntimeError('EU native cache has not passed the original-disc audit')
+    expected_tag=pipeline.compiler.cache_tag(str(ROOT/'psxrecomp/runtime/include'),
+        str(ROOT/'build-eu-tools/psxrecomp-game.exe'),str(ROOT/'eu/release/game.toml'),0)
+    if receipt['cache_tag']!=expected_tag:
+        raise RuntimeError('EU native audit belongs to a different configuration; rebuild/audit hooks first')
     namespace=target/'cache'/receipt['game_id']/'gcc'/pipeline.compiler.cache_arch_abi()/receipt['cache_tag']
     if not namespace.resolve().is_relative_to(target):
         raise RuntimeError('Invalid native cache namespace')

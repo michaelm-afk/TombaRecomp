@@ -295,7 +295,7 @@ opt-outs are preserved. If you previously enabled Fast Loading, disable it
 before using Seamless Loading. Stock SCUS-94236 assets are required; asset
 replacement mods are unsupported. Whole-game coverage is still under test.
 
-Custom Renderer is disabled by default. Enable it in Mods for Fit to Window
+Widescreen is disabled by default. Enable it in Mods for Fit to Window
 through 34:9, or choose fixed 16:9, 21:9 or 32:9. Wider windows keep side bars.
 Leave it off for stock 4:3.
 Native geometry batches reduce CPU work and wider-view frame loss. Performance

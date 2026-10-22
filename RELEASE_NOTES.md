@@ -1,3 +1,12 @@
+## Regional integration candidate
+
+- Add EU adaptive Widescreen with Fit to Window and fixed aspect choices,
+  using checked PAL language/overlay bindings for the shared renderer policies.
+- Name the option **Widescreen** in both US and EU catalogs. Existing selections
+  retain their stable IDs; the feature remains optional and disabled initially.
+- Rebuild all EU native overlays with PAL-aware culling signatures. Keep native
+  PAL simulation speed and the existing US rendering implementation.
+
 ## v0.20.2-alpha
 
 Tentative fix for horizontal tearing in focused fullscreen/borderless windows.

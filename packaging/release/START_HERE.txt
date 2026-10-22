@@ -19,7 +19,7 @@ with the stock disc data used by Seamless Loading.
 Whole-game transition coverage is still under test.
 
 Other bundled mods are disabled by default. Configure them from the Mods page.
-Custom Renderer defaults to Fit to Window (uncapped), with fixed 16:9, 21:9
+Widescreen defaults to Fit to Window (4:3 through 34:9), with fixed 16:9, 21:9
 and 32:9 choices. Leave it disabled for stock 4:3 rendering.
 Native geometry batches reduce CPU work and wider-view frame loss. Performance
 with all mods on older PCs still needs testing.
