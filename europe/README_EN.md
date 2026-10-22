@@ -1,4 +1,4 @@
-# TombiRecomp Europe — SCES-01330 and SCES-01331
+# TombiRecomp Europe â€” SCES-01330 and SCES-01331
 
 Extract the complete package into a writable folder. Start **TombiRecompEU.exe** in the top-level folder. This is the shared European launcher entry point.
 

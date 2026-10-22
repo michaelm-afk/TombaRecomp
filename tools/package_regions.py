@@ -34,26 +34,31 @@ def package(region, build, aot, out, version):
         aot = attempts[0].parent
     cache = (build / 'CMakeCache.txt').read_text()
     for flag in ('PSX_DEBUG_TOOLS:BOOL=ON', 'TOMBA_GEOMETRY_VALIDATE:BOOL=ON',
-                 'TOMBI_GEOMETRY_VALIDATE:BOOL=ON'):
+                 'TOMBI_GEOMETRY_VALIDATE:BOOL=ON', 'TOMBI_EU2_GEOMETRY_VALIDATE:BOOL=ON'):
         if flag in cache:
             raise ValueError(f'Cannot publish private validation build: {flag}')
-    eu = region == 'eu'
-    title, serial = ('Tombi! (Europe)', 'SCES-01330') if eu else ('Tomba! (USA)', 'SCUS-94236')
-    folder = 'TombiRecomp-Europe-windows-x64' if eu else 'TombaRecomp-USA-windows-x64'
+    eu = region != 'us'
+    eu2 = region == 'eu2'
+    title, serial = (('Tombi! (Europe, En/Es/Pt/Sv/Da)', 'SCES-01331') if eu2 else
+                     ('Tombi! (Europe, En/Fr/De/It/Nl)', 'SCES-01330') if eu else
+                     ('Tomba! (USA)', 'SCUS-94236'))
+    folder = ('TombiRecomp-Europe-SCES01331-windows-x64' if eu2 else
+              'TombiRecomp-Europe-windows-x64' if eu else 'TombaRecomp-USA-windows-x64')
     player = out / folder
     player.mkdir(parents=True, exist_ok=False)
-    exe = 'TombiRecompEU.exe' if eu else 'TombaRecomp.exe'
-    copy(build / ('TombiRecompEU.exe' if eu else 'Tomba__Recompiled.exe'), player / exe)
-    config = ROOT / ('eu/release/game.toml' if eu else 'packaging/release/game.toml')
+    exe = 'TombiRecompEU2.exe' if eu2 else 'TombiRecompEU.exe' if eu else 'TombaRecomp.exe'
+    copy(build / (exe if eu else 'Tomba__Recompiled.exe'), player / exe)
+    config = ROOT / ('eu2/release/game.toml' if eu2 else
+                     'eu/release/game.toml' if eu else 'packaging/release/game.toml')
     copy(config, player / 'game.toml')
     if eu:
-        copy(ROOT / 'eu/seeds/boot.txt', player / 'seeds/boot.txt')
+        copy(ROOT / ('eu2/seeds/boot.txt' if eu2 else 'eu/seeds/boot.txt'), player / 'seeds/boot.txt')
     else:
         copy(ROOT / 'game_options.toml', player / 'game_options.toml')
     for folder_name in ('assets', 'bios'):
         shutil.copytree(build / folder_name, player / folder_name)
     release_stage.stage_mods(str(build), str(player),
-                            runtime_target='tombi-eu-seamless' if eu else 'psx-runtime')
+                            runtime_target='tombi-eu2' if eu2 else 'tombi-eu-seamless' if eu else 'psx-runtime')
     filter_catalog(player / 'mods/bundled')
     forbidden = {'psx.enhancement.cd-speed', 'psx.enhancement.fast-loading',
                  'tomba.enhancement.fast-loading', 'tomba.enhancement.frame-interpolation'}
@@ -75,7 +80,18 @@ def package(region, build, aot, out, version):
         str(ROOT / 'build-eu-tools/psxrecomp-game.exe'), str(config), 0)
     if receipt['cache_tag'] != tag:
         raise ValueError('Native cache configuration differs from the packaged config')
-    pipeline.stage(aot / 'cache', player, receipt)
+    native_cache = aot / 'cache'
+    if eu2 and not native_cache.is_dir():
+        # EU2 attempts have separate source workspaces; the runtime destination
+        # holds the staged, audited modules. Recheck bytes before redistribution.
+        native_cache = build / 'cache'
+        namespace = native_cache/serial/'gcc'/pipeline.compiler.cache_arch_abi()/tag
+        for pair in receipt['pairs']:
+            for name,digest in ((pair['dll'],pair['dll_sha256']),
+                               (pair['dll'].removesuffix('.dll')+'.ranges',pair['manifest_sha256'])):
+                if hashlib.sha256((namespace/name).read_bytes()).hexdigest()!=digest:
+                    raise ValueError('Staged native module differs from its audit: '+name)
+    pipeline.stage(native_cache, player, receipt)
     strip = executable('llvm-strip.exe')
     staged_hashes = {}
     for dll in sorted((player / 'cache').rglob('*.dll')):
@@ -120,8 +136,13 @@ def package(region, build, aot, out, version):
     guide = ROOT / ('eu/release/docs/HD_TEXTURE_PACKS.md' if eu else 'docs/HD_TEXTURE_PACKS.md')
     copy(guide, player / 'docs/HD_TEXTURE_PACKS.md')
     copy(ROOT / 'psxrecomp/docs/DUCKSTATION_TEXTURE_FORMAT.md', player / 'docs/DUCKSTATION_TEXTURE_FORMAT.md')
-    copy(ROOT / ('eu/release/docs/README.md' if eu else 'README.md'), player / 'README.md')
-    disc = ('Tombi! (Europe) (En,Fr,De,It,Nl) (Rev 1), SCES-01330.\n'
+    readme = 'README.txt' if eu2 else 'README.md'
+    copy(ROOT / ('eu2/release/README_EN.txt' if eu2 else 'eu/release/docs/README.md' if eu else 'README.md'),
+         player / readme)
+    disc = ('Tombi! (Europe) (En,Es,Pt,Sv,Da), SCES-01331.\n'
+            'BIN SHA-1: 684dbf0ad03f872511046d40d3cc85b17d839dbf.\n'
+            'SCES-01330 uses the separate Europe SCES-01330 build.' if eu2 else
+            'Tombi! (Europe) (En,Fr,De,It,Nl) (Rev 1), SCES-01330.\n'
             'BIN SHA-1: 2505d958b4439d04844cadd3f968fc7432a48e00.\n'
             'SCES-01331 and other SCES-01330 revisions are unsupported.' if eu else
             'Tomba! (USA), SCUS-94236. European Tombi! discs use the separate Europe build.')
@@ -134,7 +155,7 @@ def package(region, build, aot, out, version):
         'in Mods and choose Fit to Window or a fixed ratio. Keep the entire folder.\n'
         'Memory Cards are in saves/. Keep USA and Europe saves in separate folders.\n'
         'No disc, extracted game assets, personal settings or saves are included.\n'
-        'Read README.md for setup and features. Version changes and validation limits:\n'
+        f'Read {readme} for setup and features. Version changes and validation limits:\n'
         'https://github.com/mstan/TombaRecomp/releases\n')
     report = privacy(player)
     for file in player.rglob('*'):
@@ -147,7 +168,8 @@ def package(region, build, aot, out, version):
     report.update(region=region, game_id=serial, version=version, mod_names=names,
                   native_pairs=receipt['published_pairs'], cache_tag=tag, debug_tools=False)
     (out / f'{region}-package-audit.json').write_text(json.dumps(report, indent=2) + '\n')
-    archive = out / f'{"TombiRecomp" if eu else "TombaRecomp"}-v{version}-{"Europe" if eu else "USA"}-windows-x64.zip'
+    release_region = 'Europe-SCES01331' if eu2 else 'Europe' if eu else 'USA'
+    archive = out / f'{"TombiRecomp" if eu else "TombaRecomp"}-v{version}-{release_region}-windows-x64.zip'
     create_release_zip(player, archive)
     with zipfile.ZipFile(archive) as bundle:
         if bundle.testzip():
@@ -159,11 +181,13 @@ def package(region, build, aot, out, version):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--region', choices=('us', 'eu', 'both'), default='both')
+    parser.add_argument('--region', choices=('us', 'eu', 'eu2', 'both', 'all'), default='both')
     parser.add_argument('--us-build', type=Path, default=ROOT / 'build-regions/us/native')
     parser.add_argument('--us-aot', type=Path, default=ROOT / 'build-regions/us/aot')
     parser.add_argument('--eu-build', type=Path, default=ROOT / 'build-eu-release-final/native')
     parser.add_argument('--eu-aot', type=Path, default=ROOT / 'build-eu-seamless/hook-aot')
+    parser.add_argument('--eu2-build', type=Path, default=ROOT / 'build-eu2-release/native')
+    parser.add_argument('--eu2-aot', type=Path, default=ROOT / 'build-eu2-seamless/aot')
     parser.add_argument('--output', type=Path, default=ROOT / 'build-release-dual/packages')
     args = parser.parse_args()
     out = args.output.resolve()
@@ -173,7 +197,8 @@ def main():
     version = (ROOT / 'VERSION').read_text().strip()
     if (ROOT / 'eu/VERSION').read_text().strip() != version:
         parser.error('both regional versions must match')
-    for region in ('us', 'eu') if args.region == 'both' else (args.region,):
+    regions=('us','eu','eu2') if args.region=='all' else (('us','eu') if args.region=='both' else (args.region,))
+    for region in regions:
         package(region, getattr(args, region + '_build'), getattr(args, region + '_aot'), out, version)
 
 

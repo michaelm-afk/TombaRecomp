@@ -1,4 +1,4 @@
-TombiRecomp Europe 2 - lokaler Windows-x64-Kandidat
+Tombi! (Europa, SCES-01331) - Windows-x64-Kandidat
 
 ZIP in einen beschreibbaren Ordner entpacken, TombiRecompEU2.exe starten.
 Im Launcher unter Browse For Disc die eigene SCES-01331-CUE auswaehlen.
@@ -13,7 +13,8 @@ unter Mods verfuegbar. Geometry ist wie in EU1 standardmaessig an,
 PGXP und Hybrid Controller sind standardmaessig aus. HD Texture Packs benoetigt ein
 kompatibles externes SCES-01331-Pack; Bezel Artwork ein eigenes Bild.
 Fast Forward und High Quality SPU verwenden die gemeinsamen Laufzeit-/Audiooptionen.
-Widescreen und FMV-Skip bleiben ohne Schalter; EU2-Anpassungen sind noch offen.
+Widescreen ist unter Mods optional: Fit to Window, 16:9, 21:9 oder 32:9.
+FMV-Skip bleibt ohne Schalter.
 
 Eigene Karten: saves/SCES-01331/card1.mcd und card2.mcd im Paketordner.
 Karten-Browse verwendet exakt die offizielle US/EU1-Dateiauswahl.
@@ -30,7 +31,8 @@ Enthalten: frei lizenziertes OpenBIOS mit Lizenzhinweisen. Kein Sony-BIOS,
 kein Spiel-Image und keine persoenlichen Karten. Die gebuendelte kleine
 Overlay-Toolchain dient nur dem automatischen Laufzeit-Fallback.
 
-Bekannte Grenzen: keine vollstaendige Kampagnenfreigabe, kein EU2-Widescreen.
+Bekannte Grenzen: keine vollstaendige Kampagnenfreigabe.
+Widescreen-Inhalte und Objektverhalten sind nicht fuer alle Gebiete geprueft.
 Portugiesisches Game-over-Overlay verwendet den geprueften Interpreter-Fallback.
 Erste DLL-Kompatibilitaetspruefung kann dauern; den Cache nicht jedes Mal loeschen.
 Keine Veroeffentlichung oder Weitergabe dieses Kandidaten ist erfolgt.

@@ -27,9 +27,11 @@ if(TOMBI_EU2_SEAMLESS)
     execute_process(COMMAND "${Python3_EXECUTABLE}" -I -B
         "${CMAKE_CURRENT_SOURCE_DIR}/geometry_profile.py" ${geometry_args} COMMAND_ERROR_IS_FATAL ANY)
     set(eu2_mods "${CMAKE_CURRENT_SOURCE_DIR}/mods")
+    execute_process(COMMAND "${Python3_EXECUTABLE}" -I -B
+        "${CMAKE_CURRENT_SOURCE_DIR}/widescreen_profile.py" COMMAND_ERROR_IS_FATAL ANY)
 endif()
 psxrecomp_add_game_runtime(tombi-eu2
-    WINDOW_TITLE "Tombi! SCES-01331 Prototype"
+    WINDOW_TITLE "Tombi! (Europe, SCES-01331)"
     DEFAULT_GAME_CONFIG_PATH "game.toml"
     VERSION_FILE "${TOMBA_ROOT}/VERSION"
     MAX_PLAYERS 1
@@ -38,24 +40,32 @@ psxrecomp_add_game_runtime(tombi-eu2
     PRELOADED_MODS_DIR "${eu2_mods}"
     EXCLUDE_BUILTIN_MODS psx.enhancement.8mb-ram psx.enhancement.cd-speed
         psx.enhancement.fast-loading psx.enhancement.hd-textures)
-if(TOMBI_EU2_PLAYER_RELEASE)
-    set_target_properties(tombi-eu2 PROPERTIES OUTPUT_NAME "TombiRecompEU2")
-endif()
+set_target_properties(tombi-eu2 PROPERTIES OUTPUT_NAME "TombiRecompEU2")
 if(TOMBI_EU2_SEAMLESS)
     set(eu2_generated "${TOMBA_ROOT}/build-eu2-seamless/generated")
+    set(eu2_widescreen "${eu2_generated}/widescreen")
     target_sources(tombi-eu2 PRIVATE "${eu2_generated}/eu2_loader.c"
         "${eu2_generated}/eu2_geometry.c"
+        "${eu2_widescreen}/eu_widescreen.c"
+        "${eu2_widescreen}/tomba_widescreen_plugin.c"
+        "${eu2_widescreen}/tomba_widescreen_residency.c"
+        "${eu2_widescreen}/tomba_widescreen_scripts.c"
+        "${TOMBA_ROOT}/src/mods/tomba_dispatch.c"
         "${TOMBA_ROOT}/src/mods/tomba_hybrid_controller_plugin.c"
         "${TOMBA_ROOT}/src/mods/tomba_seamless_prepare.cpp")
     if(TOMBI_EU2_GEOMETRY_VALIDATE)
         target_sources(tombi-eu2 PRIVATE "${eu2_generated}/eu2_geometry_reference.c")
         set_source_files_properties("${eu2_generated}/eu2_geometry.c" PROPERTIES COMPILE_DEFINITIONS TOMBA_GEOMETRY_VALIDATE=1)
     endif()
-    target_include_directories(tombi-eu2 PRIVATE "${eu2_generated}"
+    target_include_directories(tombi-eu2 PRIVATE "${eu2_generated}" "${eu2_widescreen}"
         "${TOMBA_ROOT}/eu/seamless" "${TOMBA_ROOT}/src/mods")
     set_source_files_properties("${TOMBA_ROOT}/src/mods/tomba_seamless_prepare.cpp" PROPERTIES
         COMPILE_DEFINITIONS "TOMBA_SEAMLESS_CATALOG_HEADER=\"${eu2_generated}/eu_catalog.inc\";TOMBA_SEAMLESS_PACK_FORMAT=\"sces01331-five-languages-gam-v1\"")
     if(NOT TOMBI_EU2_PLAYER_RELEASE)
+    add_executable(tombi-eu2-widescreen-tests "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_widescreen_identity.c"
+        "${eu2_widescreen}/eu_widescreen.c")
+    target_include_directories(tombi-eu2-widescreen-tests PRIVATE
+        "${eu2_widescreen}" "${PSXRECOMP_ROOT}/runtime/include")
     add_executable(tombi-eu2-hd-install-tests "${TOMBA_ROOT}/eu/tests/test_hd_install.cpp"
         "${PSXRECOMP_ROOT}/runtime/src/texture_pack_install.cpp"
         "${PSXRECOMP_ROOT}/runtime/src/duckstation_texture_pack.cpp")

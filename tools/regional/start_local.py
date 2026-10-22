@@ -31,7 +31,7 @@ def main():
         cards=ROOT/'build-startup/eu1-manual-cards'
     else:
         build=ROOT/'build-eu2-launcher/native'
-        executable=build/'Tombi__SCES_01331_Prototype.exe'
+        executable=build/'TombiRecompEU2.exe'
         disc=ROOT/'disc/eu2/disc.cue'
         config=build/'game.toml'
         sha='684dbf0ad03f872511046d40d3cc85b17d839dbf'

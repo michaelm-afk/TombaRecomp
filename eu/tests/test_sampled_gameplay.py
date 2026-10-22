@@ -1,4 +1,4 @@
-"""Bounded English/German controller-input smoke test using fresh private cards.
+"""Bounded controller-input samples: EU1 English/German or EU2 English/Spanish.
 
 Requires a private debug-tools build and audited native caches. No RAM writes,
 state loading, progression cheats, or host audio output. This is not a campaign
@@ -29,11 +29,11 @@ def main():
     parser.add_argument('--name', default='sample-' + time.strftime('%Y%m%dT%H%M%S'))
     parser.add_argument('--build-dir', default='build-eu-qa/native')
     parser.add_argument('--port', type=int, default=4493)
-    parser.add_argument('--languages', nargs='+', choices=('en','de'), default=['en','de'])
+    parser.add_argument('--languages', nargs='+', choices=('en','de','es'))
     parser.add_argument('--view', choices=('Fit','16:9','21:9','32:9','off'),
                         help='Private hidden-window widescreen/stock resize QA')
     parser.add_argument('--us', action='store_true', help='Sample the US build without a language selector')
-    parser.add_argument('--eu2',action='store_true',help='English EU2 timing sample using its verified profiles')
+    parser.add_argument('--eu2',action='store_true',help='Sample EU2 English/Spanish, including guarded adaptive widescreen')
     parser.add_argument('--normal-speed',action='store_true',help='Hidden OpenGL window at original video pacing; record first proved control')
     args = parser.parse_args()
     if Path(args.name).name != args.name:
@@ -41,19 +41,27 @@ def main():
     build = (ROOT / args.build_dir).resolve()
     output = ROOT / 'build-eu-qa' / args.name
     output.mkdir(parents=True, exist_ok=False)
-    identity_offset, identities = main_fingerprints(ROOT) if not args.us else (None,None)
-    _, states = profiles(ROOT) if not args.us else (None,{'en':{'base':0x8009bcc8}})
-    if args.eu2:
-        if args.us or args.languages!=['en'] or args.view:parser.error('EU2 timing sample uses --languages en and no widescreen probe')
+    if args.us and args.eu2:parser.error('Choose one region')
+    if args.languages is None:args.languages=['en','es'] if args.eu2 else ['en','de']
+    if args.us:
+        args.languages=['en']
+        identity_offset,identities=None,None
+        states={'en':{'base':0x8009bcc8}}
+    elif args.eu2:
+        if any(language not in ('en','es') for language in args.languages):
+            parser.error('EU2 samples use en/es; this is not a full language matrix')
         mapping={'en':0,'es':5,'pt':6,'sv':7,'da':8}
         identity_offset,identities=main_fingerprints(ROOT,disc_dir='disc/eu2',languages=mapping)
         _,states=profiles(ROOT,disc_dir='disc/eu2',languages=mapping)
-    if args.us:args.languages=['en']
+    else:
+        if any(language not in ('en','de') for language in args.languages):parser.error('EU1 samples use en/de')
+        identity_offset,identities=main_fingerprints(ROOT)
+        _,states=profiles(ROOT)
     report = dict(languages=[], no_ram_writes=True, no_states_loaded=True,
                   audio_output='SDL dummy', native_compilation_disabled=True,
                   limitations=['Opening movement/geometry only; no full campaign, area roundtrip, '
                                'physical controller, FMV sync or Memory Card save/load certification.'])
-    executable = build / ('Tomba__Recompiled.exe' if args.us else 'Tombi__SCES_01331_Prototype.exe' if args.eu2 else 'TombiRecompEU.exe')
+    executable = build / ('Tomba__Recompiled.exe' if args.us else 'TombiRecompEU2.exe' if args.eu2 else 'TombiRecompEU.exe')
     if not executable.is_file():
         parser.error(f'Missing private QA executable: {executable}')
     mod_state = build / 'mods/state.toml'
@@ -131,7 +139,8 @@ def main():
                 child = subprocess.Popen([str(executable), '--hidden-window' if args.view or args.normal_speed else '--headless', '--game', str(config),
                     '--disc', str(ROOT / ('disc/Tomba! (USA).cue' if args.us else 'disc/eu2/disc.cue' if args.eu2 else 'disc/Tombi! (Europe) (En,Fr,De,It,Nl) (Rev 1).cue')),
                     '--memcard-dir', str(out / 'fresh-cards'), '--debug-port', str(args.port)],
-                    cwd=build, env=env, stdout=log, stderr=subprocess.STDOUT)
+                    cwd=build, env=env, stdout=log, stderr=subprocess.STDOUT,
+                    creationflags=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0)
                 deadline = time.monotonic() + 60
                 while True:
                     if child.poll() is not None:
@@ -164,8 +173,8 @@ def main():
                     for key in ('right', 'right', 'left', 'left'):
                         steps += [campaign.step([key], 4), campaign.step([], 16)]
                 else:
-                    for _ in range(LANGUAGES.index(language)):
-                        steps += [campaign.step(['right'], 4), campaign.step([], 16)]
+                    for key in {'de':('right','right'),'es':('right',)}[language]:
+                        steps += [campaign.step([key], 4), campaign.step([], 16)]
                 if not args.us:steps += [campaign.step(['cross'], 4), campaign.step([], 16)]
                 if steps:probe.drive(steps)
                 deadline = time.monotonic() + 150
@@ -230,11 +239,14 @@ def main():
                 if args.view:
                     command=[sys.executable,'-I','-B',str(ROOT/'tools/probe_adaptive_widescreen.py'),
                         '--pid',str(child.pid),'--port',str(args.port),
-                        '--title','TombaRecomp Recompiled' if args.us else 'TombiRecomp EU','--output',str(out/'resize'),
+                        '--title',original['runtime']['window_title'],'--output',str(out/'resize'),
                         '--hidden-window','--require-anchor','--require-hud']
                     if args.view=='off':command.append('--disabled')
                     elif args.view!='Fit':command+=['--fixed-aspect',args.view]
-                    subprocess.run(command,cwd=ROOT,env=env,check=True)
+                    with (out/'resize-probe.log').open('w') as probe_log:
+                        subprocess.run(command,cwd=ROOT,env=env,check=True,
+                                       stdout=probe_log,stderr=subprocess.STDOUT,
+                                       creationflags=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0)
                 shot = probe.rpc('screenshot_file', path=str(out / 'gameplay.png'))
                 result = dict(language=language, result='passed', player=hex(player),
                     first_proved_control_seconds=first_control_seconds,normal_video_pacing=args.normal_speed,

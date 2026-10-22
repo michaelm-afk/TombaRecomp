@@ -65,7 +65,7 @@ def main():
         text=text.replace(old,new)
     config=build/'game.toml'
     if not config.exists():config.write_text(text)
-    print('Ready: build-eu2-launcher/native/Tombi__SCES_01331_Prototype.exe',flush=True)
+    print('Ready: build-eu2-launcher/native/TombiRecompEU2.exe',flush=True)
 
 
 if __name__=='__main__':main()

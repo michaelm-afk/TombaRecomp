@@ -36,7 +36,7 @@ def main():
     if not (build.is_relative_to(ROOT) or build.is_relative_to(ROOT.parent/'release-qa')):parser.error('Build must stay inside private QA roots')
     out = build.parent / ('smoke-' + args.language + '-' + time.strftime('%Y%m%dT%H%M%S'))
     out.mkdir(parents=True)
-    executable = build / ('TombiRecompEU.exe' if args.region=='eu1' else 'Tombi__SCES_01331_Prototype.exe')
+    executable = build / ('TombiRecompEU.exe' if args.region=='eu1' else 'TombiRecompEU2.exe')
     if args.executable:
         if Path(args.executable).name!=args.executable:parser.error('Executable must be a filename')
         executable=build/args.executable

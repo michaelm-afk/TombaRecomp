@@ -45,7 +45,7 @@ def main():
         print(f'Step {index+1}/{len(commands)}: {command[0]}',flush=True)
         with (scratch/f'build-step-{index+1}.log').open('w') as log:
             subprocess.run(command,cwd=ROOT,env=env,stdout=log,stderr=subprocess.STDOUT,check=True)
-    print('Local prototype: build-eu2/native/Tombi__SCES_01331_Prototype.exe',flush=True)
+    print('Local prototype: build-eu2/native/TombiRecompEU2.exe',flush=True)
 
 
 if __name__=='__main__':

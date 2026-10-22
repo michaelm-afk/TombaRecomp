@@ -13,8 +13,11 @@ local and ignored by Git.
 | USA | Tomba! (USA), SCUS-94236 | `c259ec7ff6ef4163913991f4e4db2eff71702818` |
 | Europe | Tombi! (Europe) (En,Fr,De,It,Nl) (Rev 1), SCES-01330 | `2505d958b4439d04844cadd3f968fc7432a48e00` |
 
-The EU track is 492,370,032 bytes. SCES-01331 (En/Es/Pt/Sv/Da) and other
-SCES-01330 revisions are unsupported. A matching serial alone cannot qualify
+The released EU1 track is 492,370,032 bytes. The new `eu2/` integration targets
+SCES-01331 (En/Es/Pt/Sv/Da), 492,306,528 bytes, SHA-1
+`684dbf0ad03f872511046d40d3cc85b17d839dbf`. Its sampled runtime qualification
+is pending; see the [EU2 build and QA guide](../eu2/README.md). EU1/EU2 denote
+language groups of the first game. Other SCES-01330 revisions remain unsupported. A matching serial alone cannot qualify
 a disc for guest-address hooks. Keep each region's native Memory Cards separate.
 
 ## Build
@@ -29,6 +32,11 @@ python -I -B tools/build_regions.py --region both --plan
 python -I -B tools/build_regions.py --region both --check
 python -I -B tools/build_regions.py --region both --us-disc 'G:/owned/Tomba.cue' --eu-disc 'G:/owned/Tombi.cue' --jobs 3
 ```
+
+`--region eu2` selects the new SCES-01331 target and accepts `--eu2-disc`.
+`--region all` selects USA, EU1 and EU2; `both` retains its USA/EU1 meaning.
+The combined European launcher is built separately by `europe/build.py` and
+routes between its two serial-specific backends. See the EU2 guide above.
 
 `--plan` writes nothing. `--check` verifies the selected disc hashes and tool
 prerequisites without copying or building. A build stages verified copies in

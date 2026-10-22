@@ -1,3 +1,6 @@
+> Historical developer handoff. For the current adaptive Widescreen integration
+> and qualification status, use [the active EU2 guide](../README.md).
+
 # SCES-01331 / Tombi! Europe 2 developer handoff
 
 Historical backend-only handoff. The current common European product uses the

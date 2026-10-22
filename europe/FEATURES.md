@@ -1,5 +1,10 @@
 # Features by European disc
 
+Integration status: the developer RC2 results below are historical evidence.
+The added EU2 Widescreen adapter has passed static/original-MAIN checks; its
+new full player build, native-cache rebuild and sampled runtime QA remain
+pending the exact SCES-01331 disc. See [current EU2 status](../eu2/README.md).
+
 | Feature | SCES-01330 | SCES-01331 |
 |---|---|---|
 | Original PAL timing and five original languages | Supported | Supported |
@@ -12,7 +17,7 @@
 | HD Texture Packs | Optional matching SCES-01330 pack | Optional matching SCES-01331 pack |
 | Bezel Artwork | Optional external image | Same |
 | FMV Skip | Optional, OFF | Hidden: live language-aware teardown binding unimplemented |
-| Widescreen renderer (Fit/16:9/21:9/32:9) | Optional, OFF | Hidden: camera/HUD/cull/overlay contracts incomplete |
+| Widescreen renderer (Fit/16:9/21:9/32:9) | Optional, OFF | Implemented, OFF; original-disc runtime qualification pending |
 
 Fresh defaults follow the official EU1 profile: OpenGL, VSync OFF, 1080p internal resolution, windowed output, legacy AA ON/post-AA OFF, 44100 Hz requested audio rate (device may differ), digital controller. Saved preferences take precedence and are never reset by the profile catalog.
 

@@ -5,6 +5,8 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'eu'))
 from stage_release import copy,privacy
 from toolchain import executable
+sys.path.insert(0,str(ROOT/'psxrecomp/tools'))
+import aot_overlay_pipeline as pipeline
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
@@ -16,7 +18,10 @@ def main():
     p.add_argument('--region',choices=['eu1','eu2'],default='eu2')
     args=p.parse_args();out=(ROOT/args.output).resolve();build=(ROOT/args.build_dir).resolve()
     if not out.is_relative_to(ROOT) or not build.is_relative_to(ROOT):p.error('Paths must remain inside project')
-    assert 'PSX_DEBUG_TOOLS:BOOL=OFF' in (build/'CMakeCache.txt').read_text()
+    build_config=(build/'CMakeCache.txt').read_text()
+    assert 'PSX_DEBUG_TOOLS:BOOL=OFF' in build_config
+    assert 'TOMBI_EU2_GEOMETRY_VALIDATE:BOOL=ON' not in build_config
+    assert 'TOMBI_GEOMETRY_VALIDATE:BOOL=ON' not in build_config
     out.mkdir(parents=True,exist_ok=False)
     home='eu' if args.region=='eu1' else 'eu2'
     binary='TombiRecompEU.exe' if args.region=='eu1' else 'TombiRecompEU2.exe'
@@ -47,6 +52,10 @@ def main():
         if (ROOT/'build-eu-tools'/name).exists():copy(ROOT/'build-eu-tools'/name,tk/name)
     receipt=json.loads(args.audit.read_text())
     assert receipt['all_pairs_valid'] and receipt['all_guards_match_known_input_bytes']
+    assert receipt['game_id']==('SCES-01330' if args.region=='eu1' else 'SCES-01331')
+    expected_tag=pipeline.compiler.cache_tag(str(ROOT/'psxrecomp/runtime/include'),
+        str(ROOT/'build-eu-tools/psxrecomp-game.exe'),str(ROOT/home/'release/game.toml'),0)
+    assert receipt['cache_tag']==expected_tag,'Rebuild the native cache for this exact widescreen configuration'
     namespace=Path('cache')/receipt['game_id']/'gcc/win-x64'/receipt['cache_tag']
     cache=args.cache_root/namespace
     for pair in receipt['pairs']:

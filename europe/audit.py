@@ -31,9 +31,15 @@ def audit(path,kind):
    manifests=[tomllib.loads(value.decode()) for name,value in data.items() if name.startswith(prefix+'mods/bundled/') and name.endswith('/manifest.toml')]
    assert manifests
    for manifest in manifests:
+    assert manifest['id'] not in ['psx.enhancement.cd-speed','psx.enhancement.fast-loading','tomba.enhancement.fast-loading','tomba.enhancement.frame-interpolation'],manifest['id']
     assert any(t['game_id'] in [region,'*'] for t in manifest['target']),manifest['id']
     for plugin in manifest.get('plugin',[]):assert plugin['id'].encode() in data[prefix+exe],plugin['id']
-   if region=='SCES-01331':assert not any(m['id'] in ['tomba.enhancement.widescreen','tomba.enhancement.skip-fmv'] for m in manifests)
+   wide=next(m for m in manifests if m['id']=='tomba.enhancement.widescreen')
+   assert wide['name']=='Widescreen' and not wide['feature'][0]['default_enabled']
+   assert config['widescreen']['adaptive_view'] and config['widescreen']['native_wide']
+   if region=='SCES-01331':
+    assert not any(m['id']=='tomba.enhancement.skip-fmv' for m in manifests)
+    assert set(config['widescreen']['sprite_tag_funcs'])=={'0x8005E618','0x8005E630'}
    geometry=next(m for m in manifests if m['id']=='tombi.enhancement.geometry');assert geometry['feature'][0]['default_enabled']
    cache=[n for n in data if n.startswith(prefix+'cache/'+region+'/') and n.endswith('.dll')]
    counts[region]=len(cache);assert len(cache)==(66 if region=='SCES-01330' else 65)

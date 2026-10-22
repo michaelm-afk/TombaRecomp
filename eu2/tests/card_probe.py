@@ -28,7 +28,7 @@ def main():
     env=dict(os.environ,PSX_OVERLAY_AUTOCOMPILE_OFF='1',PSX_INTERNAL_RESOLUTION='native',
         PSX_RESIDENT_CACHE=str(ROOT/'build-eu2-launcher/resident-cache'),SDL_AUDIO_DRIVER='dummy',SDL_AUDIODRIVER='dummy')
     with (out/'runtime.log').open('w') as log:
-        child=subprocess.Popen([str(build/'Tombi__SCES_01331_Prototype.exe'),'--headless','--no-launcher',
+        child=subprocess.Popen([str(build/'TombiRecompEU2.exe'),'--headless','--no-launcher',
             '--game',str(build/'game.toml'),'--disc',str(ROOT/'disc/eu2/disc.cue'),
             '--memcard-dir',str(cards),'--debug-port','4498'],cwd=build,env=env,stdout=log,stderr=subprocess.STDOUT)
         try:

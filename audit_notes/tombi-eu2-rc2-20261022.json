@@ -1,0 +1,202 @@
+{
+  "date": "2026-10-22",
+  "issue": "beads-j62e",
+  "status": "implemented; EU2 exact-disc runtime qualification pending",
+  "source_contributor": "michaelm-afk",
+  "handoff_archives": {
+    "TombiRecomp-Europe-SCES01330-SCES01331-Developer-RC2-20261022.zip": {
+      "bytes": 135029,
+      "sha256": "8621af327de0f7a78ce2cd118ca102ebdbc004fb65a1d72f474ad046e10c6e3d"
+    },
+    "TombiRecomp-Europe-SCES01330-SCES01331-Windows-x64-RC2-20261022.zip": {
+      "bytes": 160891681,
+      "sha256": "b77b14f6b643f612630de6c9ffe34fd38a94e5826a6d74f92ededeaa9c158b1e"
+    }
+  },
+  "imported_commits": {
+    "game": "4634730",
+    "framework": "8636183f",
+    "ui": "ea005b6"
+  },
+  "original_bases": {
+    "game": "ec11a7e8afa1a15d4599483f0c80f0a3b1389bff",
+    "framework": "847762995c0fa1af65f0e43604bb2a3e23d92bff",
+    "ui": "e08082d10c38d0c4293455c3d15b3ab35ef1afe3"
+  },
+  "implementation": {
+    "shared_renderer_policy": true,
+    "regional_bindings_per_language": 56,
+    "language_specific_code": true,
+    "static_profiles": [
+      "en",
+      "es",
+      "pt",
+      "sv",
+      "da"
+    ],
+    "runtime_sample_plan": [
+      "en",
+      "es"
+    ],
+    "views": [
+      "Fit",
+      "16:9",
+      "21:9",
+      "32:9"
+    ],
+    "fit_max": "34:9",
+    "default_enabled": false,
+    "labels": "Widescreen",
+    "unknown_images_rejected": true,
+    "unknown_return_sites_rejected": true,
+    "old_nonwide_cache_rejected": true,
+    "required_eu2_cache_tag": "cg18_0bea7895_gcc4151ec0_f0",
+    "us_eu1_both_selection_preserved": true,
+    "all_selection": [
+      "us",
+      "eu",
+      "eu2"
+    ],
+    "eu2_package_region_label": "Europe-SCES01331"
+  },
+  "tests": {
+    "original_correspondence_reproduced": true,
+    "generated_adapter_syntax": true,
+    "original_main_field_hud_and_identity_fixture": true,
+    "profile_model": true,
+    "blank_card_creation_and_no_overwrite": true,
+    "independent_regional_card_io": true,
+    "python_syntax_files": 85,
+    "build_plans": [
+      "us,eu",
+      "eu2",
+      "us,eu,eu2"
+    ],
+    "eu1_cli_preflight": true,
+    "eu1_rebuilt": {
+      "result": "passed",
+      "native_pairs_reaudited": 66,
+      "native_original_byte_guards": 15440,
+      "pal_hz": 50,
+      "ordinary_walk_jump": true,
+      "native_module_loads": 3,
+      "native_dispatches": 23792663,
+      "runtime_compilation_disabled": true,
+      "audio_output": "muted SDL dummy",
+      "fresh_private_cards": true,
+      "live_fit_resize_sizes": [
+        [
+          800,
+          600
+        ],
+        [
+          1280,
+          720
+        ],
+        [
+          1680,
+          720
+        ],
+        [
+          1920,
+          540
+        ],
+        [
+          1920,
+          270
+        ],
+        [
+          800,
+          600
+        ]
+      ],
+      "hud_roles": true,
+      "camera_anchor": true,
+      "real_margin_captures_visually_reviewed": true,
+      "evidence": "build-eu-qa/eu1-rc2-fit-regression-title-20261022"
+    },
+    "us_rebuilt": {
+      "result": "passed",
+      "native_pairs_reaudited": 176,
+      "recipe_count": 25,
+      "native_original_byte_guards": 8191,
+      "ordinary_walk_jump": true,
+      "native_module_loads": 4,
+      "native_dispatches": 2219260,
+      "runtime_compilation_disabled": true,
+      "audio_output": "muted SDL dummy",
+      "fresh_private_cards": true,
+      "live_fit_resize_sizes": [
+        [
+          800,
+          600
+        ],
+        [
+          1280,
+          720
+        ],
+        [
+          1680,
+          720
+        ],
+        [
+          1920,
+          540
+        ],
+        [
+          1920,
+          270
+        ],
+        [
+          800,
+          600
+        ]
+      ],
+      "hud_roles": true,
+      "camera_anchor": true,
+      "real_margin_capture_visually_reviewed": true,
+      "evidence": "build-eu-qa/us-rc2-fit-regression-20261022"
+    },
+    "all_five_real_eu1_main_images_rejected_by_eu2_adapter": true
+  },
+  "corrected_test_harness": {
+    "first_resize_attempt": "failed: stale hardcoded window title",
+    "correction": "read active config title; capture probe diagnostics",
+    "repeat": "passed"
+  },
+  "disc_status": {
+    "required_serial": "SCES-01331",
+    "required_bytes": 492306528,
+    "required_sha1": "684dbf0ad03f872511046d40d3cc85b17d839dbf",
+    "required_sha256": "2eba3dfdd25f5d270d47f5fe408391971aa25ee09c6aac9874bba4e3bf6f32cc",
+    "exact_disc_available": false,
+    "matching_main_reference_sha1": "48833672d22ddbafe8c3e904dd3aa013a280e1ee",
+    "matching_main_reference_boot_serial": "SCES-01330",
+    "all_five_eu2_main_sha256_match_handoff": true,
+    "reference_not_accepted_as_supported_boot_disc": true,
+    "additional_en_fr_de_it_nl_rev1_7z_sha1": "2505d958b4439d04844cadd3f968fc7432a48e00"
+  },
+  "unverified": [
+    "fresh EU2 full player link and original boot",
+    "EU2 native AOT rebuild/audit with wide config",
+    "EU2 launcher routing both directions and Play-gate checks on exact discs",
+    "sampled EU2 EN/ES movement and Fit/fixed/off gameplay",
+    "EU2 FMV teardown remains unimplemented/hidden",
+    "full campaign/all-area content, spawning, collision and exits",
+    "physical controller/exhaustive audio",
+    "native in-game Memory Card save/full-exit/restart/load",
+    "release archive qualification and other host platforms"
+  ],
+  "publication": {
+    "release": false,
+    "default_branches_unchanged": true,
+    "integration_branch": "integrate/tombi-eu2-rc2-20261022",
+    "draft_review_pending": true
+  },
+  "personal_cards_and_original_discs_preserved": true,
+  "storage": {
+    "new_us_build_drive": "F:",
+    "new_eu_build_and_extraction_drive": "G:",
+    "all_agent_profiles_and_caches_redirected": true
+  }
+}

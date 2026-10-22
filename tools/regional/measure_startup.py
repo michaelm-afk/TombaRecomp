@@ -23,7 +23,7 @@ def main():
         ROOT/'disc/Tomba! (USA).cue'),
         ('eu1',ROOT/'build-startup/comparison/eu1','TombiRecompEU.exe',
         ROOT/'disc/Tombi! (Europe) (En,Fr,De,It,Nl) (Rev 1).cue'),
-        ('eu2',ROOT/'build-eu2/native','Tombi__SCES_01331_Prototype.exe',ROOT/'disc/eu2/disc.cue')]
+        ('eu2',ROOT/'build-eu2/native','TombiRecompEU2.exe',ROOT/'disc/eu2/disc.cue')]
     output=ROOT/'build-startup'/('measure-'+args.mode+'-'+time.strftime('%Y%m%dT%H%M%S'))
     output.mkdir(parents=True)
     reports=[]
