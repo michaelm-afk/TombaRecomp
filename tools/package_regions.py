@@ -59,6 +59,13 @@ def package(region, build, aot, out, version):
                      'eu/release/game.toml' if eu else 'packaging/release/game.toml')
     copy(config, player / 'game.toml')
     if eu2:write_standalone_catalog(player,revision)
+    elif eu:
+        # The serial also exists on older gameplay-code revisions. Keep the
+        # standalone EU1 package on the same full-disc gate as the common UI.
+        (player/'regional-launch.toml').write_text(
+            '[[profile]]\nid = "SCES-01330"\nsize = 492370032\n'
+            'sha256 = "25aa80a9f7000fc68a4621e17c60fd1505df540dd6ed383baac305c37087bce2"\n'
+            'backend = "TombiRecompEU.exe"\n',encoding='utf-8',newline='\n')
     if eu:
         copy(ROOT / ('eu2/seeds/boot.txt' if eu2 else 'eu/seeds/boot.txt'), player / 'seeds/boot.txt')
     else:
