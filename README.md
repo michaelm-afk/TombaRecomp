@@ -44,6 +44,8 @@ Important files:
   overlay images, verify source-byte guards, and run gameplay spot checks.
 - [HD texture packs](docs/HD_TEXTURE_PACKS.md): install compatible DuckStation
   PNG/JPEG/WebP packs or capture original textures through the Mods launcher.
+- [Widescreen integration](docs/WIDESCREEN.md): renderer, camera, HUD and
+  validation contracts for the USA and Europe builds.
 - [Optional texture example](examples/hd-texture-pack/README.md): drop-in
   synthetic checkerboards and a Tomba-specific pack-directory README.
 - `game.toml`: Tomba runtime / recompiler / video / controller / widescreen config.
@@ -57,7 +59,9 @@ Important files:
 - `tools/package_appimage.sh`: builds the experimental Linux x86-64 AppImage.
 - `psxrecomp/`: the [PSXRecomp](https://github.com/mstan/psxrecomp) framework,
   pulled in as a **git submodule** pinned to a known-good commit.
-- `ISSUES.md`: game-specific issue log.
+- [Releases](https://github.com/mstan/TombaRecomp/releases): version changes,
+  downloads and release-specific validation limits.
+- [GitHub issues](https://github.com/mstan/TombaRecomp/issues): bug reports.
 
 ## Status
 
@@ -72,10 +76,17 @@ The game is playable from BIOS boot through gameplay. Latest release:
 | Title menu / OPTIONS | Works (settings persist across launches) |
 | NEW GAME / LOAD GAME | Works |
 | Memory-card save & load | Works (standard `.mcd`, emulator-compatible) |
-| Gameplay | Playable; known crashes tracked in `ISSUES.md` |
+| Gameplay | Playable; report problems through [GitHub issues](https://github.com/mstan/TombaRecomp/issues) |
 | Renderers | Software **and** OpenGL (GPU); OpenGL is the default |
 | Adaptive widescreen | Experimental, opt-in (fit to window through 34:9) |
 | Controller | Analog / D-Pad modes; optional Hybrid Controller mod |
+
+The USA native cache covers its 25 configured area/support images. Europe
+includes 66 audited native modules from the opening/support inventory and
+retains fallback for later code. Europe runs at the original PAL speed.
+English/German and US gameplay received sampled validation; campaign-wide
+Widescreen content and an integrated-EU-build Memory Card roundtrip remain
+follow-ups. See the release page for the evidence attached to each version.
 
 ## Features
 

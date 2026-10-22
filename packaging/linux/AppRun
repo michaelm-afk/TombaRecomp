@@ -60,7 +60,7 @@ if [ -d "$payload/mods" ]; then
     chmod -R u+rwX "$data_dir/mods"
 fi
 
-for file in game.toml game_options.toml LICENSE README.md RELEASE_NOTES.md \
+for file in game.toml game_options.toml LICENSE README.md \
             START_HERE.txt AOT_CACHE_AUDIT.json; do
     if [ -f "$payload/$file" ]; then
         cp -f "$payload/$file" "$data_dir/$file"

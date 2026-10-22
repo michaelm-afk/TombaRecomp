@@ -95,7 +95,8 @@ VRR does not establish 100 different game images.
 Regular gameplay, area changes and save/full-exit/restart/load were manually
 validated through Dwarf Village on the previous preserved EU build. Short
 five-language area/geometry regressions and feature tests also passed there.
-See `TEST_STATUS.md` for the release candidate's separate acceptance status.
+See the [release notes](https://github.com/mstan/TombaRecomp/releases) for
+the integrated build's validation scope and known limits.
 The entire campaign has not been validated. The owner playtested the integrated
 adaptive Widescreen build and reported that it plays well. The integrated build
 has sampled validation rather than a complete campaign replay.

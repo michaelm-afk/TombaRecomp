@@ -121,7 +121,6 @@ def package(region, build, aot, out, version):
     copy(guide, player / 'docs/HD_TEXTURE_PACKS.md')
     copy(ROOT / 'psxrecomp/docs/DUCKSTATION_TEXTURE_FORMAT.md', player / 'docs/DUCKSTATION_TEXTURE_FORMAT.md')
     copy(ROOT / ('eu/release/docs/README.md' if eu else 'README.md'), player / 'README.md')
-    copy(ROOT / 'RELEASE_NOTES.md', player / 'RELEASE_NOTES.md')
     disc = ('Tombi! (Europe) (En,Fr,De,It,Nl) (Rev 1), SCES-01330.\n'
             'BIN SHA-1: 2505d958b4439d04844cadd3f968fc7432a48e00.\n'
             'SCES-01331 and other SCES-01330 revisions are unsupported.' if eu else
@@ -135,7 +134,8 @@ def package(region, build, aot, out, version):
         'in Mods and choose Fit to Window or a fixed ratio. Keep the entire folder.\n'
         'Memory Cards are in saves/. Keep USA and Europe saves in separate folders.\n'
         'No disc, extracted game assets, personal settings or saves are included.\n'
-        'Read RELEASE_NOTES.md for features and validation limits.\n')
+        'Read README.md for setup and features. Version changes and validation limits:\n'
+        'https://github.com/mstan/TombaRecomp/releases\n')
     report = privacy(player)
     for file in player.rglob('*'):
         if file.is_file():

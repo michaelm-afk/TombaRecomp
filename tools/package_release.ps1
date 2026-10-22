@@ -156,9 +156,6 @@ $HdGuide = $HdGuide.Replace("../examples/hd-texture-pack/", "https://github.com/
 [System.IO.File]::WriteAllText((Join-Path $DocsStage "HD_TEXTURE_PACKS.md"), $HdGuide,
     [System.Text.UTF8Encoding]::new($false))
 Copy-Item -LiteralPath (Join-Path $FrameworkRoot "docs\DUCKSTATION_TEXTURE_FORMAT.md") -Destination $DocsStage
-if (Test-Path (Join-Path $Root "RELEASE_NOTES.md")) {
-    Copy-Item (Join-Path $Root "RELEASE_NOTES.md") $Stage
-}
 
 # Launcher assets: this build ships the shared recomp-ui Dear ImGui launcher
 # (RECOMP_LAUNCHER; see main.cpp + recomp-ui/recomp_ui.cmake), which loads from
