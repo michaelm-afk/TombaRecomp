@@ -105,6 +105,10 @@ across the whole campaign.
 
 ## Credits and licensing
 
+Special thanks to [michaelm-afk](https://github.com/michaelm-afk), author of the
+European Tombi! RC4 implementation and original developer handoff, including
+the EU language profiles, Seamless Loading and native geometry support.
+
 Based on TombaRecomp by mstan, PSXRecomp and recomp-ui contributors, with
 psx_tomba used as a research reference. Original Tombi!/Tomba! belongs to its
 respective rights holders. OpenBIOS is supplied under its accompanying MIT

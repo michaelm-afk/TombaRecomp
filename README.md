@@ -379,6 +379,13 @@ game code) is planned so discoveries can be shared safely in the future.
   outputs stay local.
 - See `CLAUDE.md` for project-specific rules.
 
+## Contributors and thanks
+
+Special thanks to [michaelm-afk](https://github.com/michaelm-afk) for authoring
+the European Tombi! RC4 implementation and developer handoff. His work supplied
+the EU language profiles, Seamless Loading, native geometry support and shared
+runtime fixes that made the European build possible.
+
 ## License
 
 PolyForm Noncommercial 1.0.0. See `LICENSE`.
