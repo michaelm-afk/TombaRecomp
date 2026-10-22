@@ -1,151 +1,43 @@
 # Tombi! (Europe, SCES-01330 Rev 1) - v0.22.0-alpha
 
-A native Windows x64 port of the original European Tombi!, using PSXRecomp
-and the shared TombaRecomp PC runtime. This is the European alpha build.
+This Windows x64 build supports **Tombi! (Europe) (En,Fr,De,It,Nl) (Rev 1)**:
+SCES-01330, raw BIN SHA-1 `2505d958b4439d04844cadd3f968fc7432a48e00`.
+Use the separate SCES01331-Rev1 download for English/Spanish/Portuguese/Swedish/Danish.
 
-## Requirements and first launch
+Extract the whole ZIP into a writable folder and run `TombiRecompEU.exe`.
+Select your own matching BIN/CUE and press Launch. Keep the BIN beside its CUE.
+OpenBIOS is included; no installed Python/compiler or retail BIOS is required.
+Windows 10/11 x64 and a working OpenGL driver are required.
 
-Use Windows 10/11 x64, a working OpenGL graphics driver and a writable folder.
-Extract the entire Europe-SCES01330-Rev1 ZIP, then double-click `TombiRecompEU.exe`.
-No administrator rights, system Python or compiler installation is required.
-Keep the companion folders beside the executable. Avoid Program Files and
-read-only media: settings, caches and saves are stored beside the program.
+The original game menu selects English, French, German, Italian or Dutch.
+The launcher's interface language is a separate setting. Confirm the game
+language explicitly before the opening sequence.
 
-Select your own **Tombi! (Europe) (En,Fr,De,It,Nl) (Rev 1)** BIN/CUE dump,
-boot executable **SCES_013.30**. Keep its BIN beside its CUE. Other releases
-are unsupported; do not rename their game IDs. The accepted raw data track
-has SHA-1 `2505d958b4439d04844cadd3f968fc7432a48e00`.
-No game image, retail BIOS or original artwork is included.
+## Features and controls
 
-The original game's language selector appears before the Sony introduction:
-English, French, German, Italian and Dutch. The launcher's own interface
-language does not select the game's language. The US disc is not required. Language selection waits for explicit confirmation.
+- **Widescreen** starts off. Enable it in Mods and select Fit to Window, which
+  follows resizing from 4:3 through 34:9, or fixed 16:9, 21:9 or 32:9.
+- **Seamless Loading** and **Geometry Optimization** start on. Native opening
+  overlays are included; unsupported requests retain the original behavior.
+- **Skip FMVs** is available as an optional mod for this disc group.
+- **HD Texture Packs** and **Bezel Artwork** start off and need compatible
+  external resources. No replacement artwork or game assets are supplied.
+- Controller mapping, display, volume, HQ SPU and Fast Forward use the shared
+  launcher. Digital mode accepts D-pad and left-stick directions; Hybrid
+  Controller is optional. Builds start in a normal window.
 
-## Controls and settings
+Keep all companion folders beside the executable. Settings are stored in
+`settings.toml`, mod choices under `mods/`, and Memory Cards under `saves/`.
+Exit the game before copying cards. Keep USA and European cards separate and
+preserve a backup of existing progress when replacing a build.
 
-Connect your controller before opening the launcher. Open Controllers to
-choose the device and remap buttons; keyboard bindings are shown there too.
-The default digital mode accepts both D-pad and left-stick directions.
-Analog mode uses the original game's analog input path. The optional Hybrid
-Controller mod switches digital/analog paths according to the active input;
-it does not turn every physical controller into a different device.
+The alpha has scoped opening/gameplay and widescreen validation; complete
+campaign content and every controller/audio combination are not certified.
+See [releases](https://github.com/mstan/TombaRecomp/releases) for the current
+validation scope. The [HD texture guide](docs/HD_TEXTURE_PACKS.md) describes
+compatible resource formats.
 
-Use the launcher Display and Audio settings for fullscreen, resolution,
-VSync (OFF by default), volume and sample rate. Hover over controls/mods for help. Settings
-apply when starting the game and are stored in `settings.toml`; mod choices
-are stored under `mods/`. Resource-dependent mods start disabled.
-
-Fast Forward is configured under controller shortcuts: 1.0x-5.0x in 0.1 steps,
-with Hold/Toggle modes. Audio also speeds up. The actual maximum depends on
-your PC. The legacy Select+L1 chord may also open the game's event menu;
-use a dedicated host shortcut when convenient.
-
-## PC enhancements
-
-- Widescreen: optional native-wide gameplay with Fit to Window (4:3 through
-  34:9), plus fixed 16:9, 21:9 and 32:9. It expands scenery and object culling
-  and anchors the HUD to the edges. Wider windows retain side bars. Enable it
-  in Mods; it is disabled by default. Campaign-wide content remains experimental.
-- Seamless Loading: enabled by default; prepares verified resident data from
-  your own disc and reduce area-loading interruptions. Unknown requests use
-  the original loader; original card operations are retained.
-- Geometry HLE: guarded native terrain processing; enabled by
-  default. Compared against original geometry in all five languages, with
-  limited scene coverage rather than a full-game guarantee.
-- Skip FMVs: skips videos through original movie completion. Its option can
-  preserve title/ending/credits. In-game scripted scenes are not FMVs.
-- High-quality SPU: enhanced processing where supported; improvements can
-  be subtle and unsupported voices retain the original path.
-- Perspective texture correction: partial PGXP support; not full PGXP
-  geometry precision and not widescreen.
-
-## Optional external artwork
-
-HD Texture Packs is OFF by default and supplies no HD graphics. In Mods, use
-Select Texture Pack Folder to validate an external EU pack, then enable it.
-Without a pack the status is No texture pack installed; a validated declared
-EU pack shows Installed in green. OpenGL displays matching PNG/JPEG/WebP replacements;
-unmatched textures keep original artwork. No complete HD pack is supplied.
-The optional dump setting captures texture usage and finishes PNG output on
-normal exit. See the texture format guide for naming requirements.
-
-Bezel Artwork accepts an external compatible image through its resource
-picker and draws around the original picture. No bezel artwork is supplied.
-These mods require files you install separately; they are disabled initially.
-
-## Files and saves
-
-Original Memory Cards are stored in `saves/` beside the executable. Back up
-this folder before replacing a build. No personal cards are shipped. Exit
-normally before copying cards. To bring existing EU saves across, copy your
-backed-up `card1.mcd` / `card2.mcd` while the game is closed; never overwrite
-your only copy. Keep US and EU cards separate.
-
-The runtime may create caches and diagnostic files in this same writable
-folder. They can contain paths to your files; review them before sharing.
-The development session logger/controller replay is not part of this package.
-
-## Known limits and test status
-
-Original PAL simulation remains approximately 50 Hz. Interpolated 100/120 FPS,
-independent normal-speed fast-forward music and
-fast-forward mute are deliberately omitted. A television reporting 100 Hz
-VRR does not establish 100 different game images.
-
-Regular gameplay, area changes and save/full-exit/restart/load were manually
-validated through Dwarf Village on the previous preserved EU build. Short
-five-language area/geometry regressions and feature tests also passed there.
-See the [release notes](https://github.com/mstan/TombaRecomp/releases) for
-the integrated build's validation scope and known limits.
-The entire campaign has not been validated. The owner playtested the integrated
-adaptive Widescreen build and reported that it plays well. The integrated build
-has sampled validation rather than a complete campaign replay.
-The added adaptive Widescreen integration has separate sampled English/German
-resize validation; the original RC4 acceptance does not qualify the new renderer
-across the whole campaign.
-
-## Credits and licensing
-
-Special thanks to [michaelm-afk](https://github.com/michaelm-afk), author of the
-European Tombi! RC4 implementation and original developer handoff, including
-the EU language profiles, Seamless Loading and native geometry support.
-
-Based on TombaRecomp by mstan, PSXRecomp and recomp-ui contributors, with
-psx_tomba used as a research reference. Original Tombi!/Tomba! belongs to its
-respective rights holders. OpenBIOS is supplied under its accompanying MIT
-notice; no Sony BIOS is bundled. See LICENSE and licenses/ for notices.
-The project/framework license is PolyForm Noncommercial 1.0.0; this package
-does not grant commercial distribution rights or rights to original game data.
-Do not redistribute game images, extracted assets or generated game source.
-
-## Controller and startup checks
-
-Disconnected selected controllers are checked independently of hotplug events;
-missing devices are retried at bounded intervals. A virtual-device regression
-passed. The owner also completed an RC2 Razer test without a disconnect; this
-is positive evidence, not a guarantee that every intermittent failure is gone.
-Startup measurements distinguish launcher first paint from guest boot, not the
-first visible gameplay frame. No disc/cache integrity checks were removed.
-Keep this build in a separate folder and copy cards only while both games
-are closed. Never replace the only copy of a card.
-
-RC3 hashes the same complete disc/cache bytes using the Windows system SHA-256
-provider where available, with the portable implementation retained as fallback.
-A short warm-start measurement improved from 2.39 to 1.07 seconds before guest
-execution; this is not a first-visible-game-frame timing guarantee.
-
-## Final candidate
-
-RC3 was accepted by the owner as visually good and reliable. RC4 additionally
-fixes HQ voice processing suppressing newly starting CD/XA movie audio: the
-complete original mix now passes through immediately. Fresh proof is required
-before enhanced voice processing resumes. The 180-ms stability buffer remains;
-no video delay, game-clock change or sequence-specific quest patch was added.
-The owner has now accepted RC4 in German and French, including Seamless Loading
-and correctly synchronized cutscenes. This is scoped manual acceptance, not
-certification of the entire campaign in all five languages.
-
-See [Steam setup](STEAM.md) to add the EXE as a non-Steam game. There is no
-unverified automatic Add to Steam button and no Steam data-file editing.
-Holding Circle to skip scripted scenes is deliberately not implemented.
-See [final report](FINAL_REPORT.md) for tests, scope and known limits.
+Thanks to **michaelm-afk** for the European integration, and to PSXRecomp,
+recomp-ui, OpenBIOS and the other contributors. Project and dependency notices
+are included in `LICENSE` and `licenses/`. No game image, retail BIOS or personal
+Memory Cards are included.

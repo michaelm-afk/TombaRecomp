@@ -1,7 +1,7 @@
-Tombi! (Europe, SCES-01331 Rev 1) - v0.22.0-alpha - Windows x64
+Tombi! (Europe, SCES-01331) - v0.22.0-alpha - Windows x64
 
 Extract into a writable folder and run TombiRecompEU2.exe.
-Choose your own original SCES-01331 Rev 1 CUE in Browse For Disc. Keep its BIN beside it.
+Choose your own original SCES-01331 CUE in Browse For Disc. Keep its BIN beside it.
 The complete data track is verified. Press PLAY and use the original language menu.
 English, Spanish, Portuguese, Swedish and Danish are supported.
 No PowerShell or installed development tools are required.
