@@ -1,5 +1,5 @@
 [game]
-name = "Ore! Tomba (Japan Prototype)"
+name = "Ore! Tomba (Japan)"
 region = "Japan (NTSC-J)"
 id = "SLPS-01144"
 players = 1
@@ -22,7 +22,7 @@ out_dir = "../build-jp/generated"
 strict = true
 
 [runtime]
-window_title = "Ore! Tomba SLPS-01144 Prototype"
+window_title = "Ore! Tomba"
 memcard_dir = "saves/SLPS-01144"
 overlay_cache = true
 disc_speed = "1x"

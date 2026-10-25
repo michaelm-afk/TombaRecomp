@@ -15,7 +15,7 @@ id = "resident-assets"
 name = "Seamless Loading"
 description = "Reduce loading screens with a verified Japanese resource profile. First launch prepares a local cache from your disc. Unsupported loads keep their original loading screen."
 group = "Performance"
-default_enabled = false
+default_enabled = true
 
 [[plugin]]
 feature = "resident-assets"

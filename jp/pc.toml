@@ -1,5 +1,5 @@
 [game]
-name = "Ore! Tomba (Japan RC2)"
+name = "Ore! Tomba (Japan)"
 region = "Japan (NTSC-J)"
 id = "SLPS-01144"
 players = 1
@@ -20,10 +20,10 @@ known_sha1 = ["c86baf702303e7e0963b99aff307b1c40e40478a"]
 seeds = "seeds/boot.txt"
 out_dir = "../build-jp/rc2/generated/boot"
 strict = true
-mod_function_entry_funcs = ["0x80016740", "0x800167C0", "0x8001B808", "0x80043A90"]
+mod_function_entry_funcs = ["0x80016740", "0x800167C0", "0x8001B808", "0x80043A90", "0x8005AF80", "0x80060598", "0x80057260"]
 
 [runtime]
-window_title = "Ore! Tomba SLPS-01144 RC2"
+window_title = "Ore! Tomba"
 memcard_dir = "saves/SLPS-01144"
 overlay_cache = true
 disc_speed = "1x"
@@ -58,3 +58,16 @@ multitap_analog = false
 
 [widescreen]
 offer = false
+adaptive_view = true
+native_wide = true
+sprite_tag_funcs = ["0x8005AF80"]
+sprite_anchor_addr = "0x1F800070"
+[widescreen.cull]
+guard_pixels = 32
+activation_guard_pixels = 32
+bias_sites = ["0x80021260", "0x8002137C", "0x800213D0", "0x80021450"]
+range_sites = ["0x80021268", "0x80021384", "0x800213D8", "0x80021458"]
+a1_sites = ["0x8002101C", "0x80021150", "0x800214E4"]
+auto_screen_x = true
+screen_h_imms = ["0xE0", "0xF1"]
+auto_backdrop = true

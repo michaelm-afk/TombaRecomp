@@ -7,8 +7,10 @@ set(PSX_SETUP_WIZARD OFF CACHE BOOL "No developer wizard" FORCE)
 set(PSXRECOMP_REQUIRE_GAME_C ON CACHE BOOL "Verified native boot required" FORCE)
 include("${PSXRECOMP_ROOT}/runtime/runtime.cmake")
 set(PSX_BUILTIN_MOD_ALLOWLIST psx.enhancement.pgxp psx.presentation.bezel psx.enhancement.hd-textures)
-option(TOMBA_JP_ENHANCEMENTS "Checked Japanese seamless-loader bindings" OFF)
-option(TOMBA_JP_WIDESCREEN "Experimental Japan shared renderer adapter" OFF)
+# The enhanced build carries every Japanese feature: Seamless Loading and FMV
+# Skip (checked loader/movie bindings) and Widescreen (checked shared-renderer
+# adapter, jp/widescreen_profile.py).
+option(TOMBA_JP_ENHANCEMENTS "Seamless Loading, FMV Skip and Widescreen" OFF)
 set(TOMBA_JP_GENERATED_DIR "${TOMBA_ROOT}/build-jp/generated" CACHE PATH "Japanese boot code directory")
 set(jp_mods NONE)
 if(TOMBA_JP_ENHANCEMENTS)
@@ -17,23 +19,12 @@ if(TOMBA_JP_ENHANCEMENTS)
     execute_process(COMMAND "${Python3_EXECUTABLE}" -I -B "${CMAKE_CURRENT_SOURCE_DIR}/seamless_profile.py" --output "${jp_generated}" COMMAND_ERROR_IS_FATAL ANY)
     execute_process(COMMAND "${Python3_EXECUTABLE}" -I -B "${CMAKE_CURRENT_SOURCE_DIR}/fmv_profile.py" --output "${jp_generated}" COMMAND_ERROR_IS_FATAL ANY)
     execute_process(COMMAND "${Python3_EXECUTABLE}" -I -B "${TOMBA_ROOT}/eu/seamless_catalog.py" --variant jp --output "${jp_generated}" COMMAND_ERROR_IS_FATAL ANY)
+    execute_process(COMMAND "${Python3_EXECUTABLE}" -I -B "${CMAKE_CURRENT_SOURCE_DIR}/widescreen_profile.py" --output "${jp_generated}" COMMAND_ERROR_IS_FATAL ANY)
     set(jp_mods "${CMAKE_CURRENT_SOURCE_DIR}/mods")
-endif()
-if(TOMBA_JP_WIDESCREEN)
-    find_package(Python3 REQUIRED COMPONENTS Interpreter)
-    execute_process(COMMAND "${Python3_EXECUTABLE}" -I -B "${CMAKE_CURRENT_SOURCE_DIR}/widescreen_profile.py" COMMAND_ERROR_IS_FATAL ANY)
-    if(TOMBA_JP_ENHANCEMENTS)
-        set(jp_mods "${jp_generated}/mods")
-        file(MAKE_DIRECTORY "${jp_mods}")
-        file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/mods/packages" DESTINATION "${jp_mods}")
-        file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/widescreen-mods/packages" DESTINATION "${jp_mods}")
-    else()
-        set(jp_mods "${CMAKE_CURRENT_SOURCE_DIR}/widescreen-mods")
-    endif()
 endif()
 psxrecomp_add_game_runtime(tomba-jp
     PGXP
-    WINDOW_TITLE "Ore! Tomba Japan Prototype"
+    WINDOW_TITLE "Ore! Tomba"
     DEFAULT_GAME_CONFIG_PATH "game.toml"
     VERSION_FILE "${TOMBA_ROOT}/VERSION"
     MAX_PLAYERS 1
@@ -44,14 +35,12 @@ psxrecomp_add_game_runtime(tomba-jp
     EXCLUDE_BUILTIN_MODS psx.enhancement.8mb-ram psx.enhancement.cd-speed
         psx.enhancement.fast-loading)
 set_target_properties(tomba-jp PROPERTIES OUTPUT_NAME "TombaRecompJP")
-if(TOMBA_JP_WIDESCREEN)
-    set(jp_ws "${TOMBA_ROOT}/build-jp/widescreen/generated/adapter")
+if(TOMBA_JP_ENHANCEMENTS)
+    set(jp_ws "${jp_generated}/adapter")
     target_sources(tomba-jp PRIVATE "${jp_ws}/eu_widescreen.c"
         "${jp_ws}/tomba_widescreen_plugin.c" "${jp_ws}/tomba_widescreen_residency.c"
         "${jp_ws}/tomba_widescreen_scripts.c" "${TOMBA_ROOT}/src/mods/tomba_dispatch.c")
     target_include_directories(tomba-jp PRIVATE "${jp_ws}" "${TOMBA_ROOT}/src/mods")
-endif()
-if(TOMBA_JP_ENHANCEMENTS)
     target_sources(tomba-jp PRIVATE "${jp_generated}/jp_loader.c" "${TOMBA_ROOT}/src/mods/tomba_seamless_prepare.cpp" "${TOMBA_ROOT}/src/mods/tomba_skip_fmv_plugin.c")
     target_include_directories(tomba-jp PRIVATE "${jp_generated}" "${TOMBA_ROOT}/eu/seamless" "${TOMBA_ROOT}/src/mods")
     set_source_files_properties("${TOMBA_ROOT}/src/mods/tomba_seamless_prepare.cpp" PROPERTIES COMPILE_DEFINITIONS "TOMBA_SEAMLESS_CATALOG_HEADER=\"${jp_generated}/eu_catalog.inc\";TOMBA_SEAMLESS_PACK_FORMAT=\"slps01144-gam-v1\"")

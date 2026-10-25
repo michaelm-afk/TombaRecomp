@@ -7,7 +7,7 @@ from aot_overlay_pipeline import Disc,check_disc
 spec=importlib.util.spec_from_file_location('eu2_ws_emitter',ROOT/'jp/widescreen_emitter.py')
 emitter=importlib.util.module_from_spec(spec);spec.loader.exec_module(emitter)
 shared=emitter.shared
-def generate(capture=False):
+def generate(capture=False,output=ROOT/'build-jp/rc2/generated'):
     contract=ROOT/'jp/widescreen-contract.json'
     disc=Disc(ROOT/'disc/jp/disc.cue')
     check_disc(dict(disc_hashes={'sha256':'fb5b8ea9e3bd328e88a6b8b8ecb0b493d0dda5a9b5f732a7a6e4c9b146d9cd2b'}),disc,ROOT/'disc/jp/disc.cue')
@@ -51,7 +51,7 @@ def generate(capture=False):
     assert json.loads(contract.read_text())==evidence,'Japan reviewed contract mismatch'
     # Fixed original boot-function fingerprint, checked again for every callback.
     offset=0x6740;identity={'jp':body[offset:offset+64]}
-    emitter.emit([row],code,offset,identity,ROOT/'build-jp/widescreen/generated/adapter',overlay_call='0x0C00AC78u',script_call='0x0C00848Bu')
+    emitter.emit([row],code,offset,identity,Path(output)/'adapter',overlay_call='0x0C00AC78u',script_call='0x0C00848Bu')
     print('PASS Japan original MAIN, HUD callgraph, area-0/1 hook contracts; shared renderer policy',flush=True)
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--capture-contract',action='store_true');generate(p.parse_args().capture_contract)
+    p=argparse.ArgumentParser();p.add_argument('--capture-contract',action='store_true');p.add_argument('--output',type=Path,default=ROOT/'build-jp/rc2/generated');a=p.parse_args();generate(a.capture_contract,a.output)
