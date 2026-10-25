@@ -8,7 +8,7 @@ ALLOWED.update(['quit','video_info','spu_status','spu_voices','geom_correction',
 
 def main():
  p=argparse.ArgumentParser();p.add_argument('--name',required=True);p.add_argument('--opengl',action='store_true');p.add_argument('--port',type=int,default=4516);p.add_argument('--build-dir',type=Path,default=ROOT/'build-jp/full/qa/native');p.add_argument('--config',type=Path,default=ROOT/'jp/game.toml');p.add_argument('--pgxp',action='store_true');p.add_argument('--seamless',choices=['on','off','original']);p.add_argument('--try-roundtrip',action='store_true');p.add_argument('--fmv-skip',action='store_true');p.add_argument('--trace',action='store_true')
- p.add_argument('--profile-defaults',action='store_true');p.add_argument('--require-hq',action='store_true');p.add_argument('--view',choices=['off','Fit','16:9','21:9','32:9'],default='off');p.add_argument('--audio-diagnostics',action='store_true');p.add_argument('--require-bgm',action='store_true');a=p.parse_args()
+ p.add_argument('--profile-defaults',action='store_true');p.add_argument('--require-hq',action='store_true');p.add_argument('--view',choices=['off','Fit','16:9','21:9','32:9'],default='off');p.add_argument('--audio-diagnostics',action='store_true');p.add_argument('--require-bgm',action='store_true');p.add_argument('--stick-check',action='store_true');a=p.parse_args()
  build=a.build_dir.resolve();assert build.is_relative_to(ROOT/'build-jp'), 'Private Japan QA build required'
  assert Path(a.name).name==a.name
  out=ROOT/'build-jp'/a.name;out.mkdir(exist_ok=False);probe=Probe(out,a.port)
@@ -60,6 +60,20 @@ def main():
    assert after['position'][0]>before['position'][0]+5
    probe.drive([step(['cross'],4),step([],8)]);jump=snapshot('jump-air');assert jump['state'][1]==2 and jump['position'][1]<after['position'][1]-1
    probe.drive([step([],80)]);land=snapshot('jump-landed');assert land['state'][0]==1 and land['state'][1]!=2
+   stick=None
+   if a.stick_check:
+    # The original Japanese driver reads a digital pad only; the host folds
+    # the left stick onto the D-pad. Push the stick (no D-pad) at the host
+    # input layer, the same path a physical controller takes.
+    def host_input(**fields):
+     with socket.create_connection(('127.0.0.1',a.port),timeout=3) as s:
+      s.sendall((json.dumps(dict(id=1,cmd='set_input',layer='host',buttons='0xFFFF',**fields))+'\n').encode())
+      assert json.loads(s.makefile('rb').readline()).get('ok')
+    start=probe.rpc('frame')['frame'];host_input(lx=255)
+    probe.wait_frame(start+40);host_input()
+    probe.drive([step([],30)]);moved=snapshot('stick-right')
+    stick=dict(before=land['position'][0],after=moved['position'][0])
+    assert moved['position'][0]>land['position'][0]+5,stick
    audio_samples=[]
    if a.audio_diagnostics or a.require_bgm:
     # Quiet normal gameplay after transient jumping/landing effects expire.
@@ -91,16 +105,28 @@ def main():
    roundtrip=None
    if a.try_roundtrip:
     origin=land['current_area_section'];samples=[];crossed=None;returned=None
+    # A villager may start an ordinary conversation on the way; finish it with
+    # the same Circle presses as the opening dialogs (bounded, no state writes).
+    def finish_dialog(label):
+     if player()['state'][0]!=5:return
+     probe.drive([step([],60)]);samples.append(snapshot(label+'-dialog'))
+     for i in range(60):
+      probe.drive([step(['circle'],4),step([],35)])
+      if player()['state'][0]==1:break
     for i in range(12):
      probe.drive([step(['right','cross'],24),step(['right'],56),step([],20)])
      s=snapshot('boundary-out-'+str(i));samples.append(s)
      if s['current_area_section']!=origin and s['state'][0]==1:
       crossed=s;break
+     finish_dialog('boundary-out-'+str(i))
     # The ordinary first-house entrance needs Up at its door; do not force
     # an area, quest, position or cutscene. This is one bounded route only.
     if not crossed and 950<=player()['position'][0]<=1100:
-     for i in range(3):
-      probe.drive([step(['right'],10),step(['up'],30),step([],180)])
+     for i in range(12):
+      finish_dialog('house-door-'+str(i))
+      # Up in place first, then small steps right: the door is a narrow
+      # trigger next to where the walk stops.
+      probe.drive(([step(['right'],4),step([],10)] if i else [])+[step(['up'],30),step([],180)])
       s=snapshot('house-door-'+str(i));samples.append(s)
       if s['current_area_section']!=origin:
        crossed=s;break
@@ -129,7 +155,7 @@ def main():
    if a.seamless=='original':assert counters.get('tomba.jp.seamless.test_original',0)>0,counters
    if a.pgxp:assert precision['pgxp']['dataflow_hit']>0 and precision['pgxp']['tri_precise']>0 and precision['perspective_triangles']>0,precision
    report=dict(result='passed',fresh_original_new_game=True,controller_only=True,artificial_game_state=False,japanese_dialog_framebuffer=True,walk_before=before['position'],walk_after=after['position'],jump=jump['position'],landed=land['position'],native_overlay_dispatches=overlay['dispatch_native'],native_functions_registered=overlay['registered'],nonzero_audio_frames=audio['nonzero_frames'],renderer=video['backend'],gl=video['gl'],desktop_automation=False,area_transition=False,save_load=False)
-   report.update(profile_defaults=a.profile_defaults,require_hq=a.require_hq,widescreen=a.view,pgxp_enabled=a.pgxp,precision=precision,seamless=a.seamless,mod_counters=counters,roundtrip=roundtrip,fmv_skip=a.fmv_skip)
+   report.update(profile_defaults=a.profile_defaults,require_hq=a.require_hq,widescreen=a.view,pgxp_enabled=a.pgxp,precision=precision,seamless=a.seamless,mod_counters=counters,roundtrip=roundtrip,stick=stick,fmv_skip=a.fmv_skip)
    if audio_samples:report['bgm_diagnostics']=audio_samples
    if a.fmv_skip:
     totals=struct.unpack('<22H',probe.ram(0x80071d3c,44));assert totals[1]==3,totals
