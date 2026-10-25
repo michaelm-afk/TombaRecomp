@@ -39,10 +39,8 @@ file(GLOB TOMBA_MOD_PLUGIN_SOURCES CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/src/mods/*.cpp")
 set(TOMBA_PRELOADED_MODS "${CMAKE_CURRENT_SOURCE_DIR}/mods/preloaded")
 # Seamless Loading replaces the framework's CD Speed and host-paced Fast
-# Loading on Tomba, so only the remaining framework builtins are staged.
-set(PSX_BUILTIN_MOD_ALLOWLIST
-    psx.enhancement.pgxp
-    psx.presentation.bezel)
+# Loading on Tomba, and 8 MB RAM has no use here; every other framework builtin
+# is staged (an exclude list, so new framework mods reach Tomba by default).
 
 psxrecomp_add_game_runtime(psx-runtime
     # ENABLE_NETPLAY_IF_PRESENT
@@ -58,6 +56,7 @@ psxrecomp_add_game_runtime(psx-runtime
     # Tomba provides this generic renderer plugin through its own package so
     # the launcher has one HD pack feature and title-specific instructions.
     EXCLUDE_BUILTIN_MODS psx.enhancement.hd-textures
+        psx.enhancement.8mb-ram psx.enhancement.cd-speed psx.enhancement.fast-loading
 )
 
 target_sources(psx-runtime PRIVATE ${TOMBA_MOD_PLUGIN_SOURCES})

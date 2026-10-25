@@ -1,4 +1,4 @@
-Tombi! (Europe, SCES-01331) - v0.22.0-alpha - Windows x64
+Tombi! (Europe, SCES-01331) - v0.23.0-alpha - Windows x64
 
 Extract into a writable folder and run TombiRecompEU2.exe.
 Choose your own original SCES-01331 CUE in Browse For Disc. Keep its BIN beside it.

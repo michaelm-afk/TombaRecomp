@@ -1,5 +1,5 @@
 """Verify original Japan input and stage only an isolated development copy."""
-import argparse,hashlib,json,shutil,sys
+import argparse,hashlib,json,os,shutil,sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 sys.path[:0]=[str(ROOT/'psxrecomp/tools')]
@@ -15,7 +15,10 @@ def main():
  assert hashlib.file_digest(source.open('rb'),'sha256').hexdigest()==SHA256,'Unsupported original revision'
  home=ROOT/'disc/jp';home.mkdir(parents=True,exist_ok=True);target=home/'disc.bin'
  if not target.exists():
-  with source.open('rb') as src,target.open('xb') as dst:shutil.copyfileobj(src,dst)
+  # Same volume (tools/build_regions.py stages under disc/): link, do not copy.
+  try:os.link(source,target)
+  except OSError:
+   with source.open('rb') as src,target.open('xb') as dst:shutil.copyfileobj(src,dst)
  assert hashlib.file_digest(target.open('rb'),'sha256').hexdigest()==SHA256
  cue='FILE "disc.bin" BINARY\n  TRACK 01 MODE2/2352\n    INDEX 01 00:00:00\n'
  f=home/'disc.cue'

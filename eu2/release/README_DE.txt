@@ -1,4 +1,4 @@
-Tombi! (Europa, SCES-01331) - v0.22.0-alpha - Windows x64
+Tombi! (Europa, SCES-01331) - v0.23.0-alpha - Windows x64
 
 ZIP in einen beschreibbaren Ordner entpacken, TombiRecompEU2.exe starten.
 Im Launcher unter Browse For Disc die eigene SCES-01331-CUE auswaehlen.

@@ -6,7 +6,7 @@ sys.path.insert(0,str(ROOT/'eu'))
 from toolchain import executable
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('--disc',type=Path,required=True);p.add_argument('--player',action='store_true');p.add_argument('--jobs',type=int,default=4);p.add_argument('--build-dir',type=Path);p.add_argument('--enhancements',action='store_true');p.add_argument('--webp-source',type=Path,default=ROOT/'build-eu2/native/_deps/psx_libwebp-src');a=p.parse_args()
+ p=argparse.ArgumentParser();p.add_argument('--disc',type=Path,required=True);p.add_argument('--player',action='store_true');p.add_argument('--jobs',type=int,default=4);p.add_argument('--build-dir',type=Path);p.add_argument('--enhancements',action='store_true');p.add_argument('--webp-source',type=Path,help='Pinned libwebp source tree; default: fetched by CMake');a=p.parse_args()
  profile=ROOT/('jp/pc.toml' if a.enhancements else 'jp/game.toml')
  generated=(profile.parent/tomllib.loads(profile.read_text())['recompiler']['out_dir']).resolve()
  build=(a.build_dir or ROOT/'build-jp'/('rc2' if a.enhancements else 'full')/('player' if a.player else 'qa')/'native').resolve();assert build.is_relative_to(ROOT);build.parent.mkdir(parents=True,exist_ok=True)
@@ -22,7 +22,7 @@ def main():
    '-DCMAKE_C_COMPILER_LAUNCHER=','-DCMAKE_CXX_COMPILER_LAUNCHER=','-DCMAKE_C_FLAGS='+mapping,'-DCMAKE_CXX_FLAGS='+mapping,
    '-DPSX_DEBUG_TOOLS='+('OFF' if a.player else 'ON'),'-DPSX_PGXP_VARIANT=OFF','-DPSXRECOMP_BIOS_STEMS=OpenBIOS','-DBUILD_TESTING=OFF',
    '-DTOMBA_JP_ENHANCEMENTS='+('ON' if a.enhancements else 'OFF'),'-DTOMBA_JP_GENERATED_DIR='+str(generated),
-   '-DPython3_EXECUTABLE='+sys.executable,'-DFETCHCONTENT_SOURCE_DIR_PSX_LIBWEBP='+str(a.webp_source.resolve())]),
+   '-DPython3_EXECUTABLE='+sys.executable,*(['-DFETCHCONTENT_SOURCE_DIR_PSX_LIBWEBP='+str(a.webp_source.resolve())] if a.webp_source else [])]),
   ('build',[cmake,'--build',str(build),'--target','tomba-jp','--parallel',str(a.jobs)])]
  for label,cmd in commands:
   print(label,flush=True)

@@ -36,8 +36,50 @@ def check_fmv_metadata(path: Path) -> list[str]:
     return errors
 
 
-def main() -> int:
+# Each shipped config must generate the same overlay code as the config its
+# audited native cache was built from: tools/package_regions.py refuses a
+# cache whose tag (psxrecomp overlay_codegen_config_hash) differs, and the
+# runtime would otherwise run the release with different mod entry hooks.
+CODEGEN_PAIRS = (
+    ("game.toml", "packaging/release/game.toml"),
+    ("eu/seamless/game.toml", "eu/release/game.toml"),
+    ("eu2/pc.toml", "eu2/release/game.toml"),
+    ("eu2/rev1/pc.toml", "eu2/rev1/release/game.toml"),
+    ("jp/pc.toml", "jp/release/game.toml"),
+)
+
+
+def codegen_settings(data: dict) -> dict:
+    """The TOML inputs of overlay_codegen_config_hash (config_loader.cpp)."""
+    settings = {
+        "mod_function_entry_funcs":
+            data.get("recompiler", {}).get("mod_function_entry_funcs", []),
+        "widescreen": data.get("widescreen", {}),
+        "netplay_local_viewport":
+            {k: v for k, v in data.get("netplay", {}).items() if "viewport" in k},
+    }
+    for key, value in data.items():
+        if key.startswith(("mod_immediate", "mod_instruction")):
+            settings[key] = value
+    return settings
+
+
+def check_codegen_parity() -> list[str]:
     errors = []
+    for dev, release in CODEGEN_PAIRS:
+        if not (ROOT / dev).exists() or not (ROOT / release).exists():
+            errors.append(f"codegen pair missing: {dev} / {release}")
+            continue
+        a = codegen_settings(load_toml(ROOT / dev))
+        b = codegen_settings(load_toml(ROOT / release))
+        for key in sorted(set(a) | set(b)):
+            if a.get(key) != b.get(key):
+                errors.append(f"{release} differs from {dev} in codegen setting {key}")
+    return errors
+
+
+def main() -> int:
+    errors = check_codegen_parity()
     for rel in ("game.toml", "packaging/release/game.toml"):
         errors.extend(check_fmv_metadata(ROOT / rel))
         data = load_toml(ROOT / rel)

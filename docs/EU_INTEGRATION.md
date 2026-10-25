@@ -30,9 +30,9 @@ bin directory. Keep temporary files, compiler caches and build outputs on the
 project's bulk-output drive.
 
 ```powershell
-python -I -B tools/build_regions.py --region both --plan
-python -I -B tools/build_regions.py --region both --check
-python -I -B tools/build_regions.py --region both --us-disc 'G:/owned/Tomba.cue' --eu-disc 'G:/owned/Tombi.cue' --jobs 3
+python -I -B tools/build_regions.py --region us eu --plan
+python -I -B tools/build_regions.py --region us eu --check
+python -I -B tools/build_regions.py --region us eu --us-disc 'G:/owned/Tomba.cue' --eu-disc 'G:/owned/Tombi.cue' --jobs 3
 ```
 
 `--region eu2` selects the new SCES-01331 target and accepts `--eu2-disc`.
