@@ -8,21 +8,18 @@ records. This page covers only what changed.
 ## Cover gallery
 
 The launcher shows the bundled box art (`eu/launcher_assets/img/boxart.tga`,
-from the libretro PS1 box-art set) until you choose your own covers.
-**Browse Covers** opens a folder picker for the verified disc; the launcher reads
-PNG, JPG, JPEG and TGA files from that folder without copying or changing them.
+from the libretro PS1 box-art set) until you add your own covers. Put PNG, JPG,
+JPEG or TGA files in `artwork/<serial>/` beside the launcher (for example
+`artwork/SCES-01330/`); the launcher reads them without copying or changing them.
 Files are ordered front, back, disc, then by name; arrows step through them and a
-click enlarges the current one. The choice is saved per disc serial in
-`artwork/<serial>/cover-folder.txt` beside the launcher, relative when the folder
-is inside the installation. Cover scans and manuals are never part of this
+click enlarges the current one. Cover scans and manuals are never part of this
 repository or a release package.
 
 ## Quick controls
 
 EU1 and EU2 set `[launcher] quick_controls = true`. The dashboard then shows a
 **Quick Mods** card next to the memory cards, listing Widescreen and Seamless
-Loading (their manifests set `quick = true`), and a **Quick Settings** card
-with VSync, Internal resolution, Screen mode and Screen model. Any listed mod can
+Loading (their manifests set `quick = true`). Any listed mod can
 be added or removed with **Show in Quick Mods** on the Mods page.
 
 ## Wait for Language Confirmation (SCES-01331)

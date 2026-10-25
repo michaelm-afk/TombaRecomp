@@ -43,5 +43,5 @@ default_mode = "digital"
 offer = false
 
 [launcher]
-# Quick Mods / Quick Settings cards beside the memory cards (recomp-ui).
+# Quick Mods card beside the memory cards (recomp-ui).
 quick_controls = true
