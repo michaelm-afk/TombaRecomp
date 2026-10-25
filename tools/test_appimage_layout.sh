@@ -68,9 +68,15 @@ test -f "$tmp/state/game.toml"
 test -f "$tmp/state/input.ini"
 test -f "$tmp/state/bios/openbios.bin"
 test -f "$tmp/state/mods/bundled/tomba.experimental.seamless/0.1.0/manifest.toml"
-# CD Speed and host-paced Fast Loading are excluded (PSX_BUILTIN_MOD_ALLOWLIST).
+# CD Speed and host-paced Fast Loading are excluded (EXCLUDE_BUILTIN_MODS).
 test ! -e "$tmp/state/mods/bundled/psx.enhancement.cd-speed"
 test ! -e "$tmp/state/mods/bundled/psx.enhancement.fast-loading"
+# The player's picture/sound/rewind controls live only in these framework mods.
+for id in psx.enhancement.crt-filter psx.enhancement.image-filtering \
+          psx.enhancement.internal-resolution psx.enhancement.enhanced-audio \
+          psx.feature.rewind; do
+    test -d "$tmp/state/mods/bundled/$id"
+done
 test ! -e "$tmp/state/mods/bundled/tomba.enhancement.fast-loading"
 test ! -e "$tmp/state/mods/bundled/tomba.enhancement.frame-interpolation"
 test ! -e "$appdir/settings.toml"

@@ -6,7 +6,6 @@ set(RECOMP_UI_ROOT "${TOMBA_ROOT}/recomp-ui" CACHE PATH "Shared launcher")
 set(PSX_SETUP_WIZARD OFF CACHE BOOL "No developer wizard" FORCE)
 set(PSXRECOMP_REQUIRE_GAME_C ON CACHE BOOL "Verified native boot required" FORCE)
 include("${PSXRECOMP_ROOT}/runtime/runtime.cmake")
-set(PSX_BUILTIN_MOD_ALLOWLIST psx.enhancement.pgxp psx.presentation.bezel psx.enhancement.hd-textures)
 # The enhanced build carries every Japanese feature: Seamless Loading and FMV
 # Skip (checked loader/movie bindings) and Widescreen (checked shared-renderer
 # adapter, jp/widescreen_profile.py).

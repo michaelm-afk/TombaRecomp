@@ -12,7 +12,7 @@ It is omitted from release packages pending a validated replacement.
 Fast Loading is hidden while Seamless Loading covers loads; it still appears
 for a player who already enabled it, so it can be turned off. The framework's
 CD Speed and host-paced Fast Loading packages are not staged for Tomba
-(`PSX_BUILTIN_MOD_ALLOWLIST` in `CMakeLists.txt`).
+(`EXCLUDE_BUILTIN_MODS` in `CMakeLists.txt`); every other framework mod is.
 
 Seamless Loading retains its original `tomba.experimental.seamless` package ID
 and `resident-assets` feature ID so existing player selections still apply.
