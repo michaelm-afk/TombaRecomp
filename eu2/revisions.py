@@ -52,7 +52,9 @@ def stage_mods():
     shutil.copytree(ROOT/'eu2/mods', target, dirs_exist_ok=True)
     for manifest in target.glob('packages/*/*/manifest.toml'):
         if 'tombi.enhancement.language-confirmation' in manifest.parts and active()!='original':
-            manifest.unlink()
+            # Drop the whole package: a version folder without its manifest
+            # fails the staged mod catalog check.
+            shutil.rmtree(manifest.parent.parent)
             continue # The original selector binding has not been verified for Rev 1.
         text = manifest.read_text(encoding='utf-8')
         text = text.replace(PROFILES['original']['sha256'], PROFILES[active()]['sha256'])
