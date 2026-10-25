@@ -1,4 +1,4 @@
-# Japan native port candidate (SLPS-01144)
+# Japan native port (SLPS-01144)
 
 Uses the existing framework and launcher, with no US/EU runtime source changes.
 Original raw track: 289430064 bytes, SHA256
@@ -43,28 +43,30 @@ Add `--pgxp` for the validated precision path. The default checks PGXP off.
 checks all four real launcher callbacks and production Japan/USA boot without
 developer tools. `jp/test_codec.py` needs Unicorn 2.1.4 and compares 638 assets
 against the Japanese decoder's original MIPS instructions, not another port.
-Saving/loading was confirmed manually on the prototype. Area transition/return
-and final-candidate physical-device/visible-UI acceptance remain manual.
+`--view 16:9` (enhanced build) checks the widescreen renderer, `--stick-check`
+checks left-stick movement through the host input layer, and `--try-roundtrip`
+attempts the first-house transition (a bounded route; manual play is decisive).
+Saving/loading was confirmed manually on the prototype; the owner played and
+accepted the enhanced build on 2026-10-24.
 
 The new common package reuses both exact EU-RC2 executable files. The generic
 regional catalog supports all four profiles; no launcher UI fork is needed.
-Japan config/cards live under backends/SLPS-01144. See TESTANLEITUNG_DE.md for
-evidence levels and owner-run save/load acceptance. Launcher localization remains
+Japan config/cards live under backends/SLPS-01144. Launcher localization remains
 a separate task. `jp/rebuild.py --handoff <directory> --name <new-folder>`
 reconstructs the recorded upstream bases and patches, rebuilds the compiler and
 Japanese player, then re-audits reused native pairs against freshly extracted
 original bytes. See PORT_STATUS_EN.md for deferred regional bindings.
 The staging script expects the independently verified EU RC2 base, new USA host
 and original-disc-audited USA cache; it never uses a played installation.
-No publication, push or PR.
 
-## RC2 enhancements
+## Enhanced build (release)
 
 Use `jp/build.py --enhancements --disc <cue>` and the corresponding `--player`
-build. RC2 uses `jp/pc.toml`, `build-jp/rc2` and a separate audited native tag.
-Seamless Loading and FMV Skip are optional, default OFF. The shared EU loader
-and FMV plugin use checked Japanese profiles; see RC2_MOD_REVIEW_EN.md.
-For the isolated RC2 rebuild add `--enhancements` to `jp/rebuild.py`.
+build, with `jp/build_aot.py --config jp/pc.toml --all-areas --flavor 2`.
+It uses `jp/pc.toml`, `build-jp/rc2` and a separate audited native tag, and
+carries Seamless Loading (default on, like USA), FMV Skip (default off) and
+Widescreen (default off). The shared EU loader, FMV plugin and widescreen
+renderer use checked Japanese profiles; see FEATURES_EN.md.
+For the isolated rebuild add `--enhancements` to `jp/rebuild.py`.
 The owner save before the hut was located and copied privately. Original hashes
-are unchanged. Automatic original-menu navigation did not establish a saved-game
-roundtrip; follow MANUAL_RELEASE_TESTS_DE.md, walking left for the cutscene.
+are unchanged.

@@ -17,6 +17,12 @@ The local psx_tomba reference is pinned at
 | Hybrid Controller | Shared policy, different original input driver | Hidden; adapter and original-menu/analog acceptance needed |
 | Widescreen | Shared renderer, unverified Japanese camera/HUD contracts | Hidden; no new renderer work begun |
 
+Status since 2026-10-24 (this review records RC2 as delivered): the enhanced
+build now also carries Widescreen, Seamless Loading defaults on like USA after
+the owner's playtest, and Hybrid Controller is not needed because the digital
+pad's stick fold already moves Tomba. Geometry Optimization is still open. See
+`FEATURES_EN.md` and `PORT_STATUS_EN.md`.
+
 ## Seamless profile
 
 `jp/seamless_profile.py` generates a regional derivative of the existing

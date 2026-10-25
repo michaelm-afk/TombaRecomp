@@ -24,9 +24,10 @@ The US and European feature sets are retained. EU2 still hides unverified FMV
 skip and widescreen. Japan provides normal graphics/audio, digital controller,
 native boot and guarded overlays with interpreter fallback, and optional PGXP.
 HD textures require a matching external pack; bezel artwork requires an image.
-These remain off initially. RC2 adds optional Seamless Loading and FMV Skip.
-Both are off initially; enable Seamless Loading under Mods for transition testing.
-Japanese Geometry Optimization, Hybrid Controller and Widescreen remain hidden.
+These remain off initially. Japan also offers Seamless Loading (on by default,
+like USA), FMV Skip and Widescreen (both off by default) under Mods. The left
+stick and the D-pad both move Tomba, so no Hybrid Controller mod is needed.
+Japanese Geometry Optimization is not available yet; the original code runs.
 Fast Forward and normal audio/video settings use the shared framework.
 
 Japan starts with native resolution, windowed OpenGL, VSync off, original digital
@@ -36,9 +37,7 @@ Original NTSC-J timing and Japanese text resources are preserved. English words
 on the original Japanese title menu are intentional. Confirm Japanese dialogs
 with Circle; Cross jumps in gameplay.
 
-See `JAPAN_HANDOFF_EN.md` for verified scope and deferred bindings. Confirm an
-ordinary Japanese area transition and return on a new or copied card before
-treating this candidate as fully accepted. A whole-game playthrough is not
-claimed. OpenBIOS is included under its license; Sony BIOS and original game
+See `PORT_STATUS_EN.md` for verified scope and deferred bindings. A whole-game
+playthrough is not claimed. OpenBIOS is included under its license; Sony BIOS and original game
 resources are not included. No development tools need to be installed to play;
 the bundled overlay fallback tools are runtime dependencies.

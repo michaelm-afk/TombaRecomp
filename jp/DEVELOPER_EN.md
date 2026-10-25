@@ -35,19 +35,22 @@ python -I -B jp/build.py --enhancements --player --disc "path/to/Japan.cue" --we
 The scripts check full original-disc identity and original boot/overlay bytes.
 They build separate private QA and production hosts; old prototype output paths
 remain untouched. The production build has no debug server. Existing shared
-runtime PGXP support is selected with the wrapper's PGXP keyword. Japanese geometry, hybrid and widescreen remain unregistered. The shared
-Seamless and FMV implementations use verified Japanese profiles; both default off.
+runtime PGXP support is selected with the wrapper's PGXP keyword. The shared
+Seamless, FMV and widescreen implementations use verified Japanese profiles in
+the enhanced build; Seamless defaults on (like USA), FMV Skip and Widescreen off.
+Japanese geometry HLE is not registered yet (beads-eio.4.35); Hybrid Controller
+is not needed because the digital pad's stick fold moves Tomba.
 
 `jp/overlay-contracts.json` explains the 14 byte-checked data tails needed to
 prevent native discovery from treating data as code. The remaining original
-code/data and safe fallback are preserved. See `JAPAN_HANDOFF_EN.md` for exact
+code/data and safe fallback are preserved. See `PORT_STATUS_EN.md` for exact
 regional blockers and the limits of the evidence. 24 translated overlay files
 and successful first-area play do not establish completion of the whole game.
 
 ## European and USA backends / combined staging
 
 The previous EU build and test workflow remains `europe/build.py` and is
-documented in `EU_DEVELOPER_EN.md`. Reuse a pristine audited EU RC2 stage at
+documented in `europe/DEVELOPER.md`. Reuse a pristine audited EU RC2 stage at
 `dist/TombiRecomp-Europe-Windows-x64-RC2`; do not reuse a played installation.
 Earlier isolated EU rebuild and all-ten-language results are retained rather
 than repeated for unchanged executable bytes.
@@ -98,9 +101,9 @@ previous evidence, new automated checks and owner-confirmed prototype tests.
 
 Use `europe/audit.py --kind regional` for the player directory and ZIP, and
 `--kind developer` for this handoff. Both archives must match their full staged
-file manifests and pass independent private-path/card/disc scans. Refer to
-`MANUAL_TESTS_DE.md` for the remaining area-transition/return and final-device
-acceptance. Saving/loading on the earlier prototype was already owner-confirmed.
+file manifests and pass independent private-path/card/disc scans. The owner
+played and accepted the enhanced build on 2026-10-24; saving/loading on the
+earlier prototype was already owner-confirmed.
 
 ## RC2 regional implementation and targeted tests
 
