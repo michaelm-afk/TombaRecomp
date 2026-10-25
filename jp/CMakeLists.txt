@@ -66,6 +66,6 @@ if(TOMBA_JP_ENHANCEMENTS)
         target_compile_definitions(tomba-jp-prepare-tests PRIVATE TOMBA_SEAMLESS_CATALOG_HEADER="${jp_generated}/eu_catalog.inc")
     endif()
 endif()
-
-include("${TOMBA_ROOT}/launcher_entry/windows_paths.cmake")
-tombi_windows_paths(tomba-jp)
+# The shared launcher already embeds the UTF-8 application manifest
+# (recomp-ui windows/recomp_utf8.manifest); a second manifest resource would
+# collide with it at link time.
