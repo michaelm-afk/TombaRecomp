@@ -77,7 +77,7 @@ Important files:
 ## Status
 
 The game is playable from BIOS boot through gameplay. Latest release:
-**v0.22.0-alpha**, with separate USA, SCES-01330 Rev 1 and SCES-01331 Rev 1 Windows builds.
+**v0.23.0-alpha**, with separate USA, SCES-01330 Rev 1, SCES-01331 Rev 1 and Japan (SLPS-01144) Windows builds.
 
 | Area | State |
 |---|---|

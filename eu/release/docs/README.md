@@ -1,4 +1,4 @@
-# Tombi! (Europe, SCES-01330 Rev 1) - v0.22.0-alpha
+# Tombi! (Europe, SCES-01330 Rev 1) - v0.23.0-alpha
 
 This Windows x64 build supports **Tombi! (Europe) (En,Fr,De,It,Nl) (Rev 1)**:
 SCES-01330, raw BIN SHA-1 `2505d958b4439d04844cadd3f968fc7432a48e00`.
