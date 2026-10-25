@@ -13,11 +13,18 @@ Use Windows Clang/CMake/Ninja on PATH (or TOMBI_TOOLCHAIN_BIN) and Python 3.11+.
 The existing `build-eu-tools/psxrecomp-game.exe` must match the framework checkout.
 The player uses the existing OpenBIOS source/backend workflow.
 
+Release builds and packages use the same entry points as every other region:
+
 ```
-python -I -B jp/build.py --disc path/to/Japan.cue
-python -I -B jp/build_aot.py --all-areas --flavor 2 --work-dir build-jp/full/aot-pgxp
-python -I -B jp/build.py --player --disc path/to/Japan.cue
-python -I -B jp/stage_regional.py
+python -I -B tools/build_regions.py --region jp --jp-disc path/to/Japan.cue
+python -I -B tools/package_regions.py --region jp
+```
+
+The steps it runs (also usable directly for development):
+
+```
+python -I -B jp/build.py --enhancements --player --disc path/to/Japan.cue
+python -I -B jp/build_aot.py --config jp/pc.toml --all-areas --flavor 2 --work-dir build-jp/rc2/aot --destination build-jp/rc2/player/native
 ```
 
 `build.py --webp-source <directory>` accepts a pinned libwebp source tree;

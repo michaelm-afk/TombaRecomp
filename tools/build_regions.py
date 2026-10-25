@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Build Windows US/EU candidates and audited AOT caches, serially.
+"""Build Windows USA/EU1/EU2/Japan candidates and audited AOT caches, serially.
+
+One entry point for every region; package with tools/package_regions.py.
 
 Use --plan to inspect commands, or --check to validate inputs without building.
 This does not publish a release or certify gameplay/feature parity.
@@ -24,7 +26,10 @@ DISCS = {
            '2505d958b4439d04844cadd3f968fc7432a48e00', 'SCES-01330'),
     'eu2': ('Tombi! (Europe) (En,Es,Pt,Sv,Da)', 492306528,
             '684dbf0ad03f872511046d40d3cc85b17d839dbf', 'SCES-01331'),
+    'jp': ('Ore! Tomba (Japan)', 289430064,
+           'c86baf702303e7e0963b99aff307b1c40e40478a', 'SLPS-01144'),
 }
+REGIONS = ('us', 'eu', 'eu2', 'jp')
 
 
 def data_track(path: Path) -> Path:
@@ -79,7 +84,7 @@ def stage_disc(region: str, source: Path) -> None:
 
 def build_plan(regions, jobs, tool, bash, scope, qa=False, eu2_revision='original'):
     python = [sys.executable, '-I', '-B']
-    compiler = ('clang.exe', 'clang++.exe') if any(r in regions for r in ('eu','eu2')) else ('gcc.exe', 'g++.exe')
+    compiler = ('clang.exe', 'clang++.exe') if any(r in regions for r in ('eu','eu2','jp')) else ('gcc.exe', 'g++.exe')
     cmake = tool('cmake.exe')
     common = ['-G', 'Ninja', '-DCMAKE_BUILD_TYPE=Release',
               '-DCMAKE_C_COMPILER=' + tool(compiler[0]),
@@ -143,21 +148,35 @@ def build_plan(regions, jobs, tool, bash, scope, qa=False, eu2_revision='origina
         final=[*python, 'eu2/build_release.py', '--jobs', jobs, '--build-dir', native]
         if qa:final+=['--debug-tools']
         add('EU2 private QA executable' if qa else 'EU2 release executable', final)
+    if 'jp' in regions:
+        # jp/build.py verifies and extracts the disc, generates the boot code
+        # and builds the enhanced backend (Seamless Loading, FMV Skip,
+        # Widescreen). The native area cache follows the built runtime.
+        native = 'build-jp/rc2/' + ('qa' if qa else 'player') + '/native'
+        final = [*python, 'jp/build.py', '--enhancements', '--jobs', jobs,
+                 '--disc', ROOT / 'disc' / (DISCS['jp'][0] + '.cue')]
+        if not qa:
+            final.append('--player')
+        add('JP private QA executable' if qa else 'JP release executable', final)
+        add('JP original-disc AOT and audit', [*python, 'jp/build_aot.py',
+            '--config', 'jp/pc.toml', '--all-areas', '--flavor', '2',
+            '--workers', jobs, '--work-dir', 'build-jp/rc2/aot', '--destination', native])
     return steps
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--region', choices=('us', 'eu', 'eu2', 'both', 'all'), default='both',
-                        help='both preserves USA/EU1; all builds USA/EU1/EU2')
+    parser.add_argument('--region', nargs='+', choices=(*REGIONS, 'all'), default=['all'],
+                        help='one or more of us/eu/eu2/jp; all (default) builds every region')
     parser.add_argument('--us-disc', type=Path)
     parser.add_argument('--eu-disc', type=Path)
     parser.add_argument('--eu2-disc', type=Path)
+    parser.add_argument('--jp-disc', type=Path)
     parser.add_argument('--eu2-revision',choices=('original','rev1'),help='Defaults to original; an explicit disc selects its exact revision')
     parser.add_argument('--jobs', type=int, default=3)
     parser.add_argument('--eu-aot-scope', choices=('opening', 'full'), default='opening',
                         help='opening is release-qualified; full is experimental and may fail code-safety audit')
-    parser.add_argument('--qa', action='store_true', help='Build an EU private debug-tools candidate for automation')
+    parser.add_argument('--qa', action='store_true', help='Build EU/EU2/JP private debug-tools candidates for automation')
     parser.add_argument('--toolchain-bin', type=Path,
                         default=os.environ.get('TOMBI_TOOLCHAIN_BIN'))
     parser.add_argument('--bash', default='C:/Program Files/Git/bin/bash.exe')
@@ -169,7 +188,7 @@ def main():
         parser.error('--jobs must be positive')
     if args.toolchain_bin:
         args.toolchain_bin = args.toolchain_bin.resolve()
-    regions = ('us','eu','eu2') if args.region=='all' else (('us','eu') if args.region=='both' else (args.region,))
+    regions = REGIONS if 'all' in args.region else tuple(r for r in REGIONS if r in args.region)
     path = os.pathsep.join(filter(None, [str(args.toolchain_bin or ''), os.environ.get('PATH', '')]))
     def tool(name):
         found = shutil.which(name, path=path)
@@ -207,7 +226,7 @@ def main():
             if data_track(cue) != canonical.resolve():
                 raise ValueError(f'Existing canonical CUE references a different file: {cue}')
     required = ['cmake.exe', 'ninja.exe']
-    required += ['clang.exe', 'clang++.exe'] if any(r in regions for r in ('eu','eu2')) else ['gcc.exe', 'g++.exe']
+    required += ['clang.exe', 'clang++.exe'] if any(r in regions for r in ('eu','eu2','jp')) else ['gcc.exe', 'g++.exe']
     for name in required:
         if not shutil.which(name, path=path):
             raise ValueError(f'Missing developer tool: {name}')
@@ -240,7 +259,7 @@ def main():
         print(f'[{label}]', flush=True)
         subprocess.run(command, cwd=cwd, env=dict(env, **extra), check=True,
                        creationflags=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0)
-    print('Candidates built. EU packaging: eu/stage_release.py; gameplay validation remains separate.')
+    print('Candidates built. Package with tools/package_regions.py; gameplay validation remains separate.')
 
 
 if __name__ == '__main__':
