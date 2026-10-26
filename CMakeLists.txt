@@ -164,3 +164,14 @@ if(BUILD_TESTING)
                 "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_seamless_asset_probe.py")
     endif()
 endif()
+
+if(BUILD_TESTING)
+    add_executable(tomba-audio-sync-tests tests/test_audio_sync_mod.c
+        src/mods/tomba_audio_sync_plugin.c "${PSXRECOMP_ROOT}/runtime/src/audio_sync.c")
+    target_include_directories(tomba-audio-sync-tests PRIVATE "${PSXRECOMP_ROOT}/runtime/include")
+    add_test(NAME tomba_audio_sync COMMAND tomba-audio-sync-tests)
+    add_test(NAME tomba_audio_sync_catalog COMMAND "${CMAKE_COMMAND}"
+        "-DTOMBA_ROOT=${CMAKE_CURRENT_SOURCE_DIR}"
+        "-DSCRATCH=${CMAKE_CURRENT_BINARY_DIR}/audio-catalog-tests"
+        -P "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_audio_sync_catalog.cmake")
+endif()

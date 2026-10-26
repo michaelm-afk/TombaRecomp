@@ -1,0 +1,20 @@
+format_version = 5
+id = "psx.audio.low-latency"
+version = "1.0.1"
+name = "Audio Sync Fix"
+author = "TombiRecomp contributors"
+description = "Reduces audio latency and prevents excess audio buffering during startup, fast-forward and display-mode recovery, keeping sound effects synchronized with gameplay."
+resolver = "declarative"
+save_compatibility = "shared"
+[[target]]
+game_id = "*"
+[[feature]]
+id = "low-latency-audio"
+name = "Audio Sync Fix"
+description = "Changes apply at the next game start. Uses a fixed low-latency buffer. Accelerated audio is discarded during fast-forward while the SPU keeps running; normal playback resumes automatically. OFF restores the original buffer. High Quality SPU and game speed are unchanged."
+group = "Audio"
+default_enabled = true
+quick = true
+[[plugin]]
+feature = "low-latency-audio"
+id = "psx.low-latency-audio"
