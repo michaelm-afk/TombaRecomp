@@ -3,7 +3,7 @@
 `TOMBA_NATIVE_IDLE_WAIT=ON` declares three audited SCUS-94236 edges. The
 framework's ENHANCED profile selects native induction and REFERENCE selects
 original polling. Selection is fixed at build time and recorded in execution
-identity. The option remains off pending built-game qualification.
+identity. The enhanced USA release selects this policy by default.
 
 The complete 156-byte PsyQ `v_wait` at `0x80067D78` polls the frame counter at
 `0x800974D4`. Its two edges are `0x80067DA0` and `0x80067DEC`. Each iteration

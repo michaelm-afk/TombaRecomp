@@ -28,6 +28,9 @@ extern uint32_t memory_get_ram_bytes(void);
 extern void tomba_lle_func_80024EEC(CPUState*);
 extern void tomba_lle_func_800251C0(CPUState*);
 extern void tomba_lle_func_800253C8(CPUState*);
+#ifdef TOMBA_GEOMETRY_FLAT_TRIANGLE
+extern void tomba_lle_func_80024CFC(CPUState*);
+#endif
 #endif
 
 extern uint32_t g_debug_last_store_pc;
@@ -61,14 +64,15 @@ static void xy(CPUState* cpu, unsigned reg, uint32_t address, uint32_t store_pc)
 }
 
 static void geometry(CPUState* cpu, unsigned kind) {
-    const int flat = kind == 0, quad = kind != 1;
-    const unsigned stride = kind == 2 ? 52 : 40;
+    const int flat_tri = kind == 3;
+    const int flat = kind == 0 || flat_tri, quad = kind == 0 || kind == 2;
+    const unsigned stride = flat_tri ? 32 : kind == 2 ? 52 : 40;
     const unsigned nverts = quad ? 4 : 3;
     const unsigned xy_step = flat ? 8 : 12;
-    uint32_t record = cpu->gpr[flat ? 5 : 4];
-    uint32_t vertices = cpu->gpr[flat ? 6 : 5];
-    const uint32_t ot = cpu->gpr[flat ? 7 : 6];
-    const uint32_t object = flat ? cpu->gpr[4] : 0;
+    uint32_t record = cpu->gpr[kind == 0 ? 5 : 4];
+    uint32_t vertices = cpu->gpr[kind == 0 ? 6 : 5];
+    const uint32_t ot = cpu->gpr[kind == 0 ? 7 : 6];
+    const uint32_t object = kind == 0 ? cpu->gpr[4] : 0;
     const uint32_t count = cpu->read_word(record);
     record += 4;
     const uint32_t frame = cpu->read_word(0x1F8001E0u);
@@ -88,7 +92,7 @@ static void geometry(CPUState* cpu, unsigned kind) {
         cpu->write_word(0x1F800070u, (uint32_t)facing);
         if (facing <= 0) continue;
         uint32_t packet = cpu->read_word(0x1F800164u);
-        const uint32_t base_pc = flat ? TOMBA_GEOMETRY_FLAT_PC : kind == 1 ? TOMBA_GEOMETRY_TRI_PC : TOMBA_GEOMETRY_QUAD_PC;
+        const uint32_t base_pc = flat_tri ? 0x80024D98u : flat ? TOMBA_GEOMETRY_FLAT_PC : kind == 1 ? TOMBA_GEOMETRY_TRI_PC : TOMBA_GEOMETRY_QUAD_PC;
         xy(cpu, 12, packet + 8, base_pc);
         xy(cpu, 13, packet + 8 + xy_step, base_pc + 4);
         xy(cpu, 14, packet + 8 + xy_step * 2, base_pc + 8);
@@ -111,13 +115,18 @@ static void geometry(CPUState* cpu, unsigned kind) {
         uint32_t bucket = ot + (gte_read_data(cpu, 7) << 2);
         const int animated = object && (cpu->read_byte(object + 28) & 15) == 8 &&
             cpu->read_byte(object + 2) == 1;
-        if (flat) {
+        if (flat && !flat_tri) {
             cpu->write_word(packet + 4, cpu->read_word(record + 4));
             cpu->write_half(packet + 14, cpu->read_half(record));
             cpu->write_half(packet + 22, cpu->read_half(record + 2));
         }
         if (animated) bucket = frame + 12;
         else if ((uint32_t)(bucket - frame) >= 3232u) continue;
+        if (flat_tri) {
+            cpu->write_word(packet + 4, cpu->read_word(record + 4));
+            cpu->write_half(packet + 14, cpu->read_half(record));
+            cpu->write_half(packet + 22, cpu->read_half(record + 2));
+        }
         if (!flat) {
             for (unsigned j = 0; j < nverts; ++j)
                 cpu->write_word(packet + 4 + j * 12, cpu->read_word(record + 4 + j * 4));
@@ -131,7 +140,7 @@ static void geometry(CPUState* cpu, unsigned kind) {
         }
         uint32_t link = cpu->read_word(bucket);
         cpu->write_word(bucket, packet);
-        cpu->write_word(packet, link | (kind == 2 ? 0x0C000000u : 0x09000000u));
+        cpu->write_word(packet, link | (flat_tri ? 0x07000000u : kind == 2 ? 0x0C000000u : 0x09000000u));
         cpu->write_word(0x1F800164u, packet + stride);
         ++emitted;
     }
@@ -152,7 +161,7 @@ static void entry(CPUState* cpu, unsigned kind) {
 #ifdef TOMBA_GEOMETRY_VALIDATE
     /* Test binary only: run the reference on an isolated copy of the inputs.
      * The product build never dual-executes. No GPU submission occurs here. */
-    static unsigned checked[3];
+    static unsigned checked[4];
     static uint8_t *before, *expected;
     uint32_t bytes = memory_get_ram_bytes();
     if (checked[kind] < 200 && !g_psx_guest_time_frozen) {
@@ -165,7 +174,11 @@ static void entry(CPUState* cpu, unsigned kind) {
         memcpy(spad_before, memory_get_scratchpad_ptr(), 1024);
         if (!psx_cycle_freeze_begin(&freeze, 0, NULL)) abort();
         gte_precision_speculative_begin();
-        void (*original[])(CPUState*) = {tomba_lle_func_80024EEC, tomba_lle_func_800251C0, tomba_lle_func_800253C8};
+        void (*original[])(CPUState*) = {tomba_lle_func_80024EEC, tomba_lle_func_800251C0, tomba_lle_func_800253C8,
+#ifdef TOMBA_GEOMETRY_FLAT_TRIANGLE
+            tomba_lle_func_80024CFC
+#endif
+        };
         original[kind](cpu);
         reference = *cpu;
         memcpy(expected, memory_get_ram_ptr(), bytes);
@@ -209,3 +222,6 @@ static void entry(CPUState* cpu, unsigned kind) {
 void func_80024EEC(CPUState* cpu) { entry(cpu, 0); }
 void func_800251C0(CPUState* cpu) { entry(cpu, 1); }
 void func_800253C8(CPUState* cpu) { entry(cpu, 2); }
+#ifdef TOMBA_GEOMETRY_FLAT_TRIANGLE
+void func_80024CFC(CPUState* cpu) { entry(cpu, 3); }
+#endif

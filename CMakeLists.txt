@@ -5,6 +5,7 @@ include(CTest)
 set(TOMBA_GEOMETRY_IMPL "HLE" CACHE STRING "Terrain packet implementation: HLE or LLE")
 set_property(CACHE TOMBA_GEOMETRY_IMPL PROPERTY STRINGS HLE LLE)
 option(TOMBA_GEOMETRY_VALIDATE "Test-only isolated HLE/LLE packet comparison" OFF)
+option(TOMBA_GEOMETRY_FLAT_TRIANGLE "Select the native USA flat-triangle batch" ON)
 if(NOT TOMBA_GEOMETRY_IMPL MATCHES "^(HLE|LLE)$")
     message(FATAL_ERROR "TOMBA_GEOMETRY_IMPL must be HLE or LLE")
 endif()
@@ -38,7 +39,7 @@ file(GLOB TOMBA_MOD_PLUGIN_SOURCES CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/src/mods/*.c"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/mods/*.cpp")
 set(TOMBA_PRELOADED_MODS "${CMAKE_CURRENT_SOURCE_DIR}/mods/preloaded")
-option(TOMBA_NATIVE_IDLE_WAIT "Select the audited native PsyQ frame wait for evaluation" OFF)
+option(TOMBA_NATIVE_IDLE_WAIT "Select the audited native frame wait" ON)
 set(TOMBA_NATIVE_IDLE_WAIT_SITES "")
 if(TOMBA_NATIVE_IDLE_WAIT)
     if(NOT COMMAND psxrecomp_native_idle_wait)
@@ -87,14 +88,22 @@ if(TARGET psx-runtime-pgxp)
     list(APPEND _tomba_geometry_targets psx-runtime-pgxp)
 endif()
 file(GLOB _tomba_geometry_shards "${CMAKE_CURRENT_SOURCE_DIR}/generated/SCUS_942.36_full_*.c")
+set(_tomba_geometry_symbols func_80024EEC func_800251C0 func_800253C8)
+set(_tomba_geometry_tag 0x54474801)
+if(TOMBA_GEOMETRY_FLAT_TRIANGLE)
+    list(APPEND _tomba_geometry_symbols func_80024CFC)
+    set(_tomba_geometry_tag 0x54474802)
+    set_property(SOURCE src/hle/tomba_geometry_hle.c APPEND PROPERTY
+        COMPILE_DEFINITIONS TOMBA_GEOMETRY_FLAT_TRIANGLE=1)
+endif()
 psxrecomp_select_guest_implementation(
     NAME tomba_geometry IMPLEMENTATION ${TOMBA_GEOMETRY_IMPL}
     TARGETS ${_tomba_geometry_targets}
     GENERATED_SOURCES ${_tomba_geometry_shards}
-    SYMBOLS func_80024EEC func_800251C0 func_800253C8
+    SYMBOLS ${_tomba_geometry_symbols}
     HLE_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/hle/tomba_geometry_hle.c"
     REFERENCE_PREFIX tomba_lle_
-    SNAPSHOT_TAG 0x54474801)
+    SNAPSHOT_TAG ${_tomba_geometry_tag})
 if(TOMBA_GEOMETRY_VALIDATE)
     set_property(SOURCE src/hle/tomba_geometry_hle.c APPEND PROPERTY
         COMPILE_DEFINITIONS TOMBA_GEOMETRY_VALIDATE=1)
