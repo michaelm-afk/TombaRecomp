@@ -5,6 +5,7 @@ include(CTest)
 set(TOMBA_GEOMETRY_IMPL "HLE" CACHE STRING "Terrain packet implementation: HLE or LLE")
 set_property(CACHE TOMBA_GEOMETRY_IMPL PROPERTY STRINGS HLE LLE)
 option(TOMBA_GEOMETRY_VALIDATE "Test-only isolated HLE/LLE packet comparison" OFF)
+option(TOMBA_GEOMETRY_FLAT_TRIANGLE "Select the native USA flat-triangle batch" ON)
 if(NOT TOMBA_GEOMETRY_IMPL MATCHES "^(HLE|LLE)$")
     message(FATAL_ERROR "TOMBA_GEOMETRY_IMPL must be HLE or LLE")
 endif()
@@ -38,6 +39,18 @@ file(GLOB TOMBA_MOD_PLUGIN_SOURCES CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/src/mods/*.c"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/mods/*.cpp")
 set(TOMBA_PRELOADED_MODS "${CMAKE_CURRENT_SOURCE_DIR}/mods/preloaded")
+option(TOMBA_NATIVE_IDLE_WAIT "Select the audited native frame wait" ON)
+set(TOMBA_NATIVE_IDLE_WAIT_SITES "")
+if(TOMBA_NATIVE_IDLE_WAIT)
+    if(NOT COMMAND psxrecomp_native_idle_wait)
+        message(FATAL_ERROR "TOMBA_NATIVE_IDLE_WAIT needs a framework with native wait-policy support")
+    endif()
+    # SCUS-94236 v_wait at80067D78: one timeout word atsp+16;
+    # frame counter800974D4, no MMIO or other counter-dependent exit.
+    # Main-loop scratchpad wait at80016588: read-only uint16 counter at
+    # 1F8001E8 until it reaches v1. One edge, no calls, stores or MMIO.
+    set(TOMBA_NATIVE_IDLE_WAIT_SITES 0x80067DA0 0x80067DEC 0x80016588)
+endif()
 # Seamless Loading replaces the framework's CD Speed and host-paced Fast
 # Loading on Tomba, and 8 MB RAM has no use here; every other framework builtin
 # is staged (an exclude list, so new framework mods reach Tomba by default).
@@ -46,6 +59,7 @@ psxrecomp_add_game_runtime(psx-runtime
     # ENABLE_NETPLAY_IF_PRESENT
     # NETPLAY_LOBBY_URL "ws://netplay.retcomm.net:8765"
     WINDOW_TITLE "Tomba! Recompiled"
+    NATIVE_IDLE_WAIT_SITES ${TOMBA_NATIVE_IDLE_WAIT_SITES}
     DEFAULT_GAME_CONFIG_PATH "game.toml"
     MAX_PLAYERS 1
     LAUNCHER_BOXART "${CMAKE_CURRENT_SOURCE_DIR}/launcher_assets/img/boxart.tga"
@@ -74,14 +88,22 @@ if(TARGET psx-runtime-pgxp)
     list(APPEND _tomba_geometry_targets psx-runtime-pgxp)
 endif()
 file(GLOB _tomba_geometry_shards "${CMAKE_CURRENT_SOURCE_DIR}/generated/SCUS_942.36_full_*.c")
+set(_tomba_geometry_symbols func_80024EEC func_800251C0 func_800253C8)
+set(_tomba_geometry_tag 0x54474801)
+if(TOMBA_GEOMETRY_FLAT_TRIANGLE)
+    list(APPEND _tomba_geometry_symbols func_80024CFC)
+    set(_tomba_geometry_tag 0x54474802)
+    set_property(SOURCE src/hle/tomba_geometry_hle.c APPEND PROPERTY
+        COMPILE_DEFINITIONS TOMBA_GEOMETRY_FLAT_TRIANGLE=1)
+endif()
 psxrecomp_select_guest_implementation(
     NAME tomba_geometry IMPLEMENTATION ${TOMBA_GEOMETRY_IMPL}
     TARGETS ${_tomba_geometry_targets}
     GENERATED_SOURCES ${_tomba_geometry_shards}
-    SYMBOLS func_80024EEC func_800251C0 func_800253C8
+    SYMBOLS ${_tomba_geometry_symbols}
     HLE_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/hle/tomba_geometry_hle.c"
     REFERENCE_PREFIX tomba_lle_
-    SNAPSHOT_TAG 0x54474801)
+    SNAPSHOT_TAG ${_tomba_geometry_tag})
 if(TOMBA_GEOMETRY_VALIDATE)
     set_property(SOURCE src/hle/tomba_geometry_hle.c APPEND PROPERTY
         COMPILE_DEFINITIONS TOMBA_GEOMETRY_VALIDATE=1)
@@ -156,6 +178,19 @@ if(BUILD_TESTING)
     add_test(NAME tomba_camera_anchor COMMAND tomba-camera-anchor-tests)
     find_package(Python3 QUIET COMPONENTS Interpreter)
     if(Python3_FOUND)
+        add_test(NAME tomba_vwait_contract
+            COMMAND "${Python3_EXECUTABLE}"
+                "${PSXRECOMP_ROOT}/runtime/tests/native_wait_caller.py"
+                --framework "${PSXRECOMP_ROOT}" --cc "${CMAKE_C_COMPILER}"
+                --generated "${CMAKE_CURRENT_SOURCE_DIR}/generated"
+                --contract "${CMAKE_CURRENT_SOURCE_DIR}/tests/vwait_contract.json")
+        set_tests_properties(tomba_vwait_contract PROPERTIES SKIP_RETURN_CODE 77 RUN_SERIAL TRUE)
+        add_test(NAME tomba_scratch_wait_contract
+            COMMAND "${Python3_EXECUTABLE}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_scratch_wait_contract.py"
+                --framework "${PSXRECOMP_ROOT}" --cc "${CMAKE_C_COMPILER}"
+                --generated "${CMAKE_CURRENT_SOURCE_DIR}/generated")
+        set_tests_properties(tomba_scratch_wait_contract PROPERTIES SKIP_RETURN_CODE 77 RUN_SERIAL TRUE)
         add_test(NAME tomba_runtime_metadata
             COMMAND "${Python3_EXECUTABLE}"
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_runtime_config_metadata.py")

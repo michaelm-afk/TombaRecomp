@@ -1,0 +1,9 @@
+{
+  "revision": "SCUS-94236",
+  "symbol": "func_80067D78",
+  "entry": "0x80067D78",
+  "end": "0x80067E14",
+  "counter": "0x800974D4",
+  "sites": ["0x80067DA0", "0x80067DEC"],
+  "callbacks": ["0x800665D0", "0x8005CD88", "0x80067E14"]
+}
